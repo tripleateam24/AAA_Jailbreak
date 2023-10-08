@@ -10,6 +10,7 @@ int main()
     std::cout << "abcxyz\n";
     std::cout << "Change 2 - put this one on master\n";
     std::cout << "change 2 from AAA-23\n";
+    std::cout << "change 3 from master\n";
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
