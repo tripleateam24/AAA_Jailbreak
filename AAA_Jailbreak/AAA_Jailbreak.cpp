@@ -124,7 +124,7 @@ void MoveRooms(Prison* prison) {
 }
 
 int main() {
-	//creating prison in main
+	//creating prison in main 
 	Prison* prison = new Prison();
 	prison->PrintRoom();
 
