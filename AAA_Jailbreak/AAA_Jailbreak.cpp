@@ -6,7 +6,7 @@
 using namespace std;
 
 
-string printBackstory() // backstory function. Can call it when the user inputs "story"
+void printBackstory() // backstory function. Can call it when the user inputs "story"
 {
     //backstory
     string backStory;
@@ -19,8 +19,7 @@ string printBackstory() // backstory function. Can call it when the user inputs 
         "hanging heavy in the air. The legal battle that ensues is nothing short of a high-stakes drama, where your attempts to set the record straight fall on deaf ears."
         "Against all odds, you find yourself on a rollercoaster ride through the justice system, ultimately facing a daunting 15-year sentence in a federal prison. "
         "The tale of your unwavering moral compass and the fight for justice paints a riveting portrait of an unexpected journey through the twists and turns of the law. \n";
-
-    return backStory;
+    cout << backStory;
 }
 
 int main()
@@ -30,7 +29,7 @@ int main()
     //displaying backstory
     printBackstory(); // need help with getting this to display - Nour
     //Displaying game objective
-    cout << "Game Objective: Go through different tasks to escape the prison in the shortest amount of days possible."
+    cout << endl <<"Game Objective: Go through different tasks to escape the prison in the shortest amount of days possible."
         "You will have items and people to help you get out along the way.   \n";
 
     //Need a message letting the user know that if they type "story", they can get the backstory again
