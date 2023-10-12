@@ -47,6 +47,7 @@ public:
 	//defining the room objects that the prison itself has
 	Room* cell;
 	Room* cafe;
+	Room* gym;
 
 	//this room will be the tracker for which room the player is currently in
 	Room* currentRoom;
@@ -55,8 +56,10 @@ public:
 	Prison() {
 		cell = new Room("Your Cell", "DESCRIPTION HERE", nullptr, nullptr, nullptr, nullptr);
 		cafe = new Room("The Cafeteria", "DESCRIPTION HERE", cell, nullptr, nullptr, nullptr); //the cafe is linked to cell, so it is created with the cell as it's "back room"
+		gym = new Room("The Gym", "DESCRIPTION HERE", cell, nullptr, nullptr, nullptr);
 
 		cell->leftRoom = cafe; //setting the cell's "left room" to the cafeteria
+		cell->rightRoom = gym;
 
 		currentRoom = cell; //setting the tracker to the cell
 
