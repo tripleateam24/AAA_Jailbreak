@@ -1,79 +1,9 @@
 #include <iostream>
 #include <string>
+#include "Prison.h"
 
 using namespace std;
 
-//draft of room class, need to add entities, items, etc...
-class Room {
-	string name;
-	string description;
-	//we can add more stuff here later
-
-public:
-	//pointers to other rooms within a room
-	//sort of like doorways
-	Room* backRoom;
-	Room* leftRoom;
-	Room* rightRoom;
-	Room* forwardRoom;
-
-	//constructor for each room
-	Room(string n, string desc, Room* bR, Room* lR, Room* rR, Room* fR) {
-		name = n;
-		description = desc;
-		backRoom = bR;
-		leftRoom = lR;
-		rightRoom = rR;
-		forwardRoom = fR;
-
-	}
-
-	//getter functions for name and description
-	string getName() {
-		return name;
-	}
-	string getDescription() {
-		return description;
-	}
-
-
-};
-
-//manually defining the prison temporarily -only cell and cafe currently, will add more rooms - we might want to create a better framework later
-
-//Reminder for later: I'm pretty sure this class causes a memory leak until I create a proper destructor
-class Prison {
-public:
-	//defining the room objects that the prison itself has
-	Room* cell;
-	Room* cafe;
-	Room* gym;
-
-	//this room will be the tracker for which room the player is currently in
-	Room* currentRoom;
-
-	//constructing all of the rooms in the prison
-	Prison() {
-		cell = new Room("Your Cell", "DESCRIPTION HERE", nullptr, nullptr, nullptr, nullptr);
-		cafe = new Room("The Cafeteria", "DESCRIPTION HERE", cell, nullptr, nullptr, nullptr); //the cafe is linked to cell, so it is created with the cell as it's "back room"
-		gym = new Room("The Gym", "DESCRIPTION HERE", cell, nullptr, nullptr, nullptr);
-
-		cell->leftRoom = cafe; //setting the cell's "left room" to the cafeteria
-		cell->rightRoom = gym;
-
-		currentRoom = cell; //setting the tracker to the cell
-
-	}
-
-	void PrintRoom() {
-		cout << "You are Currently inside " + currentRoom->getName() << endl;
-		cout << currentRoom->getDescription() << endl;
-		cout << "\n\n";
-	}
-
-
-
-};
 
 //This function asks the player for input on where to go and then moves the tracker to that room and displays the description
 //If there is no pointer to another room it assumes that there is no room there and tells the player he can't go there
@@ -118,7 +48,14 @@ void MoveRooms(Prison* prison) {
 		cout << "Exiting...\n";
 		exit(0);
 
-	}else {
+	}else if(answer == "whereami" || answer == "w" || answer == "W" || answer == "where") {
+		cout << "You are currently standing in " << prison->currentRoom->getName() << "\n\n";
+
+	}
+	else if (answer == "inspect" || answer == "i" || answer == "I") {
+		cout << prison->currentRoom->getDescription() << "\n\n";
+
+	}else{
 		cout << "Sorry, I don't understand what you want to do here.\n";
 
 
