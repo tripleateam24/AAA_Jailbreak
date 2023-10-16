@@ -32,6 +32,23 @@ int main()
     cout << endl <<"Game Objective: Go through different tasks to escape the prison in the shortest amount of days possible."
         "You will have items and people to help you get out along the way.   \n";
 
+    cout << "Type 'story' to see the backstory again.\n";
+    cout << "Type 'Exit' to start the game" << endl;
+
+    string userInput;
+    while (true) {
+        cin >> userInput;
+        if (userInput == "story") {
+            printBackstory();
+        }
+        else if( userInput == "Exit" )
+        {
+            break; 
+        }
+    }
+
+
+
     //Need a message letting the user know that if they type "story", they can get the backstory again
 
     // need to make a conditional statement to redisplay the backstory when user inputs "story"
