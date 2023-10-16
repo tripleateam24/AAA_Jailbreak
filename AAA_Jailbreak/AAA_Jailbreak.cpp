@@ -27,13 +27,13 @@ int main()
     //Displaying Game title
     cout << "-------Jailbreak-------\n";
     //displaying backstory
-    printBackstory(); // need help with getting this to display - Nour
+
+    printBackstory(); 
     //Displaying game objective
     cout << endl <<"Game Objective: Go through different tasks to escape the prison in the shortest amount of days possible."
         "You will have items and people to help you get out along the way.   \n";
-
     cout << "Type 'story' to see the backstory again.\n";
-    cout << "Type 'Exit' to start the game" << endl;
+    cout << "Type 'start' to continue the game" << endl;
 
     string userInput;
     while (true) {
@@ -41,20 +41,15 @@ int main()
         if (userInput == "story") {
             printBackstory();
         }
-        else if( userInput == "Exit" )
+        else if( userInput == "start" )
         {
             break; 
+            // when the user enters start the game will start.  
         }
+        // user can now redisplay story. 
     }
 
-
-
-    //Need a message letting the user know that if they type "story", they can get the backstory again
-
-    // need to make a conditional statement to redisplay the backstory when user inputs "story"
-    /* if user types == "story"
-    *   printBackStory();
-    */
+    
 
 }
 
