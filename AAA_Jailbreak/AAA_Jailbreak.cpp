@@ -3,23 +3,53 @@
 
 #include <iostream>
 
-int main()
+using namespace std;
+
+
+void printBackstory() // backstory function. Can call it when the user inputs "story"
 {
-    std::cout << "Hello World from cafe to cell branch\n";
-    std::cout << "Hello World from nour\n"; 
-    std::cout << "abcxyz\n";
-    std::cout << "Change 2 - put this one on master\n";
-    std::cout << "change 3 from AAA-23\n";
-    std::cout << "change 3 from master\n";
+    //backstory
+    string backStory;
+    backStory =  "In the realm of tax consulting, you're a shining star, renowned for your prowess in deciphering the complex labyrinth of tax codes."
+        " Your standing in the community is unblemished, but fate takes a dark turn when your neighbor, burdened by his ailing wife's medical bills,"
+        "approaches you with a drastic proposal: to dance on the edge of legality and commit tax fraud. "
+        "Brimming with integrity, you bravely decline, opting for the high road.Undeterred, your neighbor ventures forth, successfully securing the much" 
+        "- needed loan.However, this triumph is short - lived as the IRS sniffs out irregularities and turns the spotlight on him. Cornered, he deflects attention,"
+        "naming you as his trusted tax advisor, leaving you in the crosshairs. Soon, you're summoned for a gripping interrogation, the gravity of the situation "
+        "hanging heavy in the air. The legal battle that ensues is nothing short of a high-stakes drama, where your attempts to set the record straight fall on deaf ears."
+        "Against all odds, you find yourself on a rollercoaster ride through the justice system, ultimately facing a daunting 15-year sentence in a federal prison. "
+        "The tale of your unwavering moral compass and the fight for justice paints a riveting portrait of an unexpected journey through the twists and turns of the law. \n";
+    cout << backStory;
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
+int main()
+{
+    //Displaying Game title
+    cout << "-------Jailbreak-------\n";
+    //displaying backstory
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+    printBackstory(); 
+    //Displaying game objective
+    cout << endl <<"Game Objective: Go through different tasks to escape the prison in the shortest amount of days possible."
+        "You will have items and people to help you get out along the way.   \n";
+    cout << "Type 'story' to see the backstory again.\n";
+    cout << "Type 'start' to continue the game" << endl;
+
+    string userInput;
+    while (true) {
+        cin >> userInput;
+        if (userInput == "story") {
+            printBackstory();
+        }
+        else if( userInput == "start" )
+        {
+            break; 
+            // when the user enters start the game will start.  
+        }
+        // user can now redisplay story. 
+    }
+
+    
+
+}
+
