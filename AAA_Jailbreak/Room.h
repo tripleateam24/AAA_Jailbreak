@@ -1,26 +1,31 @@
 #pragma once
 #include <string>
 #include <iostream>
+#include <vector>
+#include "Item.h"
 
 using namespace std;
 
-class Room{
+
+class Room {
 	string name;
 	string description;
-	//we can add more stuff here later
 
+	vector<Item> ItemsInRoom;
 public:
-	//pointers to other rooms within a room
-	//sort of like doorways
 	Room* backRoom;
 	Room* leftRoom;
 	Room* rightRoom;
 	Room* forwardRoom;
 
-	//constructor for each room
 	Room(string n, string desc, Room* bR, Room* lR, Room* rR, Room* fR);
 
-	//getter functions for name and description
+	bool SearchForItem(string itemName);
+	Item GetItem(string itemName);
+
+	void AddItemToRoom(Item item);
+	void RemoveItemFromRoom(string itemName);
+
 	string getName() const;
 	string getDescription() const;
 
