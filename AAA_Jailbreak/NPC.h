@@ -11,9 +11,8 @@ public:
 
     void talkToPlayer() 
     {
-        cout << "\n" << name << ": " << description << endl;
+        cout << "\n" << name << " your " << description << " says:" << endl;
     }
-    
     
     string generateDialogue();
 
