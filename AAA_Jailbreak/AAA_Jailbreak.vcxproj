@@ -130,8 +130,10 @@
     <ClCompile Include="AAA_Jailbreak.cpp" />
     <ClCompile Include="Prison.cpp" />
     <ClCompile Include="Room.cpp" />
+    <ClCompile Include="NPC.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="NPC.h" />
     <ClInclude Include="Prison.h" />
     <ClInclude Include="Room.h" />
   </ItemGroup>

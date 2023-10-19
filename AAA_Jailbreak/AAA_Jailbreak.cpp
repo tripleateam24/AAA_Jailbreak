@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "Prison.h"
+#include "NPC.h"
 
 using namespace std;
 
@@ -20,6 +21,13 @@ void PrintBackStory() { // backstory function. Can call it when the user inputs 
 	cout << backStory;
 }
 
+void talkToNPC(NPC* npc)
+{
+	string answer;
+
+	getline(cin, answer);
+	cout << answer;
+}
 
 
 //This function asks the player for input on where to go and then moves the tracker to that room and displays the description
@@ -27,7 +35,7 @@ void PrintBackStory() { // backstory function. Can call it when the user inputs 
 //this can be left on own or put in either prison class or player class down the line
 void MoveRooms(Prison* prison) {
 	string answer;
-	cout << "Move: ";
+	cout << "Your Move: ";
 	getline(cin, answer);
 	cout << "\n";
 	if ((answer == "L") || (answer == "l") || (answer == "left") || (answer == "LEFT")) {
@@ -72,10 +80,16 @@ void MoveRooms(Prison* prison) {
 	else if (answer == "inspect" || answer == "i" || answer == "I") {
 		cout << prison->currentRoom->getDescription() << "\n\n";
 
-	}else if (answer == "story") {
+	}
+	else if (answer == "story") {
 		cout << "\n";
 		PrintBackStory();
-	}else{
+	}
+	else if (answer == "fork")
+	{
+
+	}
+	else{
 		cout << "Sorry, I don't understand what you want to do here.\n";
 
 
@@ -98,6 +112,7 @@ int main()
         "You will have items and people to help you get out along the way.   \n";
     cout << "Type 'story' to see the backstory again.\n";
     cout << "Type 'start' to continue the game" << endl;
+	
 
     string userInput;
     while (true) {
@@ -117,9 +132,13 @@ int main()
 	Prison* prison = new Prison();
 	prison->PrintRoom();
 
+	NPC* npc = new NPC("Fork","Cell Mate");
+
+
 	//moving within rooms demo
 	while (true) {
 		MoveRooms(prison);
+		
 	}
 
 	delete prison;

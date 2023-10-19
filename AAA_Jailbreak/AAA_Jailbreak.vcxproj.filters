@@ -24,12 +24,18 @@
     <ClCompile Include="Prison.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="NPC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Room.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Prison.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NPC.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
