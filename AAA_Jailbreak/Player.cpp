@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Item.h"
 
 
 Player::Player(string n) {
@@ -107,6 +108,10 @@ void Player::InputMenu(Prison* prison) {
 		cout << "Exiting Game...\n";
 		exit(0);
 	}
+	else if (answer == "USEITEM")
+	{
+		manipulateItem();
+	}
 	else {
 		cout << "Sorry, didn't quite understand that.\n";
 	}
@@ -128,4 +133,48 @@ void Player::setName(string n) {
 
 string Player::getName() const {
 	return name;
+}
+
+// Revist
+void Player::manipulateItem()
+{
+	//string itemType = Item.getType();
+	string answer;
+	cout << "Which item? \n";
+	getline(cin, answer);
+	if (answer == "Cookie") 
+	{
+		string item = answer;
+		for (int i = 0; i < PocketsInventory.size(); i++) {
+			if (PocketsInventory[i].getName() == item) {
+				cout << "You consumed " << item << endl;
+				PocketsInventory.erase(PocketsInventory.begin() + i);
+			}
+		}
+	}
+
+	// add weapon item
+
+	/* 
+	switch (itemType)
+	{
+	case "cookie":
+
+		for (int i = 0; i < PocketsInventory.size(); i++) {
+			if (PocketsInventory[i].getName() == item) {
+				cout << "You consumed " << item << endl;
+				PocketsInventory.erase(PocketsInventory.begin() + i);
+			}
+		}
+		break;
+	case "Wepon":
+		cout << "Attacked with " << item << endl;
+		break;
+
+	}
+	string Item::getType() const
+	{
+		return itemType();
+	}
+	*/
 }

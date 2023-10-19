@@ -1,4 +1,5 @@
 #include "Item.h"
+#include "Player.h"
 
 Item::Item() {
 	name = "UNDEFINED ITEM";
@@ -19,4 +20,8 @@ string Item::getName() const {
 string Item::getDescription() const {
 	return description;
 }
+
+
+
+
 

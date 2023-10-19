@@ -23,4 +23,6 @@ public:
 
 	string getName() const;
 
+	void manipulateItem();
+
 };

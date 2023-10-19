@@ -13,5 +13,6 @@ public:
 	Item(string n, string desc);
 	string getName() const;
 	string getDescription() const;
-
+	string getType() const;
+	string itemtype() const;
 };
