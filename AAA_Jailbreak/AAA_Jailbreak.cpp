@@ -78,10 +78,7 @@ void MoveRooms(Prison* prison) {
 		cout << "\n";
 		PrintBackStory();
 	}
-	else if (answer == "fork")
-	{
 
-	}
 	else{
 		cout << "Sorry, I don't understand what you want to do here.\n";
 
