@@ -138,7 +138,11 @@ int main()
 	//moving within rooms demo
 	while (true) {
 		MoveRooms(prison);
-		
+		if (prison->currentRoom->getName() == "Your Cell") // if statement to 
+		{
+			npc->talkToPlayer();
+			cout << npc->generateDialogue() << endl;
+		}
 	}
 
 	delete prison;

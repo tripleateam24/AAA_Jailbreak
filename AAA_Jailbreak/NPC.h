@@ -6,13 +6,16 @@ using namespace std;
 
 class NPC {
 public:
-    NPC(const string& name, const string& dialogue)
-        : name(name), dialogue(dialogue) {}
+    NPC(const string& name, const string& description)
+        : name(name), description(description) {}
 
-    void talkToPlayer() {
-        cout << name << ": " << dialogue << endl;
+    void talkToPlayer() 
+    {
+        cout << "\n" << name << ": " << description << endl;
     }
     
+    
+    string generateDialogue();
 
 private:
     string name;
@@ -20,5 +23,6 @@ private:
     string description;
     string getName() const;
     string getDescription() const;
+    
 };
 
