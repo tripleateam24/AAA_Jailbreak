@@ -4,8 +4,8 @@
 
 using namespace std;
 
-void printBackstory() // backstory function. Can call it when the user inputs "story"
-{
+void PrintBackStory() { // backstory function. Can call it when the user inputs "story"
+
 	//backstory
 	string backStory;
 	backStory = "In the realm of tax consulting, you're a shining star, renowned for your prowess in deciphering the complex labyrinth of tax codes."
@@ -16,7 +16,7 @@ void printBackstory() // backstory function. Can call it when the user inputs "s
 		"naming you as his trusted tax advisor, leaving you in the crosshairs. Soon, you're summoned for a gripping interrogation, the gravity of the situation "
 		"hanging heavy in the air. The legal battle that ensues is nothing short of a high-stakes drama, where your attempts to set the record straight fall on deaf ears."
 		"Against all odds, you find yourself on a rollercoaster ride through the justice system, ultimately facing a daunting 15-year sentence in a federal prison. "
-		"The tale of your unwavering moral compass and the fight for justice paints a riveting portrait of an unexpected journey through the twists and turns of the law. \n";
+		"The tale of your unwavering moral compass and the fight for justice paints a riveting portrait of an unexpected journey through the twists and turns of the law. \n\n\n";
 	cout << backStory;
 }
 
@@ -72,6 +72,9 @@ void MoveRooms(Prison* prison) {
 	else if (answer == "inspect" || answer == "i" || answer == "I") {
 		cout << prison->currentRoom->getDescription() << "\n\n";
 
+	}else if (answer == "story") {
+		cout << "\n";
+		PrintBackStory();
 	}else{
 		cout << "Sorry, I don't understand what you want to do here.\n";
 
@@ -83,10 +86,10 @@ void MoveRooms(Prison* prison) {
 int main() {
 
 	//Displaying Game title
-	cout << "-------Jailbreak-------\n";
+	cout << "\t\t\t\t\t\t-------Jailbreak-------\n";
 	//displaying backstory
 
-	printBackstory();
+	PrintBackStory();
 	//Displaying game objective
 	cout << endl << "Game Objective: Go through different tasks to escape the prison in the shortest amount of days possible."
 		"You will have items and people to help you get out along the way.   \n";
@@ -95,9 +98,9 @@ int main() {
 
 	string userInput;
 	while (true) {
-		cin >> userInput;
+		getline(cin, userInput);
 		if (userInput == "story") {
-			printBackstory();
+			PrintBackStory();
 		}
 		else if (userInput == "start")
 		{
