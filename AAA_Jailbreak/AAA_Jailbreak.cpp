@@ -7,7 +7,7 @@ using namespace std;
 
 
 void PrintBackStory() { // backstory function. Can call it when the user inputs "story"
-
+	 
 	//backstory
 	string backStory;
 	backStory = "In the realm of tax consulting, you're a shining star, renowned for your prowess in deciphering the complex labyrinth of tax codes."
