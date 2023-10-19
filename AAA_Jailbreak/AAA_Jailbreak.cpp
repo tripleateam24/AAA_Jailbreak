@@ -21,13 +21,6 @@ void PrintBackStory() { // backstory function. Can call it when the user inputs 
 	cout << backStory;
 }
 
-void talkToNPC(NPC* npc)
-{
-	string answer;
-
-	getline(cin, answer);
-	cout << answer;
-}
 
 
 //This function asks the player for input on where to go and then moves the tracker to that room and displays the description
