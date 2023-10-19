@@ -12,9 +12,13 @@ string NPC::getDescription() const {
 
 string NPC::generateDialogue()
 {
-    string dialogue[2] = { "Hey cellie, what you up to?","What's up cellie?" };
+    //generic dialogue for just fork - will add/diversify future dialogues and responses
+    string dialogue[] = { "Hey Cellie, what you up to?","What's up, Cellie?", "You need something, Cellie?", "Sup, Cellie?", "How's it hanging, Cellie?"};
     srand(time(NULL));
-    int choice = rand() % 2;
-    return dialogue[choice];
+    int arraySize = sizeof(dialogue) / sizeof(dialogue[0]);
+    int choice = rand() % arraySize;
+    string dialogueSep = "\n============================================\n";
+    cout << dialogueSep;
+    return dialogue[choice] + dialogueSep;
     
 }

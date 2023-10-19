@@ -128,9 +128,10 @@ int main()
 	//moving within rooms demo
 	while (true) {
 		MoveRooms(prison);
-		if (prison->currentRoom->getName() == "Your Cell") // if statement to ensure fork can only be "talked" to in cell
+		if (prison->currentRoom->getName() == "Your Cell") // if statement to ensure fork can only be "prompted" in cell
 		{
 			npc->talkToPlayer();
+
 			cout << npc->generateDialogue() << endl;
 		}
 	}
