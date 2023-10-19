@@ -96,12 +96,12 @@ void MoveRooms(Prison* prison) {
 
 
 
-int main()
-{
-    //Displaying Game title
-    cout << "-------Jailbreak-------\n";
-    //displaying backstory
+	//Displaying Game title
+	cout << "\t\t\t\t\t\t-------Jailbreak-------\n";
+	Player player("Prisoner Name");
+	player.PrintInstructions();
 
+	//displaying backstory
 	PrintBackStory();
 	//Displaying game objective
 	cout << endl << "Game Objective: Go through different tasks to escape the prison in the shortest amount of days possible."

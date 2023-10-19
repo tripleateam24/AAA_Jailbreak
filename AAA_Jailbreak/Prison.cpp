@@ -144,6 +144,16 @@ Prison::Prison() {
 
 	courtYard->AddNPCToRoom(josh);
 
+	currentRoom = cell;
+
+	//creating items within rooms
+	Item cookie("Cookie", "A large, round cookie");
+	Item biscuit("Biscuit", "A biscuit");
+	Item apple("Apple", "A red apple");
+
+	cafe->AddItemToRoom(cookie);
+	cafe->AddItemToRoom(biscuit);
+	cafe->AddItemToRoom(apple);
 
 
 }
@@ -151,6 +161,36 @@ Prison::Prison() {
 Prison::~Prison() {
 	delete cell, cafe, hallway, gym, showers, courtYard, WardensOffice;
 }
+
+void Prison::MoveRooms() {
+	string answer;
+	cout << "Move: ";
+	getline(cin, answer);
+	cout << "\n";
+	if ((answer == "left") || (answer == "LEFT") || (answer == "l") || (answer == "L") || (answer == "Left")) {
+		if (currentRoom->leftRoom != nullptr) {
+			currentRoom = currentRoom->leftRoom;
+			cout << "Moving into " << currentRoom->getName() << ".....\n";
+
+		}
+		else {
+			cout << "No Room to the Left.\n";
+		}
+	}
+	else if ((answer == "right") || (answer == "RIGHT") || (answer == "r") || (answer == "R") || (answer == "Right")) {
+		if (currentRoom->rightRoom != nullptr) {
+			currentRoom = currentRoom->rightRoom;
+			cout << "Moving into " << currentRoom->getName() << ".....\n";
+
+		}
+		else {
+			cout << "No Room to the Right.\n";
+		}
+	}
+	else if ((answer == "back") || (answer == "BACK") || (answer == "b") || (answer == "B") || (answer == "Back")) {
+		if (currentRoom->backRoom != nullptr) {
+			currentRoom = currentRoom->backRoom;
+			cout << "Moving into " << currentRoom->getName() << ".....\n";
 
 void Prison::MoveRooms() {
 	string answer;

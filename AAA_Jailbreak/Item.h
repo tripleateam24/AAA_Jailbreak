@@ -8,6 +8,7 @@ class Item {
 	string name;
 	string Type;
 	string description;
+
 public:
 	Item();
 	Item(string n, string desc, string type);
