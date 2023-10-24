@@ -2,13 +2,11 @@
 #include <string>
 #include "Prison.h"
 #include "NPC.h"
-#include "Player.h"
 
 using namespace std;
 
-
 void PrintBackStory() { // backstory function. Can call it when the user inputs "story"
-	 
+	  
 	//backstory
 	string backStory;
 	backStory = "In the realm of tax consulting, you're a shining star, renowned for your prowess in deciphering the complex labyrinth of tax codes."
@@ -109,20 +107,20 @@ int main()
     string userInput;
     while (true) {
 		getline(cin, userInput);
-		if (userInput == "story") {
+        if (userInput == "story") {
 			PrintBackStory();
-		}
-		else if (userInput == "start")
-		{
-			break;
-			// when the user enters start the game will start.  
-		}
-		// user can now redisplay story. 
-	}
+        }
+        else if( userInput == "start" )
+        {
+            break; 
+            // when the user enters start the game will start.  
+        }
+        // user can now redisplay story. 
+    }
 
-
+	//creating prison in main 
 	Prison* prison = new Prison();
-
+	prison->PrintRoom();
 
 	NPC* npc = new NPC("Fork","Cell Mate");
 

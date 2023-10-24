@@ -128,15 +128,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AAA_Jailbreak.cpp" />
-    <ClCompile Include="Item.cpp" />
-    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Prison.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="NPC.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Item.h" />
-    <ClInclude Include="Player.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="Prison.h" />
     <ClInclude Include="Room.h" />
