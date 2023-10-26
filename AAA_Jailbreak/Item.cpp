@@ -7,8 +7,9 @@ Item::Item() {
 }
 
 
-Item::Item(string n, string desc) {
+Item::Item(string n, string firstDesc, string desc) {
 	name = n;
+	firstDescription = firstDesc;
 	description = desc;
 
 }
@@ -17,11 +18,13 @@ string Item::getName() const {
 	return name;
 }
 
+string Item::getFirstDescription() const {
+	return firstDescription;
+}
+
 string Item::getDescription() const {
 	return description;
 }
-
-
 
 
 

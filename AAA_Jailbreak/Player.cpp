@@ -59,6 +59,20 @@ bool Player::HasItem(string itemName) {
 
 }
 
+void Player::TalkToNPC(Prison* prison) {
+	string answer;
+	cout << "Who do you want to talk to? ";
+	getline(cin, answer);
+	if (prison->currentRoom->SearchForPerson(answer)) {
+		cout << prison->currentRoom->getNPC(answer).generateDialogue();
+	}
+	else {
+		cout << "There is no one in this room by that name.\n";
+	}
+
+
+}
+
 //Input menu parser
 //this method could be moved out of the class an be a standalone function
 void Player::InputMenu(Prison* prison) {
@@ -101,8 +115,14 @@ void Player::InputMenu(Prison* prison) {
 			}
 		}
 	}
+	else if (answer == "SEARCH") {
+		prison->currentRoom->PrintItems();
+	}
 	else if (answer == "HELP") {
 		PrintInstructions();
+	}
+	else if (answer == "TALK") {
+		TalkToNPC(prison);
 	}
 	else if (answer == "EXIT") {
 		cout << "Exiting Game...\n";
@@ -142,7 +162,7 @@ void Player::manipulateItem()
 	string answer;
 	cout << "Which item? \n";
 	getline(cin, answer);
-	if (answer == "Cookie") 
+	if (answer == "Cookie")
 	{
 		string item = answer;
 		for (int i = 0; i < PocketsInventory.size(); i++) {
@@ -155,7 +175,7 @@ void Player::manipulateItem()
 
 	// add weapon item
 
-	/* 
+	/*
 	switch (itemType)
 	{
 	case "cookie":

@@ -20,14 +20,57 @@ Prison::Prison() {
 
 	currentRoom = cell;
 
-	//creating items within rooms
-	Item cookie("Cookie", "A large, round cookie");
-	Item biscuit("Biscuit", "A biscuit");
-	Item apple("Apple", "A red apple");
+	//Items in Cell
+	Item toothbrush("Tooth Brush", "A blue, plastic toothbrush. You can't seem to find toothpaste anywhere.", "A blue, plastic toothbrush.");
+	Item razor("Razor", "A red, disposable shaving razor that's made specifically for prisoners, as they can't have normal razors blades.", "A red, disposable shaving razor");
+	cell->AddItemToRoom(toothbrush);
+	cell->AddItemToRoom(razor);
 
+	//Items in cafe
+	Item cookie("Cookie", "A large, round cookie", "A large, round cookie");
+	Item plate("Plate", "A small, paper plate", "A small, paper plate");
+	Item apple("Apple", "A red apple", "A red apple");
 	cafe->AddItemToRoom(cookie);
-	cafe->AddItemToRoom(biscuit);
+	cafe->AddItemToRoom(plate);
 	cafe->AddItemToRoom(apple);
+
+	//Items in hallway
+	Item toothpickspack("Toothpicks", "A small pack of toothpicks sitting in the corner, clearly someone must have dropped this here.", "A small pack of toothpicks");
+	hallway->AddItemToRoom(toothpickspack);
+
+	//Items in gym
+	Item weight("Weight", "A 5 pound curling weight resting near a bench press.", "A 5 pound curling weight");
+	gym->AddItemToRoom(weight);
+
+	//Items in showers
+	Item soap("Soap", "A small bar of soap, smells like lavender", "A small bar of soap, smells like lavender");
+	Item shampoo("Shampoo Bottle", "A small shampoo bottle, barely the size of your hand. \"Peppermint Scent\" written on the back", "A small shampoo bottle, barely the size of your hand. \"Peppermint Scent\" written on the back");
+
+	showers->AddItemToRoom(soap);
+	showers->AddItemToRoom(shampoo);
+
+	//Items in Courtyard
+	Item basketball("Basketball", "An old, deflated basketball", "An old, deflated basketball");
+	Item pebble("Pebble", "A small pebble lying on the ground", "A small pebble");
+	courtYard->AddItemToRoom(basketball);
+	courtYard->AddItemToRoom(pebble);
+
+	//Items in Wardens Office
+	Item roledex("Roledex", "The Warden's roledex, lots of phone numbers that you can't make out", "The Warden's roledex, lots of phone numbers that you can't make out");
+	Item cellphone("Cellphone", "The Warden's cell phone, he still uses a flip phone.", "The Warden's cell phone, he still uses a flip phone.");
+	WardensOffice->AddItemToRoom(roledex);
+	WardensOffice->AddItemToRoom(cellphone);
+
+
+
+
+	//adding people to rooms
+	NPC fork("Fork", "You're cellmate");
+	NPC bob("Bob", "Line Cook");
+
+	cell->AddNPCToRoom(fork);
+
+	cafe->AddNPCToRoom(bob);
 
 
 }

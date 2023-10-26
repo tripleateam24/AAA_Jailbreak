@@ -15,7 +15,10 @@ public:
 	void TakeItem(Prison* prison, string itemName);
 	void DiscardItem(Prison* prison, string itemName);
 	void PrintInventory();
+	void TalkToNPC(Prison* prison);
+
 	bool HasItem(string itemName);
+
 
 	void InputMenu(Prison* prison);
 

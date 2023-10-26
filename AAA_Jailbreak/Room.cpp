@@ -1,4 +1,3 @@
-
 #include "Room.h"
 
 Room::Room(string n, string desc, Room* bR, Room* lR, Room* rR, Room* fR) {
@@ -30,6 +29,7 @@ Item Room::GetItem(string itemName) {
 }
 
 
+
 void Room::AddItemToRoom(Item item) {
 	ItemsInRoom.push_back(item);
 }
@@ -42,6 +42,26 @@ void Room::RemoveItemFromRoom(string itemName) {
 	}
 }
 
+void Room::AddNPCToRoom(NPC npc) {
+	PeopleInRoom.push_back(npc);
+}
+
+bool Room::SearchForPerson(string personName) {
+	for (auto person : PeopleInRoom) {
+		if (personName == person.getName()) {
+			return true;
+		}
+	}
+	return false;
+}
+
+NPC Room::getNPC(string personName) {
+	for (auto person : PeopleInRoom) {
+		if (personName == person.getName()) {
+			return person;
+		}
+	}
+}
 
 //getter methods:
 string Room::getName() const {
@@ -50,4 +70,18 @@ string Room::getName() const {
 string Room::getDescription() const {
 	return description;
 
+}
+
+void Room::PrintItems() {
+	cout << "\nYou Look around you....\n";
+	if (ItemsInRoom.empty()) {
+		cout << "Nothing catches your eye.\n";
+	}
+	else {
+		cout << "\nYou see:\n";
+		for (auto item : ItemsInRoom) {
+			cout << item.getName() << "\n\t" << item.getFirstDescription() << "\n\n";
+		}
+
+	}
 }
