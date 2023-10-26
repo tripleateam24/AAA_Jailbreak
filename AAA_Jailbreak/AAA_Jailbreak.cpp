@@ -8,7 +8,7 @@ using namespace std;
 
 
 void PrintBackStory() { // backstory function. Can call it when the user inputs "story"
-
+	 
 	//backstory
 	string backStory;
 	backStory = "In the realm of tax consulting, you're a shining star, renowned for your prowess in deciphering the complex labyrinth of tax codes."
@@ -25,21 +25,21 @@ void PrintBackStory() { // backstory function. Can call it when the user inputs 
 
 
 
-int main() {
-	//Displaying Game title
-	cout << "-------Jailbreak-------\n";
-	//displaying backstory
+int main(){
+    //Displaying Game title
+    cout << "-------Jailbreak-------\n";
+    //displaying backstory
 
-	PrintBackStory();
-	//Displaying game objective
-	cout << endl << "Game Objective: Go through different tasks to escape the prison in the shortest amount of days possible."
-		"You will have items and people to help you get out along the way.   \n";
-	cout << "Type 'story' to see the backstory again.\n";
-	cout << "Type 'start' to continue the game" << endl;
+    PrintBackStory(); 
+    //Displaying game objective
+    cout << endl <<"Game Objective: Go through different tasks to escape the prison in the shortest amount of days possible."
+        "You will have items and people to help you get out along the way.   \n";
+    cout << "Type 'story' to see the backstory again.\n";
+    cout << "Type 'start' to continue the game" << endl;
+	
 
-
-	string userInput;
-	while (true) {
+    string userInput;
+    while (true) {
 		getline(cin, userInput);
 		if (userInput == "story") {
 			PrintBackStory();
