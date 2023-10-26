@@ -37,7 +37,7 @@ int main(){
     cout << "Type 'story' to see the backstory again.\n";
     cout << "Type 'start' to continue the game" << endl;
 	
-
+	 
     string userInput;
     while (true) {
 		getline(cin, userInput);
