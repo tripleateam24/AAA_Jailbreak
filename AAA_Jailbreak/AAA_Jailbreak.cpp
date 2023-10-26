@@ -133,7 +133,8 @@ int main()
 		if (prison->currentRoom->getName() == "Your Cell") // if statement to ensure fork can only be "prompted" in cell
 		{
 			npc->talkToPlayer();
-
+			cout << npc->generateGreetingDialogue() << endl;
+			if
 			cout << npc->generateDialogue() << endl;
 		}
 	}

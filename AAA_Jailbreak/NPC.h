@@ -15,7 +15,7 @@ public:
     }
     
     string generateDialogue();
-
+    string generateGreetingDialogue();
 private:
     string name;
     string dialogue;
