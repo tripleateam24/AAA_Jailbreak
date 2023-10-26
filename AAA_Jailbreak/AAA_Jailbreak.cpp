@@ -50,7 +50,7 @@ int main(){
 			// when the user enters start the game will start.  
 		}
 		// user can now redisplay story. 
-	}
+	} 
 
 	Player player1 = Player("Mr. Prisoner");
 
