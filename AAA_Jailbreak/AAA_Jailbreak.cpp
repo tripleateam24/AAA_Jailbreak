@@ -126,7 +126,7 @@ int main()
 
 	NPC* npc = new NPC("Fork","Cell Mate");
 
-
+	string testinput;
 	//moving within rooms demo
 	while (true) {
 		MoveRooms(prison);
@@ -134,7 +134,8 @@ int main()
 		{
 			npc->talkToPlayer();
 			cout << npc->generateGreetingDialogue() << endl;
-			if
+			getline(cin,testinput);
+			if(testinput == "fork")
 			cout << npc->generateDialogue() << endl;
 		}
 	}
