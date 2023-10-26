@@ -1,8 +1,11 @@
 #include <iostream>
 #include <string>
+#include <chrono>
+#include <thread>
 #include "Prison.h"
 #include "NPC.h"
 #include "Player.h"
+
 
 using namespace std;
 
@@ -134,8 +137,7 @@ int main()
 		{
 			npc->talkToPlayer();
 			cout << npc->generateGreetingDialogue() << endl;
-			getline(cin,testinput);
-			if(testinput == "fork")
+			this_thread::sleep_for(5s); //a way to delay outputs useful for outputting multiple lines of dialogue over time 
 			cout << npc->generateDialogue() << endl;
 		}
 	}
