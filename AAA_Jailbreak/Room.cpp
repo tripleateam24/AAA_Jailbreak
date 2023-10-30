@@ -1,5 +1,6 @@
 #include "Room.h"
-
+#include <iostream>
+using namespace std;
 Room::Room(string n, string desc, Room* bR, Room* lR, Room* rR, Room* fR) {
 	name = n;
 	description = desc;
@@ -27,9 +28,13 @@ Item Room::GetItem(string itemName) {
 		}
 	}
 }
-
-
-
+void Room::printIteminroom()
+{
+	cout << "items in Room: \n";
+		for (int i = 0; i < ItemsInRoom.size(); i++) {
+			cout << "*"<< ItemsInRoom[i].getName() << endl;
+		}
+}
 void Room::AddItemToRoom(Item item) {
 	ItemsInRoom.push_back(item);
 }
@@ -80,7 +85,7 @@ void Room::PrintItems() {
 	else {
 		cout << "\nYou see:\n";
 		for (auto item : ItemsInRoom) {
-			cout << item.getName() << "\n\t" << item.getFirstDescription() << "\n\n";
+			cout << item.getName() << "\n\t" << item.getName() << "\n\n";
 		}
 
 	}

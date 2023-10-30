@@ -25,7 +25,7 @@ public:
 
 	bool SearchForItem(string itemName);
 	Item GetItem(string itemName);
-
+	void printIteminroom();
 	void AddItemToRoom(Item item);
 	void RemoveItemFromRoom(string itemName);
 

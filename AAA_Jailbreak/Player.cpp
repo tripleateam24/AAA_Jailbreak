@@ -100,6 +100,7 @@ void Player::InputMenu(Prison* prison) {
 	}
 	else if (answer == "inspect" || answer == "i" || answer == "I" || answer == "INSPECT") {
 		cout << "\n" << prison->currentRoom->getDescription() << "\n\n";
+		prison->currentRoom->printIteminroom();
 	}
 	else if (answer == "DISCARD") {
 		if (PocketsInventory.empty()) {
@@ -162,7 +163,7 @@ string Player::getName() const {
 //Function allows player to maniplulate object based on type
 void Player::manipulateItem()
 {
-	Prison* prison;
+	//Prison* prison;
 	vector<string>Item_Types = {"Consumeable","Wepons","potential_Wepons","Throwable","key_Item", "objective_item", "Valuable"};
 	string answer;
 	cout << "Which item? \n";
@@ -186,14 +187,12 @@ void Player::manipulateItem()
 					bool ticker = true;
 					while (ticker)
 					{
-
-					
-						if (PocketsInventory[i].getName() == "Tooth brush")
+						if (PocketsInventory[i].getName() == "Tooth Brush")
 						{
 							string choice;
 							cout << "To sharpen, enter S.\n";
 							cout << "To brush Teeth enter B.\n";
-							cin >> choice;
+							getline(cin, answer);
 							if (choice == "s" || choice == "S")
 							{
 								cout << "Sharpening Tooth Brush...\n";
@@ -232,7 +231,7 @@ void Player::manipulateItem()
 							if (choice == "y" || choice == "Y")
 							{
 								cout << "You chucked a " << PocketsInventory[i].getName() << endl;
-								DiscardItem(prison, PocketsInventory[i].getName());
+								//DiscardItem(prison, PocketsInventory[i].getName());
 								ticker = false;
 							}
 							else if (choice == "n" || choice == "N")
