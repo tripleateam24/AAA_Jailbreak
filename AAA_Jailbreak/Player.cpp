@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "Item.h"
-
+#include <chrono>
+#include <thread>
 
 Player::Player(string n) {
 	name = n;
@@ -107,6 +108,7 @@ void Player::InputMenu(Prison* prison) {
 		else {
 			cout << "What would you like to drop? ";
 			getline(cin, dropAnswer);
+			this_thread::sleep_for(2s);
 			if (HasItem(dropAnswer)) {
 				DiscardItem(prison, dropAnswer);
 			}
@@ -140,6 +142,7 @@ void Player::InputMenu(Prison* prison) {
 
 void Player::PrintInventory() {
 	cout << "\nYou feel around in your pockets....\n";
+	this_thread::sleep_for(3s);
 	if (PocketsInventory.empty()) cout << "You have nothing on you right now.\n";
 	for (auto item : PocketsInventory) {
 		cout << item.getName() << ":\n" << item.getDescription() << "\n\n";
@@ -156,22 +159,114 @@ string Player::getName() const {
 }
 
 // Revist
+//Function allows player to maniplulate object based on type
 void Player::manipulateItem()
 {
-	//string itemType = Item.getType();
+	Prison* prison;
+	vector<string>Item_Types = {"Consumeable","Wepons","potential_Wepons","Throwable","key_Item", "objective_item", "Valuable"};
 	string answer;
 	cout << "Which item? \n";
 	getline(cin, answer);
-	if (answer == "Cookie")
-	{
-		string item = answer;
+
+		//check to see if the item exsit in inventory
 		for (int i = 0; i < PocketsInventory.size(); i++) {
-			if (PocketsInventory[i].getName() == item) {
-				cout << "You consumed " << item << endl;
-				PocketsInventory.erase(PocketsInventory.begin() + i);
+			if (PocketsInventory[i].getName() == answer) {
+				if (PocketsInventory[i].getType() == Item_Types[0])
+				{
+					cout << "You consumed " << answer << endl;
+					PocketsInventory.erase(PocketsInventory.begin() + i);
+				}
+				else if (PocketsInventory[i].getType() == Item_Types[1])
+				{
+					cout << "You swung a " << answer << endl;
+
+				}
+				else if (PocketsInventory[i].getType() == Item_Types[2])
+				{
+					bool ticker = true;
+					while (ticker)
+					{
+
+					
+						if (PocketsInventory[i].getName() == "Tooth brush")
+						{
+							string choice;
+							cout << "To sharpen, enter S.\n";
+							cout << "To brush Teeth enter B.\n";
+							cin >> choice;
+							if (choice == "s" || choice == "S")
+							{
+								cout << "Sharpening Tooth Brush...\n";
+								this_thread::sleep_for(3s);
+								PocketsInventory[i].updateName("Sharped Toothbrush");
+								PocketsInventory[i].updateType("Wepon");
+								ticker = false;
+							}
+							else if (choice == "b" || choice == "B")
+							{
+								cout << "Brushing teeth...\n";
+								this_thread::sleep_for(5s);
+								cout << "You now have fresh breath!\n";
+								ticker = false;
+							}
+							else
+							{
+								cout << "Invalid input\n";
+								cout << "To sharpen, enter S.\n";
+								cout << "To brush Teeth enter B.\n";
+								cout << "__________________________________\n";
+
+							}
+						}
+					}
+				}
+				else if (PocketsInventory[i].getType() == Item_Types[3])
+				{
+					bool ticker = true;
+					while (ticker)
+					{
+							string choice;
+							cout << "Would you like to throw " << PocketsInventory[i].getName() <<"?"<< endl;
+							cout << "Enter Y or N.\n";
+							cin >> choice;
+							if (choice == "y" || choice == "Y")
+							{
+								cout << "You chucked a " << PocketsInventory[i].getName() << endl;
+								DiscardItem(prison, PocketsInventory[i].getName());
+								ticker = false;
+							}
+							else if (choice == "n" || choice == "N")
+							{
+								cout << "I guess we will keep this in our pocket...\n";
+								this_thread::sleep_for(3s);
+								ticker = false;
+							}
+							else
+							{
+								cout << "Invalid input\n";
+								cout << "Enter Y or N.\n";
+								cout << "__________________________________\n";
+							}
+					}
+				}
+				//have to configure some sort of door to be able to use key item..
+				else if (PocketsInventory[i].getType() == Item_Types[4])
+				{
+					cout << "We have to use this on a door....\n";
+				}
+				//must figure out how objective items will be used
+				else if (PocketsInventory[i].getType() == Item_Types[5])
+				{
+					cout << "This will definitely come in handy\n";
+				}
+				//will create a trading / barter system
+				else if (PocketsInventory[i].getType() == Item_Types[6])
+				{
+					cout << "I could trade this for something....\n";
+				}
 			}
 		}
-	}
+	
 
 	// add weapon item
 

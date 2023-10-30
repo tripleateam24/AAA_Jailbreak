@@ -20,44 +20,60 @@ Prison::Prison() {
 
 	currentRoom = cell;
 
+	//List of Item types
+	vector<string>Item_Types = {"Consumeable","Wepons","potential_Wepons","Throwable","key_Item", "objective_item", "Valuable"};
+
+	/*
+	Consumeable: Food items
+	Wepons: objects that can be used to defend against attackers/attack others with
+	Potential wepons: objects that can be maniplulated to become actual wepons
+	Throwables: Items that can be tossed around a room.. Can be used to create distractions or double as a wepon
+	key_item: keys to open doors
+	valuables: items that have high trade value
+	*/
+
+
+
 	//Items in Cell
-	Item toothbrush("Tooth Brush", "A blue, plastic toothbrush. You can't seem to find toothpaste anywhere.", "A blue, plastic toothbrush.");
-	Item razor("Razor", "A red, disposable shaving razor that's made specifically for prisoners, as they can't have normal razors blades.", "A red, disposable shaving razor");
+	Item toothbrush("Tooth Brush", "A blue, plastic toothbrush. You can't seem to find toothpaste anywhere. Yes, you can sharpen, but be careful.", Item_Types[2]);
+	Item razor("Razor", "A red, disposable shaving razor that's made specifically for prisoners, as they can't have normal razors blades.", Item_Types[1]);
 	cell->AddItemToRoom(toothbrush);
 	cell->AddItemToRoom(razor);
 
 	//Items in cafe
-	Item cookie("Cookie", "A large, round cookie", "A large, round cookie");
-	Item plate("Plate", "A small, paper plate", "A small, paper plate");
-	Item apple("Apple", "A red apple", "A red apple");
+	Item cookie("Cookie", "A large, round cookie", Item_Types[0]);
+	Item plate("Plate", "A small, paper plate", Item_Types[0]);
+	Item apple("Apple", "A red apple", Item_Types[0]);
+	Item bottled_Water("Bottled Water", "A bottle of room temp water.", Item_Types[0]);
 	cafe->AddItemToRoom(cookie);
 	cafe->AddItemToRoom(plate);
 	cafe->AddItemToRoom(apple);
+	cafe->AddItemToRoom(bottled_Water);
 
 	//Items in hallway
-	Item toothpickspack("Toothpicks", "A small pack of toothpicks sitting in the corner, clearly someone must have dropped this here.", "A small pack of toothpicks");
+	Item toothpickspack("Toothpicks", "A small pack of toothpicks sitting in the corner, clearly someone must have dropped this here.", Item_Types[5]);
 	hallway->AddItemToRoom(toothpickspack);
 
 	//Items in gym
-	Item weight("Weight", "A 5 pound curling weight resting near a bench press.", "A 5 pound curling weight");
+	Item weight("Weight", "A 5 pound curling weight resting near a bench press.", Item_Types[1]);
 	gym->AddItemToRoom(weight);
 
 	//Items in showers
-	Item soap("Soap", "A small bar of soap, smells like lavender", "A small bar of soap, smells like lavender");
-	Item shampoo("Shampoo Bottle", "A small shampoo bottle, barely the size of your hand. \"Peppermint Scent\" written on the back", "A small shampoo bottle, barely the size of your hand. \"Peppermint Scent\" written on the back");
+	Item soap("Soap", "A small bar of soap, smells like lavender",Item_Types[3]);
+	Item shampoo("Shampoo Bottle", "A small shampoo bottle, barely the size of your hand. \"Peppermint Scent\" written on the back", Item_Types[3]);
 
 	showers->AddItemToRoom(soap);
 	showers->AddItemToRoom(shampoo);
 
 	//Items in Courtyard
-	Item basketball("Basketball", "An old, deflated basketball", "An old, deflated basketball");
-	Item pebble("Pebble", "A small pebble lying on the ground", "A small pebble");
+	Item basketball("Basketball", "An old, deflated basketball", Item_Types[3]);
+	Item pebble("Pebble", "A small pebble lying on the ground", Item_Types[3]);
 	courtYard->AddItemToRoom(basketball);
 	courtYard->AddItemToRoom(pebble);
 
 	//Items in Wardens Office
-	Item roledex("Roledex", "The Warden's roledex, lots of phone numbers that you can't make out", "The Warden's roledex, lots of phone numbers that you can't make out");
-	Item cellphone("Cellphone", "The Warden's cell phone, he still uses a flip phone.", "The Warden's cell phone, he still uses a flip phone.");
+	Item roledex("Roledex", "The Warden's roledex, lots of phone numbers that you can't make out",Item_Types[5]);
+	Item cellphone("Cellphone", "The Warden's cell phone, he still uses a flip phone.", Item_Types[5]);
 	WardensOffice->AddItemToRoom(roledex);
 	WardensOffice->AddItemToRoom(cellphone);
 
