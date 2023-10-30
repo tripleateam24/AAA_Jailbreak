@@ -39,5 +39,10 @@ void Item::updateType(string updty)
 	Type = updty;
 }
 
+void Item::updatedesc(string upddesc)
+{
+	description = upddesc;
+}
+
 
 

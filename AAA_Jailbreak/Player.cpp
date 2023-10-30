@@ -184,29 +184,31 @@ void Player::manipulateItem()
 				}
 				else if (PocketsInventory[i].getType() == Item_Types[2])
 				{
-					bool ticker = true;
-					while (ticker)
+					bool ticker = false;
+					while (!ticker)
 					{
 						if (PocketsInventory[i].getName() == "Tooth Brush")
 						{
 							string choice;
 							cout << "To sharpen, enter S.\n";
 							cout << "To brush Teeth enter B.\n";
-							getline(cin, answer);
+							getline(cin, choice);
 							if (choice == "s" || choice == "S")
 							{
 								cout << "Sharpening Tooth Brush...\n";
 								this_thread::sleep_for(3s);
-								PocketsInventory[i].updateName("Sharped Toothbrush");
+								PocketsInventory[i].updateName("Shank");
 								PocketsInventory[i].updateType("Wepon");
-								ticker = false;
+								PocketsInventory[i].updatedesc("You sharpended the end of the toothbrush to create a shank. You can use this to injure others.");
+								cout << "You now have a shank.\n";
+								ticker = true;
 							}
 							else if (choice == "b" || choice == "B")
 							{
 								cout << "Brushing teeth...\n";
 								this_thread::sleep_for(5s);
 								cout << "You now have fresh breath!\n";
-								ticker = false;
+								ticker = true;
 							}
 							else
 							{
@@ -221,8 +223,8 @@ void Player::manipulateItem()
 				}
 				else if (PocketsInventory[i].getType() == Item_Types[3])
 				{
-					bool ticker = true;
-					while (ticker)
+					bool ticker = false;
+					while (!ticker)
 					{
 							string choice;
 							cout << "Would you like to throw " << PocketsInventory[i].getName() <<"?"<< endl;
@@ -232,13 +234,13 @@ void Player::manipulateItem()
 							{
 								cout << "You chucked a " << PocketsInventory[i].getName() << endl;
 								//DiscardItem(prison, PocketsInventory[i].getName());
-								ticker = false;
+								ticker = true;
 							}
 							else if (choice == "n" || choice == "N")
 							{
 								cout << "I guess we will keep this in our pocket...\n";
 								this_thread::sleep_for(3s);
-								ticker = false;
+								ticker = true;
 							}
 							else
 							{

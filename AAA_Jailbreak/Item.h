@@ -8,8 +8,6 @@ class Item {
 	string name;
 	string Type;
 	string description;
-	string updatedName;
-	string updatedType;
 public:
 	Item();
 	Item(string n, string desc, string type);
@@ -18,4 +16,5 @@ public:
 	string getType() const;
 	void updateName(string updname);
 	void updateType(string updty);
+	void updatedesc(string upddesc);
 };
