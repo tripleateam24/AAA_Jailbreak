@@ -89,7 +89,7 @@ Prison::Prison() {
 
 	NPC* james = new NPC("James", "Second Line Cook", "FRIEND");
 
-
+	//traders
 	Trader* greg = new Trader("Greg", "Gym Trader", "TRADER");
 	Trader* bill = new Trader("Bill", "Gym Trader", "TRADER");
 	Trader* john = new Trader("John", "Gym Trader", "TRADER");
@@ -99,6 +99,7 @@ Prison::Prison() {
 	bill->TradeTable["Apple"] = Item("Wrench", "A silver hand wrench", Item_Types[4]);
 	bill->TradeTable["Cookie"] = Item("Flashlight", "A handheld, battery powered flashling", Item_Types[4]);
 
+	//enemies
 	Enemy* josh = new Enemy("Josh", "Bad Guy", "ENEMY", 20, 5, Item("Knife", "A knife", Item_Types[1]));
 
 	cell->AddNPCToRoom(fork);
