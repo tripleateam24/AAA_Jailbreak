@@ -1,6 +1,5 @@
 #include "Room.h"
-#include <iostream>
-using namespace std;
+
 Room::Room(string n, string desc, Room* bR, Room* lR, Room* rR, Room* fR) {
 	name = n;
 	description = desc;
@@ -11,6 +10,11 @@ Room::Room(string n, string desc, Room* bR, Room* lR, Room* rR, Room* fR) {
 
 }
 
+Room::~Room() {
+	for (auto person : PeopleInRoom) {
+		delete person;
+	}
+}
 
 bool Room::SearchForItem(string itemName) {
 	for (auto item : ItemsInRoom) {
@@ -28,13 +32,9 @@ Item Room::GetItem(string itemName) {
 		}
 	}
 }
-void Room::printIteminroom()
-{
-	cout << "items in Room: \n";
-		for (int i = 0; i < ItemsInRoom.size(); i++) {
-			cout << "*"<< ItemsInRoom[i].getName() << endl;
-		}
-}
+
+
+
 void Room::AddItemToRoom(Item item) {
 	ItemsInRoom.push_back(item);
 }
@@ -47,25 +47,36 @@ void Room::RemoveItemFromRoom(string itemName) {
 	}
 }
 
-void Room::AddNPCToRoom(NPC npc) {
+void Room::AddNPCToRoom(NPC* npc) {
 	PeopleInRoom.push_back(npc);
 }
 
 bool Room::SearchForPerson(string personName) {
-	for (auto person : PeopleInRoom) {
-		if (personName == person.getName()) {
+
+	vector<NPC*>::iterator it;
+	it = PeopleInRoom.begin();
+	while (it != PeopleInRoom.end()) {
+		if (personName == (*it)->getName()) {
+			cout << (*it)->getName();
 			return true;
 		}
+		++it;
 	}
+
 	return false;
 }
 
-NPC Room::getNPC(string personName) {
-	for (auto person : PeopleInRoom) {
-		if (personName == person.getName()) {
-			return person;
+
+NPC* Room::getNPC(string personName) {
+	vector<NPC*>::iterator it;
+	it = PeopleInRoom.begin();
+	while (it != PeopleInRoom.end()) {
+		if (personName == (*it)->getName()) {
+			return *it;
 		}
+		++it;
 	}
+
 }
 
 //getter methods:
@@ -85,7 +96,7 @@ void Room::PrintItems() {
 	else {
 		cout << "\nYou see:\n";
 		for (auto item : ItemsInRoom) {
-			cout << item.getName() << "\n\t" << item.getName() << "\n\n";
+			cout << item.getName() << "\n\t" << item.getDescription() << "\n\n";
 		}
 
 	}

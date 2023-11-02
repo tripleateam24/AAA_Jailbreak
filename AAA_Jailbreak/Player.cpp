@@ -3,8 +3,11 @@
 #include <chrono>
 #include <thread>
 
+
 Player::Player(string n) {
 	name = n;
+	health = 15;
+	strengthModifier = 10;
 }
 
 void Player::PrintInstructions() {
@@ -31,6 +34,7 @@ void Player::TakeItem(Prison* prison, string itemName) {
 			cout << "You have found " << itemName << endl;
 			PocketsInventory.push_back(prison->currentRoom->GetItem(itemName));
 			prison->currentRoom->RemoveItemFromRoom(itemName);
+			prison->LoseDayLight(1);
 		}
 		else {
 			cout << "You cannot find " << itemName << " in this room.\n";
@@ -60,12 +64,62 @@ bool Player::HasItem(string itemName) {
 
 }
 
+//absolutely need to refactor this with proper variable names 
+//also add a condition that tells if they have anything to trade today
+void Player::Trade(Prison* prison, string traderName){
+	string itemAnswer;
+	string finalAnswer;
+	
+	prison->currentRoom->getNPC(traderName)->PrintTradeTable();
+	cout << "Which Item would you like to trade for? ";
+	getline(cin, itemAnswer);
+	if(prison->currentRoom->getNPC(traderName)->SearchForTradeItem(itemAnswer)){
+		if(HasItem(prison->currentRoom->getNPC(traderName)->ItemToGiveToTrader(itemAnswer))){
+			cout << "Give " << traderName << " " << prison->currentRoom->getNPC(traderName)->ItemToGiveToTrader(itemAnswer) << " for " << itemAnswer << "? Y/N: ";
+			getline(cin, finalAnswer);
+			if(finalAnswer == "Y" || finalAnswer == "y"){
+				if(PocketsInventory.size() >= 2){
+					cout << "\nYou're Pockets are Already Full!\n";
+				}else{
+					for (int i = 0; i < PocketsInventory.size(); i++) {
+						if (PocketsInventory[i].getName() == prison->currentRoom->getNPC(traderName)->ItemToGiveToTrader(itemAnswer)) {
+							PocketsInventory.erase(PocketsInventory.begin() + i);
+						}
+					}
+					PocketsInventory.push_back(prison->currentRoom->getNPC(traderName)->getItemFromTrader(itemAnswer));	
+					prison->currentRoom->getNPC(traderName)->DeleteTradeItem(itemAnswer);
+				}
+
+			}else{
+				cout << "\nCancelling Trade.\n\n";
+			}
+		}else{
+			cout << "You don't have the " << prison->currentRoom->getNPC(traderName)->ItemToGiveToTrader(itemAnswer) << " in order to make that trade!\n";
+		}
+	}else{
+		cout << traderName << " does not have that item.\n";
+	}
+
+}
+
+
 void Player::TalkToNPC(Prison* prison) {
 	string answer;
+	string tradeAnswer;
 	cout << "Who do you want to talk to? ";
 	getline(cin, answer);
 	if (prison->currentRoom->SearchForPerson(answer)) {
-		cout << prison->currentRoom->getNPC(answer).generateDialogue();
+		cout << prison->currentRoom->getNPC(answer)->generateDialogue();	
+
+		if(prison->currentRoom->getNPC(answer)->getID() == "TRADER"){	
+			cout << answer << " is a Trader.\nTrade With " << prison->currentRoom->getNPC(answer)->getName() << "? Y/N: "; 
+			getline(cin, tradeAnswer);
+			if(tradeAnswer == "Y" || tradeAnswer == "y"){
+				Trade(prison, answer);
+			}
+		}
+
+		prison->LoseDayLight(1);
 	}
 	else {
 		cout << "There is no one in this room by that name.\n";
@@ -74,8 +128,15 @@ void Player::TalkToNPC(Prison* prison) {
 
 }
 
-//Input menu parser
-//this method could be moved out of the class an be a standalone function
+void Player::Exercise(Prison* prison){
+	cout << "You start lifting weights....\nYou feel yourself get stronger";
+	health += 2;
+	strengthModifier += 2;
+	prison->LoseDayLight(3);
+
+}
+
+
 void Player::InputMenu(Prison* prison) {
 	string answer;
 	string itemAnswer;
@@ -100,7 +161,6 @@ void Player::InputMenu(Prison* prison) {
 	}
 	else if (answer == "inspect" || answer == "i" || answer == "I" || answer == "INSPECT") {
 		cout << "\n" << prison->currentRoom->getDescription() << "\n\n";
-		prison->currentRoom->printIteminroom();
 	}
 	else if (answer == "DISCARD") {
 		if (PocketsInventory.empty()) {
@@ -109,7 +169,6 @@ void Player::InputMenu(Prison* prison) {
 		else {
 			cout << "What would you like to drop? ";
 			getline(cin, dropAnswer);
-			this_thread::sleep_for(2s);
 			if (HasItem(dropAnswer)) {
 				DiscardItem(prison, dropAnswer);
 			}
@@ -126,13 +185,15 @@ void Player::InputMenu(Prison* prison) {
 	}
 	else if (answer == "TALK") {
 		TalkToNPC(prison);
+	
+	}else if(answer == "EXERCISE" && prison->currentRoom->getName() == "The Gym"){
+		Exercise(prison);
+
 	}
 	else if (answer == "EXIT") {
 		cout << "Exiting Game...\n";
 		exit(0);
-	}
-	else if (answer == "USEITEM")
-	{
+	}else if (answer == "USEITEM"){
 		manipulateItem();
 	}
 	else {
@@ -143,20 +204,38 @@ void Player::InputMenu(Prison* prison) {
 
 void Player::PrintInventory() {
 	cout << "\nYou feel around in your pockets....\n";
-	this_thread::sleep_for(3s);
 	if (PocketsInventory.empty()) cout << "You have nothing on you right now.\n";
 	for (auto item : PocketsInventory) {
 		cout << item.getName() << ":\n" << item.getDescription() << "\n\n";
+		
 	}
 
+
+	
 }
+
 
 void Player::setName(string n) {
 	name = n;
 }
+void Player::setHealth(int x){
+	health = x;
+}
+void Player::setStrengthModifier(int x){
+
+	strengthModifier = x;
+}
+
+
 
 string Player::getName() const {
 	return name;
+}
+int Player::getHealth() const{
+	return health;
+}
+int Player::getStrengthModifier() const{
+	return strengthModifier;
 }
 
 // Revist

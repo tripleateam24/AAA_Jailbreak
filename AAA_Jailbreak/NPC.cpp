@@ -9,6 +9,9 @@ string NPC::getName() const {
 string NPC::getDescription() const {
     return description;
 }
+string NPC::getID() const {
+    return ID;
+}
 
 string NPC::generateDialogue()
 {
@@ -22,5 +25,27 @@ string NPC::generateDialogue()
     return dialogue[choice] + dialogueSep;
 
 }
+
+void NPC::PrintTradeTable() {
+
+}
+
+bool NPC::SearchForTradeItem(string itemName) {
+    return false;
+}
+
+string NPC::ItemToGiveToTrader(string itemName) {
+    return "";
+}
+
+Item NPC::getItemFromTrader(string itemName) {
+    return Item();
+}
+
+void NPC::DeleteTradeItem(string itemName) {
+
+}
+
+
 
 

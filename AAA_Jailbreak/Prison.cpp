@@ -1,6 +1,8 @@
 #include "Prison.h"
 
 Prison::Prison() {
+	dayLight = 20;
+	dayCounter = 0;
 	cell = new Room("Your Cell", "CELL DESCRIPTION HERE", nullptr, nullptr, nullptr, nullptr);
 	cafe = new Room("The Cafeteria", "A Large cafeteria with long tables, many other prisoners sit with their food. You see a Cookie on a table next to.", cell, nullptr, nullptr, nullptr);
 	hallway = new Room("The A Block Hallway", "HALLWAY DESCRIPTION HERE", cell, nullptr, nullptr, nullptr);
@@ -81,12 +83,34 @@ Prison::Prison() {
 
 
 	//adding people to rooms
-	NPC fork("Fork", "You're cellmate");
-	NPC bob("Bob", "Line Cook");
+	//adding people to rooms
+	NPC* fork = new NPC("Fork", "You're cellmate", "FRIEND");
+	NPC* bob = new NPC("Bob", "Line Cook", "FRIEND");
+
+	NPC* james = new NPC("James", "Second Line Cook", "FRIEND");
+
+
+	Trader* greg = new Trader("Greg", "Gym Trader", "TRADER");
+	Trader* bill = new Trader("Bill", "Gym Trader", "TRADER");
+	Trader* john = new Trader("John", "Gym Trader", "TRADER");
+
+	greg->TradeTable["Plate"] = Item("Lighter", "A silver zippo lighter, good for lighting up dark places", Item_Types[4]);
+	greg->TradeTable["Razor"] = Item("Matches", "A small box of striking matches", Item_Types[4]);
+	bill->TradeTable["Apple"] = Item("Wrench", "A silver hand wrench", Item_Types[4]);
+	bill->TradeTable["Cookie"] = Item("Flashlight", "A handheld, battery powered flashling", Item_Types[4]);
+
+	Enemy* josh = new Enemy("Josh", "Bad Guy", "ENEMY", 20, 5, Item("Knife", "A knife", Item_Types[1]));
 
 	cell->AddNPCToRoom(fork);
-
 	cafe->AddNPCToRoom(bob);
+	cafe->AddNPCToRoom(james);
+
+	gym->AddNPCToRoom(greg);
+	gym->AddNPCToRoom(bill);
+	gym->AddNPCToRoom(john);
+
+	courtYard->AddNPCToRoom(josh);
+
 
 
 }
@@ -104,7 +128,7 @@ void Prison::MoveRooms() {
 		if (currentRoom->leftRoom != nullptr) {
 			currentRoom = currentRoom->leftRoom;
 			cout << "Moving into " << currentRoom->getName() << ".....\n";
-
+			LoseDayLight(1);
 		}
 		else {
 			cout << "No Room to the Left.\n";
@@ -114,7 +138,7 @@ void Prison::MoveRooms() {
 		if (currentRoom->rightRoom != nullptr) {
 			currentRoom = currentRoom->rightRoom;
 			cout << "Moving into " << currentRoom->getName() << ".....\n";
-
+			LoseDayLight(1);
 		}
 		else {
 			cout << "No Room to the Right.\n";
@@ -124,7 +148,7 @@ void Prison::MoveRooms() {
 		if (currentRoom->backRoom != nullptr) {
 			currentRoom = currentRoom->backRoom;
 			cout << "Moving into " << currentRoom->getName() << ".....\n";
-
+			LoseDayLight(1);
 		}
 		else {
 			cout << "You are in you're cell, there is no back room here.\n";
@@ -134,7 +158,7 @@ void Prison::MoveRooms() {
 		if (currentRoom->forwardRoom != nullptr) {
 			currentRoom = currentRoom->forwardRoom;
 			cout << "Moving into " << currentRoom->getName() << ".....\n";
-
+			LoseDayLight(1);
 		}
 		else {
 			cout << "No Room in Front of you.\n";
@@ -154,4 +178,25 @@ void Prison::MoveRooms() {
 
 void Prison::PrintRoom() {
 	cout << "You are currently inside " << currentRoom->getName() << "\n\n\n";
+}
+
+void Prison::LoseDayLight(int x) {
+	dayLight -= x;
+}
+
+void Prison::SetDayLight(int x) {
+	dayLight = x;
+}
+
+int Prison::getDaylight() const {
+	return dayLight;
+
+}
+
+void Prison::newDay() {
+	dayCounter++;
+}
+
+int Prison::getDay() const {
+	return dayCounter;
 }
