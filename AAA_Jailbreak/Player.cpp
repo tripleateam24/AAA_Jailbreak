@@ -69,32 +69,32 @@ bool Player::HasItem(string itemName) {
 void Player::Trade(Prison* prison, string traderName){
 	string itemAnswer;
 	string finalAnswer;
-	
-	prison->currentRoom->getNPC(traderName)->PrintTradeTable();
+	NPC* trader = prison->currentRoom->getNPC(traderName);
+	trader->PrintTradeTable();
 	cout << "Which Item would you like to trade for? ";
 	getline(cin, itemAnswer);
-	if(prison->currentRoom->getNPC(traderName)->SearchForTradeItem(itemAnswer)){
-		if(HasItem(prison->currentRoom->getNPC(traderName)->ItemToGiveToTrader(itemAnswer))){
-			cout << "Give " << traderName << " " << prison->currentRoom->getNPC(traderName)->ItemToGiveToTrader(itemAnswer) << " for " << itemAnswer << "? Y/N: ";
+	if(trader->SearchForTradeItem(itemAnswer)){
+		if(HasItem(trader->ItemToGiveToTrader(itemAnswer))){
+			cout << "Give " << traderName << " " << trader->ItemToGiveToTrader(itemAnswer) << " for " << itemAnswer << "? Y/N: ";
 			getline(cin, finalAnswer);
 			if(finalAnswer == "Y" || finalAnswer == "y"){
 				if(PocketsInventory.size() >= 2){
 					cout << "\nYou're Pockets are Already Full!\n";
 				}else{
 					for (int i = 0; i < PocketsInventory.size(); i++) {
-						if (PocketsInventory[i].getName() == prison->currentRoom->getNPC(traderName)->ItemToGiveToTrader(itemAnswer)) {
+						if (PocketsInventory[i].getName() == trader->ItemToGiveToTrader(itemAnswer)) {
 							PocketsInventory.erase(PocketsInventory.begin() + i);
 						}
 					}
-					PocketsInventory.push_back(prison->currentRoom->getNPC(traderName)->getItemFromTrader(itemAnswer));	
-					prison->currentRoom->getNPC(traderName)->DeleteTradeItem(itemAnswer);
+					PocketsInventory.push_back(trader->getItemFromTrader(itemAnswer));
+					trader->DeleteTradeItem(itemAnswer);
 				}
 
 			}else{
 				cout << "\nCancelling Trade.\n\n";
 			}
 		}else{
-			cout << "You don't have the " << prison->currentRoom->getNPC(traderName)->ItemToGiveToTrader(itemAnswer) << " in order to make that trade!\n";
+			cout << "You don't have the " << trader->ItemToGiveToTrader(itemAnswer) << " in order to make that trade!\n";
 		}
 	}else{
 		cout << traderName << " does not have that item.\n";
