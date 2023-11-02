@@ -3,22 +3,54 @@
 Prison::Prison() {
 	dayLight = 20;
 	dayCounter = 0;
+
+	//possible map design(subject to change)
 	cell = new Room("Your Cell", "CELL DESCRIPTION HERE", nullptr, nullptr, nullptr, nullptr);
-	cafe = new Room("The Cafeteria", "A Large cafeteria with long tables, many other prisoners sit with their food. You see a Cookie on a table next to.", cell, nullptr, nullptr, nullptr);
-	hallway = new Room("The A Block Hallway", "HALLWAY DESCRIPTION HERE", cell, nullptr, nullptr, nullptr);
 
-	gym = new Room("The Gym", "GYM DESCRIPTION HERE", cafe, nullptr, nullptr, nullptr);
-	showers = new Room("The Showers", "SHOWERS DESCRIPTION HERE", cafe, nullptr, nullptr, nullptr);
+	hallway = new Room("The A Block Hallway", "HALLWAY DESCRIPTION HERE", nullptr, nullptr, nullptr, nullptr);
+	commonRoom = new Room("The Common Room", "COMMON ROOM DESCRIPTION HERE", nullptr, nullptr, nullptr, nullptr);
+	cafe = new Room("The Cafeteria", "A Large cafeteria with long tables, many other prisoners sit with their food. You see a Cookie on a table next to.", nullptr, nullptr, nullptr, nullptr);
+	
+	airlock = new Room("Airlock Room", "A room seperating the courtyard from the rest of the prison", nullptr, nullptr, nullptr, nullptr);
+	courtYard = new Room("The Court Yard", "COURTYARD DESCRIPTION HERE", nullptr, nullptr, nullptr, nullptr);
+	
+	workshopRoom = new Room("The Workshop Room", "WORKSHOP ROOM DESCRIPTION HERE", nullptr, nullptr, nullptr, nullptr);
+	gym = new Room("The Gym", "GYM DESCRIPTION HERE", nullptr, nullptr, nullptr, nullptr);
+	showers = new Room("The Showers", "SHOWERS DESCRIPTION HERE", nullptr, nullptr, nullptr, nullptr);
 
-	courtYard = new Room("The Court Yard", "COURTYARD DESCRIPTION HERE", hallway, nullptr, nullptr, nullptr);
-	WardensOffice = new Room("The Warden's Office", "WARDEN'S OFFICE DESCRIPTION HERE", hallway, nullptr, nullptr, nullptr);
+	
+	WardensOffice = new Room("The Warden's Office", "WARDEN'S OFFICE DESCRIPTION HERE", nullptr, nullptr, nullptr, nullptr);
 
-	cell->leftRoom = cafe;
-	cell->rightRoom = hallway;
-	cafe->leftRoom = gym;
-	cafe->rightRoom = showers;
-	hallway->leftRoom = courtYard;
-	hallway->rightRoom = WardensOffice;
+	cell->forwardRoom = hallway;
+	
+	hallway->backRoom = cell;
+	hallway->leftRoom = cafe;
+	hallway->rightRoom = commonRoom;
+	hallway->forwardRoom = airlock;
+
+	airlock->backRoom = hallway;
+	airlock->forwardRoom = courtYard;
+
+	courtYard->backRoom = airlock;
+
+	cafe->rightRoom = hallway;
+	cafe->forwardRoom = workshopRoom;
+
+	commonRoom->leftRoom = hallway;
+	commonRoom->forwardRoom = showers;
+
+	showers->backRoom = commonRoom;
+	showers->leftRoom = gym;
+	
+	gym->rightRoom = showers;
+	gym->leftRoom = workshopRoom;
+
+	workshopRoom->rightRoom = gym;
+	workshopRoom->backRoom = cafe;
+	workshopRoom->leftRoom = WardensOffice;
+
+	WardensOffice->rightRoom = workshopRoom;
+
 
 	currentRoom = cell;
 
@@ -152,7 +184,7 @@ void Prison::MoveRooms() {
 			LoseDayLight(1);
 		}
 		else {
-			cout << "You are in you're cell, there is no back room here.\n";
+			cout << "There is no back room here.\n";
 		}
 	}
 	else if ((answer == "forward") || (answer == "FORWARD") || (answer == "f") || (answer == "F") || (answer == "Forward")) {

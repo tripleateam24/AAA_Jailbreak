@@ -16,6 +16,7 @@ public:
 	Room* workshopRoom;
 	Room* courtYard;
 	Room* WardensOffice;
+	Room* airlock;
 
 	Room* currentRoom;
 
