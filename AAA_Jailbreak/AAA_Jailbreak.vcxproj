@@ -134,6 +134,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Prison.cpp" />
     <ClCompile Include="Room.cpp" />
+    <ClCompile Include="NPC.cpp" />
     <ClCompile Include="Trader.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -141,6 +142,7 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="NPC.h" />
     <ClInclude Include="Prison.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="Trader.h" />

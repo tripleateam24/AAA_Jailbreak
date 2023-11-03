@@ -1,4 +1,5 @@
 #pragma once
+
 #include <string>
 #include <iostream>
 #include "Item.h"
@@ -8,15 +9,17 @@ using namespace std;
 
 class NPC {
 public:
+    NPC(const string& name, const string& description)
+        : name(name), description(description) {}
     NPC() {}
     NPC(const string& name, const string& description, const string& id)
         : name(name), description(description), ID(id) {}
 
-    void talkToPlayer()
+    void talkToPlayer() 
     {
         cout << "\n" << name << ", your " << description << ", says:" << endl;
     }
-
+    
     string generateDialogue();
     string getName() const;
     string getDescription() const;
@@ -29,9 +32,14 @@ public:
     virtual Item getItemFromTrader(string itemName);
     virtual void DeleteTradeItem(string itemName);
 protected:
+    string generateGreetingDialogue();
+private:
     string name;
     string dialogue;
     string description;
+    string getName() const;
+    string getDescription() const;
     string ID;
-
+    
 };
+
