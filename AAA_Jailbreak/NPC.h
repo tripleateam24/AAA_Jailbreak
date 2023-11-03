@@ -25,6 +25,13 @@ public:
     string getDescription() const;
     string getID() const;
 
+    string name; 
+    string dialogue; 
+    string description; 
+   // string getName() const; 
+   //string getDescription() const; 
+    string ID; 
+
 
     virtual void PrintTradeTable();
     virtual bool SearchForTradeItem(string itemName);
@@ -34,12 +41,13 @@ public:
 protected:
     string generateGreetingDialogue();
 private:
+    /*
     string name;
     string dialogue;
     string description;
     string getName() const;
     string getDescription() const;
     string ID;
-    
+    */
 };
 

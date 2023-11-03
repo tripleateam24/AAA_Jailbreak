@@ -1,4 +1,6 @@
 #include "Enemy.h"
+#include "NPC.h" 
+
 Enemy::Enemy(string n, string desc, string id, int h, int s, Item w) {
         name = n;
         description = desc;
@@ -6,8 +8,4 @@ Enemy::Enemy(string n, string desc, string id, int h, int s, Item w) {
         health = h;
         strength = s;
         wp = w;
-    
-
-
-
 };

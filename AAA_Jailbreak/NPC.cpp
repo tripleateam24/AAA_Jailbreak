@@ -1,7 +1,5 @@
 #include "NPC.h"
 
-
-
 //getter functions for name and description
 string NPC::getName() const {
     return name;
@@ -38,11 +36,9 @@ string NPC::ItemToGiveToTrader(string itemName) {
     return "";
 }
 
+
 string NPC::generateDialogue()
 {
-Item NPC::getItemFromTrader(string itemName) {
-    return Item();
-}
     
     string dialogue[] = { "You plan on getting out of here somehow?","How I got my name? You dont wanna know why.",
         "Have you done your shift today?", "Have you had went to the commissary" };
@@ -52,7 +48,21 @@ Item NPC::getItemFromTrader(string itemName) {
     string dialogueSep = "\n============================================\n";
     cout << dialogueSep;
     return dialogue[choice] + dialogueSep;
-void NPC::DeleteTradeItem(string itemName) {
+
+ //found this outside of this block, I assume it goes in here -NE
+
+}
+
+
+Item NPC::getItemFromTrader(string itemName)
+{
+    return Item();
+}
+
+
+
+void NPC::DeleteTradeItem(string itemName)
+{
 
 }
 
