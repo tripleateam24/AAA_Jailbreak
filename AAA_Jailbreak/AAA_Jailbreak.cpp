@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <chrono>
+#include <thread>
 #include "Prison.h"
 #include "NPC.h"
 #include "Player.h"
@@ -58,6 +60,7 @@ int main() {
 	 
 
 
+	string testinput;
 	//moving within rooms demo
 	while (true) {
 		player1.InputMenu(prison);
@@ -68,10 +71,8 @@ int main() {
 			prison->newDay();
 
 		}
+		*/
 	}
-
-	//cout << "You spent " << prison->getDay() << " days in jail.\n";
-
 
 	delete prison;
 
