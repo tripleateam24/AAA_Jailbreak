@@ -8,8 +8,6 @@
 #include "Item.h"
 
 
-using namespace std;
-
 
 void PrintBackStory() { // backstory function. Can call it when the user inputs "story"
 
@@ -34,7 +32,7 @@ void PrintBackStory() { // backstory function. Can call it when the user inputs 
 //this can be left on own or put in either prison class or player class down the line
 void MoveRooms(Prison* prison) {
 	string answer;
-	cout << "Your Move: ";
+	std::cout << "Your Move: ";
 	getline(cin, answer);
 	cout << "\n";
 	if ((answer == "L") || (answer == "l") || (answer == "left") || (answer == "LEFT")) {
@@ -94,7 +92,7 @@ void MoveRooms(Prison* prison) {
 }
 
 
-
+int main() {
 
 	//Displaying Game title
 	cout << "\t\t\t\t\t\t-------Jailbreak-------\n";

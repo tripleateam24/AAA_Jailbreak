@@ -35,22 +35,9 @@ Room::~Room() {
 	}
 }
 
-bool Room::SearchForItem(string itemName) {
-	for (auto item : ItemsInRoom) {
-		if (item.getName() == itemName) {
-			return true;
-		}
-	}
-	return false;
-}
+// duplicate bool Room::SearchForItem(string itemName) removed
 
-Item Room::GetItem(string itemName) {
-	for (auto item : ItemsInRoom) {
-		if (item.getName() == itemName) {
-			return item;
-		}
-	}
-}
+// duplicate Item Room::GetItem(string itemName) removed
 
 
 
