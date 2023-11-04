@@ -17,7 +17,7 @@ void Player::PrintInstructions() {
 		"\nTAKEITEM - Take an item in the room\nDISCARD - Discard an item from your inventory\n"
 		"INVENTORY - See what you have in your inventory\n"
 		"EXIT - Exit the game\nHELP - Print this menu again\n\n\n\n";
-	cout << instructions << "\n\nress Enter to Continue ";
+	cout << instructions << "\n\nPress Enter to Continue ";
 	getline(cin, answer);
 	cout << "\n\n";
 
