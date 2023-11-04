@@ -1,6 +1,9 @@
 #include "Item.h"
 #include "Player.h"
 
+
+//items are not showing up when the user types "INSPECT" 
+
 Item::Item() {
 	name = "UNDEFINED ITEM";
 	description = "UNDEFINED ITEM DESCRIPTION";
