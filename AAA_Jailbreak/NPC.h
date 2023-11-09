@@ -24,12 +24,11 @@ public:
     string getName() const;
     string getDescription() const;
     string getID() const;
+    string sethDialogue();
 
     string name; 
     string dialogue; 
     string description; 
-   // string getName() const; 
-   //string getDescription() const; 
     string ID; 
 
 
@@ -41,7 +40,8 @@ public:
 protected:
     string generateGreetingDialogue();
 private:
-    /*
+   
+    /* code wasnt working when this was in the private
     string name;
     string dialogue;
     string description;

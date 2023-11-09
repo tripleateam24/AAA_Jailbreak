@@ -36,6 +36,4 @@ public:
 
 	int getDay() const;
 
-
-
 };

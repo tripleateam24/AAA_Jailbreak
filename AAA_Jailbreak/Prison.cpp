@@ -22,6 +22,7 @@ Prison::Prison() {
 	
 	WardensOffice = new Room("The Warden's Office", "The Warden's office, where a large desk and cabinets that contain sensitive files and records reside.\n It is also a communication center equipped with phones, radios, and computer systems for the Warden to stay in contact with other prison staff.", nullptr, nullptr, nullptr, nullptr);
 
+	// Prison layout
 	cell->forwardRoom = hallway;
 	
 	hallway->backRoom = cell;
@@ -119,9 +120,11 @@ Prison::Prison() {
 	//adding people to rooms
 	//adding people to rooms
 	NPC* fork = new NPC("Fork", "You're cellmate", "FRIEND");
-	NPC* bob = new NPC("Bob", "Line Cook", "FRIEND");
 
+	NPC* bob = new NPC("Bob", "Line Cook", "FRIEND");
 	NPC* james = new NPC("James", "Second Line Cook", "FRIEND");
+
+	NPC* seth = new NPC("Seth", "Fellow Prisoner", "FRIEND"); // NPC who gives player info about crime in showers
 
 	//traders
 	Trader* greg = new Trader("Greg", "Gym Trader", "TRADER");
@@ -136,6 +139,7 @@ Prison::Prison() {
 	//enemies
 	Enemy* josh = new Enemy("Josh", "Bad Guy", "ENEMY", 20, 5, Item("Knife", "A knife", Item_Types[1]));
 
+	//assigning NPC to rooms
 	cell->AddNPCToRoom(fork);
 	cafe->AddNPCToRoom(bob);
 	cafe->AddNPCToRoom(james);
@@ -146,10 +150,9 @@ Prison::Prison() {
 
 	courtYard->AddNPCToRoom(josh);
 
+	showers->AddNPCToRoom(seth);
+
 	currentRoom = cell;
-
-	// deleted duplicate Cookie, Biscuit & Apple declarations
-
 
 }
 
@@ -157,7 +160,7 @@ Prison::~Prison() {
 	delete cell, cafe, hallway, gym, showers, courtYard, WardensOffice;
 }
 
-// Duplicate void Prison::MoveRooms()
+
 
 void Prison::MoveRooms() {
 	string answer;
@@ -211,8 +214,6 @@ void Prison::MoveRooms() {
 	else {
 		"Sorry, I don't understand what you want to do here.\n";
 	}
-
-
 
 }
 

@@ -53,6 +53,14 @@ string NPC::generateDialogue()
 
 }
 
+string NPC::sethDialogue()
+{
+    string dialogue = "SETH's DIALOUGE";
+    string dialogueSep = "\n============================================\n";
+    cout << dialogueSep;
+    return dialogue + dialogueSep;
+}
+
 
 Item NPC::getItemFromTrader(string itemName)
 {

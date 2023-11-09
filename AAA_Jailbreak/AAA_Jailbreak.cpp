@@ -144,7 +144,7 @@ int main() {
 		
 	}
 	
-		MoveRooms(prison); 
+	MoveRooms(prison); 
 
 	/*
 		if (prison->currentRoom->getName() == "Your Cell") // if statement to ensure fork can only be "prompted" in cell
@@ -155,6 +155,20 @@ int main() {
 			cout << npc->generateDialogue() << endl;
 		}
 	*/ 
+
+	//shower scene attempt
+	int showerEntranceCounter = 0;
+	if (prison->currentRoom == prison->cell)
+	{
+		showerEntranceCounter++;
+	}
+	else if (showerEntranceCounter == 1)
+	{
+		//generate the dialogue from seth in the showers
+	}
+	
+
+
 
 	delete prison;
 

@@ -109,7 +109,10 @@ void Player::TalkToNPC(Prison* prison) {
 	cout << "Who do you want to talk to? ";
 	getline(cin, answer);
 	if (prison->currentRoom->SearchForPerson(answer)) {
-		cout << prison->currentRoom->getNPC(answer)->generateDialogue();	
+		cout << prison->currentRoom->getNPC(answer)->generateDialogue();
+	if (prison->currentRoom->SearchForPerson("Seth")) {
+		cout << prison->currentRoom->getNPC(answer)->sethDialogue();
+	}
 
 		if(prison->currentRoom->getNPC(answer)->getID() == "TRADER"){	
 			cout << answer << " is a Trader.\nTrade With " << prison->currentRoom->getNPC(answer)->getName() << "? Y/N: "; 
