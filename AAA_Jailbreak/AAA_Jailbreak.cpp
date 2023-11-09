@@ -158,14 +158,12 @@ int main() {
 
 	//shower scene attempt
 	int showerEntranceCounter = 0;
-	if (prison->currentRoom == prison->cell)
+	if (prison->currentRoom == prison->showers)
 	{
 		showerEntranceCounter++;
 	}
-	else if (showerEntranceCounter == 1)
-	{
-		//generate the dialogue from seth in the showers
-	}
+
+
 	
 
 

@@ -41,7 +41,7 @@ string NPC::generateDialogue()
 {
     
     string dialogue[] = { "You plan on getting out of here somehow?","How I got my name? You dont wanna know why.",
-        "Have you done your shift today?", "Have you had went to the commissary" };
+        "Have you done your shift today?", "Have you had went to the commissary?" };
     srand(time(NULL));
     int arraySize = sizeof(dialogue) / sizeof(dialogue[0]);
     int choice = rand() % arraySize;

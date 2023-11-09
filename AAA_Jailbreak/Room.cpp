@@ -1,14 +1,14 @@
 
 #include "Room.h"
 
-Room::Room(string n, string desc, Room* bR, Room* lR, Room* rR, Room* fR) {
+Room::Room(string n, string desc, Room* bR, Room* lR, Room* rR, Room* fR, int moveCounter) {
 	name = n;
 	description = desc;
 	backRoom = bR;
 	leftRoom = lR;
 	rightRoom = rR;
 	forwardRoom = fR;
-
+	amountTimesInRoom = moveCounter;
 }
 
 

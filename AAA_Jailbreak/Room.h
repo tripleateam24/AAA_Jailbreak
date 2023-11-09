@@ -22,7 +22,7 @@ public:
 	Room* rightRoom;
 	Room* forwardRoom;
 
-	Room(string n, string desc, Room* bR, Room* lR, Room* rR, Room* fR);
+	Room(string n, string desc, Room* bR, Room* lR, Room* rR, Room* fR, int moveCounter);
 	~Room();
 
 	bool SearchForItem(string itemName);
@@ -35,6 +35,8 @@ public:
 	bool SearchForPerson(string personName);
 
 	NPC* getNPC(string personName);
+
+	int amountTimesInRoom;
 
 	string getName() const;
 	string getDescription() const;

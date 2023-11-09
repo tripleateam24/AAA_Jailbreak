@@ -6,21 +6,21 @@ Prison::Prison() {
 
 	//possible map design(subject to change)
 	// need to clean up the actual navigation of rooms
-	cell = new Room("Your Cell", "Your 6x8 ft humble abode. You have a toilet, a sink, and a bunk bed you share with your cellmate, Fork.", nullptr, nullptr, nullptr, nullptr);
+	cell = new Room("Your Cell", "Your 6x8 ft humble abode. You have a toilet, a sink, and a bunk bed you share with your cellmate, Fork.", nullptr, nullptr, nullptr, nullptr, 0);
 
-	hallway = new Room("The A Block Hallway", "An adequate lit hallway with security doors, exit signs, and emergency routes. Under strict supervision by prison guards.", nullptr, nullptr, nullptr, nullptr);
-	commonRoom = new Room("The Common Room", "COMMON ROOM DESCRIPTION HERE", nullptr, nullptr, nullptr, nullptr);
-	cafe = new Room("The Cafeteria", "A Large cafeteria with long tables, many other prisoners sit with their food. You see a Cookie on a table next to.", nullptr, nullptr, nullptr, nullptr);
+	hallway = new Room("The A Block Hallway", "An adequate lit hallway with security doors, exit signs, and emergency routes. Under strict supervision by prison guards.", nullptr, nullptr, nullptr, nullptr, 0);
+	commonRoom = new Room("The Common Room", "COMMON ROOM DESCRIPTION HERE", nullptr, nullptr, nullptr, nullptr, 0);
+	cafe = new Room("The Cafeteria", "A Large cafeteria with long tables, many other prisoners sit with their food. You see a Cookie on a table next to.", nullptr, nullptr, nullptr, nullptr, 0);
 	
-	airlock = new Room("Airlock Room", "A room seperating the courtyard from the rest of the prison", nullptr, nullptr, nullptr, nullptr);
-	courtYard = new Room("The Court Yard", "The courtyard is the outdoor space with a basketball court being the main attraction. The high fences and prison guards keep this area under control.", nullptr, nullptr, nullptr, nullptr);
+	airlock = new Room("Airlock Room", "A room seperating the courtyard from the rest of the prison", nullptr, nullptr, nullptr, nullptr, 0);
+	courtYard = new Room("The Court Yard", "The courtyard is the outdoor space with a basketball court being the main attraction. The high fences and prison guards keep this area under control.", nullptr, nullptr, nullptr, nullptr, 0);
 	
-	workshopRoom = new Room("The Workshop Room", "WORKSHOP ROOM DESCRIPTION HERE", nullptr, nullptr, nullptr, nullptr);
-	gym = new Room("The Gym", "A prison gym that features exercise equipment and other jail-mates. There are also 2 guards always on supervision.", nullptr, nullptr, nullptr, nullptr);
-	showers = new Room("The Showers", "The communal showers where there are open shower heads for you to wash up.", nullptr, nullptr, nullptr, nullptr);
-	laundryRoom = new Room("The Laundry Room", "Filled with your standard washers and dryers ran by other prisoners. Both gurads and prisoners get their clothes washed here.", gym, nullptr, nullptr, nullptr);
+	workshopRoom = new Room("The Workshop Room", "WORKSHOP ROOM DESCRIPTION HERE", nullptr, nullptr, nullptr, nullptr, 0);
+	gym = new Room("The Gym", "A prison gym that features exercise equipment and other jail-mates. There are also 2 guards always on supervision.", nullptr, nullptr, nullptr, nullptr, 0);
+	showers = new Room("The Showers", "The communal showers where there are open shower heads for you to wash up.", nullptr, nullptr, nullptr, nullptr, 0);
+	laundryRoom = new Room("The Laundry Room", "Filled with your standard washers and dryers ran by other prisoners. Both gurads and prisoners get their clothes washed here.", gym, nullptr, nullptr, nullptr, 0);
 	
-	WardensOffice = new Room("The Warden's Office", "The Warden's office, where a large desk and cabinets that contain sensitive files and records reside.\n It is also a communication center equipped with phones, radios, and computer systems for the Warden to stay in contact with other prison staff.", nullptr, nullptr, nullptr, nullptr);
+	WardensOffice = new Room("The Warden's Office", "The Warden's office, where a large desk and cabinets that contain sensitive files and records reside.\n It is also a communication center equipped with phones, radios, and computer systems for the Warden to stay in contact with other prison staff.", nullptr, nullptr, nullptr, nullptr, 0);
 
 	// Prison layout
 	cell->forwardRoom = hallway;
@@ -164,6 +164,7 @@ Prison::~Prison() {
 
 void Prison::MoveRooms() {
 	string answer;
+
 	cout << "Move: ";
 	getline(cin, answer);
 	cout << "\n";
@@ -172,6 +173,7 @@ void Prison::MoveRooms() {
 			currentRoom = currentRoom->leftRoom;
 			cout << "Moving into " << currentRoom->getName() << ".....\n";
 			LoseDayLight(1);
+			currentRoom->amountTimesInRoom++;
 		}
 		else {
 			cout << "No Room to the Left.\n";
@@ -182,6 +184,7 @@ void Prison::MoveRooms() {
 			currentRoom = currentRoom->rightRoom;
 			cout << "Moving into " << currentRoom->getName() << ".....\n";
 			LoseDayLight(1);
+			currentRoom->amountTimesInRoom++;
 		}
 		else {
 			cout << "No Room to the Right.\n";
@@ -192,6 +195,7 @@ void Prison::MoveRooms() {
 			currentRoom = currentRoom->backRoom;
 			cout << "Moving into " << currentRoom->getName() << ".....\n";
 			LoseDayLight(1);
+			currentRoom->amountTimesInRoom++;
 		}
 		else {
 			cout << "There is no back room here.\n";
@@ -202,6 +206,7 @@ void Prison::MoveRooms() {
 			currentRoom = currentRoom->forwardRoom;
 			cout << "Moving into " << currentRoom->getName() << ".....\n";
 			LoseDayLight(1);
+			currentRoom->amountTimesInRoom++;
 		}
 		else {
 			cout << "No Room in Front of you.\n";

@@ -110,9 +110,9 @@ void Player::TalkToNPC(Prison* prison) {
 	getline(cin, answer);
 	if (prison->currentRoom->SearchForPerson(answer)) {
 		cout << prison->currentRoom->getNPC(answer)->generateDialogue();
-	if (prison->currentRoom->SearchForPerson("Seth")) {
-		cout << prison->currentRoom->getNPC(answer)->sethDialogue();
-	}
+	//if (prison->currentRoom->SearchForPerson("Seth")) {
+		//cout << prison->currentRoom->getNPC(answer)->sethDialogue();
+	
 
 		if(prison->currentRoom->getNPC(answer)->getID() == "TRADER"){	
 			cout << answer << " is a Trader.\nTrade With " << prison->currentRoom->getNPC(answer)->getName() << "? Y/N: "; 
@@ -144,6 +144,7 @@ void Player::InputMenu(Prison* prison) {
 	string answer;
 	string itemAnswer;
 	string dropAnswer;
+	int showerEntranceCounter = 0;
 	cout << "\nWhat would you like to do in " << prison->currentRoom->getName() << "?\n";
 	cout << "Enter Choice: ";
 	getline(cin, answer);
@@ -164,6 +165,8 @@ void Player::InputMenu(Prison* prison) {
 	}
 	else if (answer == "inspect" || answer == "i" || answer == "I" || answer == "INSPECT") {
 		cout << "\n" << prison->currentRoom->getDescription() << "\n\n";
+		if (prison->currentRoom == prison->showers && prison->currentRoom->amountTimesInRoom == 1)
+		cout << prison->currentRoom->getNPC(answer)->sethDialogue(); //method/format to trigger a cutscene/story line output for the first time in a room
 	}
 	else if (answer == "DISCARD") {
 		if (PocketsInventory.empty()) {
