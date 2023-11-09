@@ -15,7 +15,7 @@ void Player::PrintInstructions() {
 	string instructions = "Here's How to Play:\nMOVE - Move rooms\n\tleft - left\n\tright - right\n\tforward - forward\n\tback - back\n"
 		"\nWHERE - Check where you are in the prison\nINSPECT - Inspect the room in which you are in"
 		"\nTAKEITEM - Take an item in the room\nDISCARD - Discard an item from your inventory\n"
-		"INVENTORY - See what you have in your inventory\n"
+		"INVENTORY - See what you have in your inventory\nSEARCH - look for items in a room\nTALK- Talk to person in a room\nUSEITEM - Use an item"
 		"EXIT - Exit the game\nHELP - Print this menu again\n\n\n\n";
 	cout << instructions << "\n\nPress Enter to Continue ";
 	getline(cin, answer);
