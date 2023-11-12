@@ -49,13 +49,12 @@ string NPC::generateDialogue()
     cout << dialogueSep;
     return dialogue[choice] + dialogueSep;
 
- //found this outside of this block, I assume it goes in here -NE
-
 }
 
 string NPC::sethDialogue()
 {
-    string dialogue = "SETH's DIALOUGE";
+    string dialogue = "Yo Mouse. You remember that one case in the papers with the tax fraud and the wife? Yeah well, turns out the wife wasn't in the hospital at all!\n"
+        "If I was that tax guy, I'd get out of here and get my revenge...\n";
     string dialogueSep = "\n============================================\n";
     cout << dialogueSep;
     return dialogue + dialogueSep;

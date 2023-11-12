@@ -23,6 +23,7 @@ void PrintBackStory() { // backstory function. Can call it when the user inputs 
 		"Against all odds, you find yourself on a rollercoaster ride through the justice system, ultimately facing a daunting 15-year sentence in a federal prison. "
 		"The tale of your unwavering moral compass and the fight for justice paints a riveting portrait of an unexpected journey through the twists and turns of the law. \n\n\n";
 	cout << backStory;
+	//cout << "Type 'story' to see the backstory again.\n";
 }
 
 
@@ -156,16 +157,9 @@ int main() {
 		}
 	*/ 
 
-	//shower scene attempt
-	int showerEntranceCounter = 0;
-	if (prison->currentRoom == prison->showers)
-	{
-		showerEntranceCounter++;
-	}
-
-
 	
 
+	
 
 
 	delete prison;
