@@ -245,7 +245,6 @@ void Player::CheckQuestConditions(Prison* prison, string questGiverName) {
 		getline(cin, answer);
 		if (answer == "Y" || answer == "y") {
 			GiveItemAway("Cookie", "Fork");
-			TakeItemFromNPC(prison, "Fork", "Pills", questPOS);
 
 		}
 
@@ -255,7 +254,7 @@ void Player::CheckQuestConditions(Prison* prison, string questGiverName) {
 		getline(cin, answer);
 		if (answer == "Y" || answer == "y") {
 			GiveItemAway("Apple", "Fork");
-			TakeItemFromNPC(prison, "Fork", "Pills", questPOS);
+			TakeItemFromNPC(prison, "Fork", "Lighter", questPOS);
 
 		}
 	}
