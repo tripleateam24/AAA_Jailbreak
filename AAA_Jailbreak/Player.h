@@ -1,39 +1,59 @@
 #pragma once
-#include <iostream>
-#include "Item.h"
+#define PLAYER_H
 #include "Prison.h"
-
-using namespace std;
+#include <string>
+#include <iostream>
+#include <chrono>
+#include <thread>
 
 class Player {
 	string name;
 	int health;
+	int INVENTORYSIZE;
 	int strengthModifier;
+	int exerciseCount;
+	int studyCount;
+	int intellect;
+	int reputation;
 
 	vector<Item> PocketsInventory;
 
 public:
 	Player(string n);
 	void PrintInstructions();
-	void TakeItem(Prison* prison, string itemName);
-	void DiscardItem(Prison* prison, string itemName);
+	void TakeItem(Prison*, string);
+	void TakeItemFromNPC(Prison*, string, string, int);
+	void DiscardItem(Prison*, string);
 	void PrintInventory();
-	void TalkToNPC(Prison* prison);
-	void Trade(Prison* prison, string traderName);
+	void TalkToNPC(Prison*);
+	void Trade(Prison*, string);
 
-	bool HasItem(string itemName);
+	bool HasItem(string);
 
-	void Exercise(Prison* prison);
+	void Exercise(Prison*);
+	void Study(Prison*);
+	void CheckTime(Prison*);
 
-	void InputMenu(Prison* prison);
+	void GiveItemAway(string, string);
 
-	void setName(string n);
-	void setHealth(int x);
-	void setStrengthModifier(int x);
+	void InputMenu(Prison*);
+	void CheckQuestConditions(Prison*, string);
+
+	void setName(string);
+	void setHealth(int);
+	void setStrengthModifier(int);
+	void setIntellect(int);
+	void setReputation(int);
+
+	void resetExerciseCount();
+	void resetStudyCount();
 
 	string getName() const;
 	int getHealth() const;
 	int getStrengthModifier() const;
+	int getIntellect() const;
+	int getReputationLevel() const;
+
 
 	void manipulateItem();
 

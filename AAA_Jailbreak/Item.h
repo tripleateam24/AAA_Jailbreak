@@ -1,21 +1,29 @@
 #pragma once
-#include <iostream>
-#include <vector>
+#define ITEM_H
+#include <string>
+
 
 using namespace std;
 
 class Item {
+protected:
+	//name, item type, and description
 	string name;
 	string Type;
 	string description;
 
+
 public:
 	Item();
-	Item(string n, string desc, string type);
+	Item(string, string, string);
 	string getName() const;
 	string getDescription() const;
 	string getType() const;
-	void updateName(string updname);
-	void updateType(string updty);
-	void updatedesc(string upddesc);
+	string itemtype() const;
+	void updateName(string);
+	void updateType(string);
+	void updatedesc(string);
+
+
 };
+

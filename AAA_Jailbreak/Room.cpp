@@ -1,16 +1,20 @@
-
 #include "Room.h"
 
-Room::Room(string n, string desc, Room* bR, Room* lR, Room* rR, Room* fR, int moveCounter) {
+Room::Room(string n, string desc, Room* bR, Room* lR, Room* rR, Room* fR) {
 	name = n;
 	description = desc;
 	backRoom = bR;
 	leftRoom = lR;
 	rightRoom = rR;
 	forwardRoom = fR;
-	amountTimesInRoom = moveCounter;
+	numTimesInRoom = 0;
 }
 
+Room::~Room() {
+	for (auto person : PeopleInRoom) {
+		delete person;
+	}
+}
 
 bool Room::SearchForItem(string itemName) {
 	for (auto item : ItemsInRoom) {
@@ -28,16 +32,6 @@ Item Room::GetItem(string itemName) {
 		}
 	}
 }
-
-Room::~Room() {
-	for (auto person : PeopleInRoom) {
-		delete person;
-	}
-}
-
-// duplicate bool Room::SearchForItem(string itemName) removed
-
-// duplicate Item Room::GetItem(string itemName) removed
 
 
 
@@ -85,6 +79,15 @@ NPC* Room::getNPC(string personName) {
 
 }
 
+NPC* Room::getNPCByIndex(int index) {
+	if (PeopleInRoom.size() == 0) {
+		return nullptr;
+	}
+	else {
+		return PeopleInRoom[index];
+	}
+}
+
 //getter methods:
 string Room::getName() const {
 	return name;
@@ -93,6 +96,13 @@ string Room::getDescription() const {
 	return description;
 
 }
+
+int Room::getNumPeopleInRoom() {
+	int total = PeopleInRoom.size();
+	return total;
+
+}
+
 
 void Room::PrintItems() {
 	cout << "\nYou Look around you....\n";

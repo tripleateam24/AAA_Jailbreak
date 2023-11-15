@@ -1,30 +1,34 @@
 #include "Prison.h"
 
 Prison::Prison() {
-	dayLight = 20;
-	dayCounter = 0;
 
+	dayLight = 24;
+	dayCounter = 0;
 	//possible map design(subject to change)
 	// need to clean up the actual navigation of rooms
-	cell = new Room("Your Cell", "Your 6x8 ft humble abode. You have a toilet, a sink, and a bunk bed you share with your cellmate, Fork.", nullptr, nullptr, nullptr, nullptr, 0);
+	cell = new Room("Your Cell", "Your 6x8 ft humble abode. You have a toilet, a sink, and a bunk bed you share with your cellmate, Fork.", nullptr, nullptr, nullptr, nullptr);
+	bathroom = new Room("Your Bathroom", "A very small room with just enough space to give you privacy while using the bathroom....A small hole is visible in the wall behind the toilet, discarded items in this room will not be found during inspection", nullptr, nullptr, nullptr, nullptr);
 
-	hallway = new Room("The A Block Hallway", "An adequate lit hallway with security doors, exit signs, and emergency routes. Under strict supervision by prison guards.", nullptr, nullptr, nullptr, nullptr, 0);
-	commonRoom = new Room("The Common Room", "COMMON ROOM DESCRIPTION HERE", nullptr, nullptr, nullptr, nullptr, 0);
-	cafe = new Room("The Cafeteria", "A Large cafeteria with long tables, many other prisoners sit with their food. You see a Cookie on a table next to.", nullptr, nullptr, nullptr, nullptr, 0);
-	
-	airlock = new Room("Airlock Room", "A room seperating the courtyard from the rest of the prison", nullptr, nullptr, nullptr, nullptr, 0);
-	courtYard = new Room("The Court Yard", "The courtyard is the outdoor space with a basketball court being the main attraction. The high fences and prison guards keep this area under control.", nullptr, nullptr, nullptr, nullptr, 0);
-	
-	workshopRoom = new Room("The Workshop Room", "WORKSHOP ROOM DESCRIPTION HERE", nullptr, nullptr, nullptr, nullptr, 0);
-	gym = new Room("The Gym", "A prison gym that features exercise equipment and other jail-mates. There are also 2 guards always on supervision.", nullptr, nullptr, nullptr, nullptr, 0);
-	showers = new Room("The Showers", "The communal showers where there are open shower heads for you to wash up.", nullptr, nullptr, nullptr, nullptr, 0);
-	laundryRoom = new Room("The Laundry Room", "Filled with your standard washers and dryers ran by other prisoners. Both gurads and prisoners get their clothes washed here.", gym, nullptr, nullptr, nullptr, 0);
-	
-	WardensOffice = new Room("The Warden's Office", "The Warden's office, where a large desk and cabinets that contain sensitive files and records reside.\n It is also a communication center equipped with phones, radios, and computer systems for the Warden to stay in contact with other prison staff.", nullptr, nullptr, nullptr, nullptr, 0);
+	hallway = new Room("The A Block Hallway", "An adequate lit hallway with security doors, exit signs, and emergency routes. Under strict supervision by prison guards.", nullptr, nullptr, nullptr, nullptr);
+	commonRoom = new Room("The Common Room", "COMMON ROOM DESCRIPTION HERE", nullptr, nullptr, nullptr, nullptr);
+	cafe = new Room("The Cafeteria", "A Large cafeteria with long tables, many other prisoners sit with their food. You see a Cookie on a table next to.", nullptr, nullptr, nullptr, nullptr);
+
+	airlock = new Room("Airlock Room", "A room seperating the courtyard from the rest of the prison", nullptr, nullptr, nullptr, nullptr);
+	courtYard = new Room("The Court Yard", "The courtyard is the outdoor space with a basketball court being the main attraction. The high fences and prison guards keep this area under control.", nullptr, nullptr, nullptr, nullptr);
+
+	workshopRoom = new Room("The Workshop Room", "WORKSHOP ROOM DESCRIPTION HERE", nullptr, nullptr, nullptr, nullptr);
+	gym = new Room("The Gym", "A prison gym that features exercise equipment and other jail-mates. There are also 2 guards always on supervision.", nullptr, nullptr, nullptr, nullptr);
+	showers = new Room("The Showers", "The communal showers where there are open shower heads for you to wash up.", nullptr, nullptr, nullptr, nullptr);
+	laundryRoom = new Room("The Laundry Room", "Filled with your standard washers and dryers ran by other prisoners. Both gurads and prisoners get their clothes washed here.", gym, nullptr, nullptr, nullptr);
+
+	WardensOffice = new Room("The Warden's Office", "The Warden's office, where a large desk and cabinets that contain sensitive files and records reside.\n It is also a communication center equipped with phones, radios, and computer systems for the Warden to stay in contact with other prison staff.", nullptr, nullptr, nullptr, nullptr);
 
 	// Prison layout
 	cell->forwardRoom = hallway;
-	
+	cell->rightRoom = bathroom;
+
+	bathroom->leftRoom = cell;
+
 	hallway->backRoom = cell;
 	hallway->leftRoom = cafe;
 	hallway->rightRoom = commonRoom;
@@ -43,7 +47,7 @@ Prison::Prison() {
 
 	showers->backRoom = commonRoom;
 	showers->leftRoom = gym;
-	
+
 	gym->rightRoom = showers;
 	gym->leftRoom = workshopRoom;
 	gym->forwardRoom = laundryRoom;
@@ -54,11 +58,10 @@ Prison::Prison() {
 
 	WardensOffice->rightRoom = workshopRoom;
 
-
 	currentRoom = cell;
 
 	//List of Item types
-	vector<string>Item_Types = {"Consumeable","Wepons","potential_Wepons","Throwable","key_Item", "objective_item", "Valuable"};
+	vector<string>Item_Types = { "Consumeable","Wepons","potential_Wepons","Throwable","key_Item", "objective_item", "Valuable" };
 
 	/*
 	Consumeable: Food items
@@ -68,9 +71,6 @@ Prison::Prison() {
 	key_item: keys to open doors
 	valuables: items that have high trade value
 	*/
-
-
-
 	//Items in Cell
 	Item toothbrush("Tooth Brush", "A blue, plastic toothbrush. You can't seem to find toothpaste anywhere. Yes, you can sharpen, but be careful.", Item_Types[2]);
 	Item razor("Razor", "A red, disposable shaving razor that's made specifically for prisoners, as they can't have normal razors blades.", Item_Types[1]);
@@ -96,7 +96,7 @@ Prison::Prison() {
 	gym->AddItemToRoom(weight);
 
 	//Items in showers
-	Item soap("Soap", "A small bar of soap, smells like lavender",Item_Types[3]);
+	Item soap("Soap", "A small bar of soap, smells like lavender", Item_Types[3]);
 	Item shampoo("Shampoo Bottle", "A small shampoo bottle, barely the size of your hand. \"Peppermint Scent\" written on the back", Item_Types[3]);
 
 	showers->AddItemToRoom(soap);
@@ -109,38 +109,60 @@ Prison::Prison() {
 	courtYard->AddItemToRoom(pebble);
 
 	//Items in Wardens Office
-	Item roledex("Roledex", "The Warden's roledex, lots of phone numbers that you can't make out",Item_Types[5]);
+	Item roledex("Roledex", "The Warden's roledex, lots of phone numbers that you can't make out", Item_Types[5]);
 	Item cellphone("Cellphone", "The Warden's cell phone, he still uses a flip phone.", Item_Types[5]);
 	WardensOffice->AddItemToRoom(roledex);
 	WardensOffice->AddItemToRoom(cellphone);
 
 
 
-
 	//adding people to rooms
-	//adding people to rooms
-	NPC* fork = new NPC("Fork", "You're cellmate", "FRIEND");
 
-	NPC* bob = new NPC("Bob", "Line Cook", "FRIEND");
-	NPC* james = new NPC("James", "Second Line Cook", "FRIEND");
+	//creating fork as questgiver with 2 quests
+	QuestGiver* fork = new QuestGiver("Fork", "You're cellmate", "QUESTGIVER");
+	fork->greetings = { "Hey cellie", "sup, cellie?", "How's it hanging, cellie?", "What's up Cellie?", "Hey man" }; //special cell mate greetings
+	//defining fork's quest
+	Quest forkQuest = Quest("Hey cellie, you think you could get me a cookie from the cafeteria?", "Hey cellie, any word on my cookie?", "Oh man, thanks for the cookie cellie.");
+	fork->quests.push_back(forkQuest);
+	Quest forkQuest2 = Quest("Hey one more thing, could you get me an apple too, I've got some pills here I could give to ya in return", "could you get me apple from the cafe too, I'll give ya these pills in return", "Wow thanks so much, here you go");
+	//giving fork's second quest and item to give to player
+	forkQuest2.itemsToGive.push_back(Item("Pills", "Anxiety Pills, prisoners take them to feel better about themselves", Item_Types[6]));
+	fork->quests.push_back(forkQuest2);
+
+
+	QuestGiver* bob = new QuestGiver("Bob", "Line Cook", "QUESTGIVER");
+
+
+	QuestGiver* james = new QuestGiver("James", "Second Line Cook", "QUESTGIVER");
+	Quest jamesQuest = Quest("Hey man, I got this idea, can you get me some soap from the showers, I'll get you something in return", "Hey can you get me a bar of soap from the showers, I'll get you something in return", "Alright thanks man...here you go");
+	jamesQuest.itemsToGive.push_back(Item("Makeshift Knife", "Sharp knife crafted from a toothbrush and razorblades", Item_Types[1]));
+	james->quests.push_back(jamesQuest);
 
 	NPC* seth = new NPC("Seth", "Fellow Prisoner", "FRIEND"); // NPC who gives player info about crime in showers
+	seth->greetings = { "Yo Mouse. You remember that one case in the papers with the tax fraud and the wife? Yeah well, turns out the wife wasn't in the hospital at all!\n""If I was that tax guy, I'd get out of here and get my revenge...\n" };
 
-	//traders
 	Trader* greg = new Trader("Greg", "Gym Trader", "TRADER");
 	Trader* bill = new Trader("Bill", "Gym Trader", "TRADER");
 	Trader* john = new Trader("John", "Gym Trader", "TRADER");
 
-	greg->TradeTable["Plate"] = Item("Lighter", "A silver zippo lighter, good for lighting up dark places", Item_Types[4]);
-	greg->TradeTable["Razor"] = Item("Matches", "A small box of striking matches", Item_Types[4]);
-	bill->TradeTable["Apple"] = Item("Wrench", "A silver hand wrench", Item_Types[4]);
-	bill->TradeTable["Cookie"] = Item("Flashlight", "A handheld, battery powered flashling", Item_Types[4]);
+	greg->TradeTable["Plate"] = Item("Lighter", "A silver zippo lighter, good for lighting up dark places", Item_Types[5]);
+	greg->TradeTable["Razor"] = Item("Matches", "A small box of striking matches", Item_Types[5]);
+	bill->TradeTable["Apple"] = Item("Wrench", "A silver hand wrench", Item_Types[0]);
+	bill->TradeTable["Cookie"] = Item("Flashlight", "A handheld, battery powered flashling", Item_Types[5]);
 
 	//enemies
 	Enemy* josh = new Enemy("Josh", "Bad Guy", "ENEMY", 20, 5, Item("Knife", "A knife", Item_Types[1]));
 
-	//assigning NPC to rooms
+	Trader* adam = new Trader("Adam", "Courtyard Trader", "TRADER");
+	adam->TradeTable["Weight"] = Item("Shank", "A shank", Item_Types[1]);
+
+	//creating guard
+	Guard* phil = new Guard("Phil", "Prison Guard", "GUARD");
+
+
+	//adding everyone to their rooms
 	cell->AddNPCToRoom(fork);
+
 	cafe->AddNPCToRoom(bob);
 	cafe->AddNPCToRoom(james);
 
@@ -149,22 +171,24 @@ Prison::Prison() {
 	gym->AddNPCToRoom(john);
 
 	courtYard->AddNPCToRoom(josh);
+	courtYard->AddNPCToRoom(adam);
 
 	showers->AddNPCToRoom(seth);
 
-	currentRoom = cell;
+	hallway->AddNPCToRoom(phil);
 
 }
 
+//prison destructor
 Prison::~Prison() {
-	delete cell, cafe, hallway, gym, showers, courtYard, WardensOffice;
+	delete cell, cafe, hallway, commonRoom, workshopRoom, gym, showers, courtYard, WardensOffice;
+
 }
 
 
 
 void Prison::MoveRooms() {
 	string answer;
-
 	cout << "Move: ";
 	getline(cin, answer);
 	cout << "\n";
@@ -173,7 +197,8 @@ void Prison::MoveRooms() {
 			currentRoom = currentRoom->leftRoom;
 			cout << "Moving into " << currentRoom->getName() << ".....\n";
 			LoseDayLight(1);
-			currentRoom->amountTimesInRoom++;
+			currentRoom->numTimesInRoom++;
+
 		}
 		else {
 			cout << "No Room to the Left.\n";
@@ -184,7 +209,7 @@ void Prison::MoveRooms() {
 			currentRoom = currentRoom->rightRoom;
 			cout << "Moving into " << currentRoom->getName() << ".....\n";
 			LoseDayLight(1);
-			currentRoom->amountTimesInRoom++;
+			currentRoom->numTimesInRoom++;
 		}
 		else {
 			cout << "No Room to the Right.\n";
@@ -195,10 +220,10 @@ void Prison::MoveRooms() {
 			currentRoom = currentRoom->backRoom;
 			cout << "Moving into " << currentRoom->getName() << ".....\n";
 			LoseDayLight(1);
-			currentRoom->amountTimesInRoom++;
+			currentRoom->numTimesInRoom++;
 		}
 		else {
-			cout << "There is no back room here.\n";
+			cout << "No Room behind you.\n";
 		}
 	}
 	else if ((answer == "forward") || (answer == "FORWARD") || (answer == "f") || (answer == "F") || (answer == "Forward")) {
@@ -206,21 +231,25 @@ void Prison::MoveRooms() {
 			currentRoom = currentRoom->forwardRoom;
 			cout << "Moving into " << currentRoom->getName() << ".....\n";
 			LoseDayLight(1);
-			currentRoom->amountTimesInRoom++;
+			currentRoom->numTimesInRoom++;
+
 		}
 		else {
 			cout << "No Room in Front of you.\n";
 		}
+
 	}
 	else if (answer == "EXIT") {
 		cout << "Exiting Game...\n";
 		exit(0);
 	}
 	else {
-		"Sorry, I don't understand what you want to do here.\n";
+		cout << "Sorry, I don't understand what you want to do here.\n";
 	}
 
+
 }
+
 
 void Prison::PrintRoom() {
 	cout << "You are currently inside " << currentRoom->getName() << "\n\n\n";

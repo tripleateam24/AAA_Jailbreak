@@ -1,27 +1,30 @@
 #pragma once
-#include <string>
-#include <iostream>
-#include "Item.h"
+#define TRADER_H
 #include "NPC.h"
 #include <map>
 
 class Trader : public NPC {
 public:
+    //trade table map for traders
     map<string, Item> TradeTable;
 
     Trader();
-    Trader(string n, string desc, string id);
+    Trader(string, string, string);
 
-    void AddTradeableItem(Item item, string price);
+    void AddTradeableItem(Item, string);
 
 
-    bool SearchForTradeItem(string itemName);
+    bool SearchForTradeItem(string);
 
-    string ItemToGiveToTrader(string itemName);
-    Item getItemFromTrader(string itemName);
+    string ItemToGiveToTrader(string);
+
+    Item getItemFromTrader(string);
 
     void PrintTradeTable();
+    void DeleteTradeItem(string);
 
-    void DeleteTradeItem(string itemName);
+    string getGreeting();
+
+
 
 };
