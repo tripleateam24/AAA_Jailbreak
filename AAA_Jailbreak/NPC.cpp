@@ -37,6 +37,7 @@ string NPC::ItemToGiveToTrader(string itemName) {
 }
 
 
+// Randomize dialogue when player inputs "TALK" to NPC
 string NPC::generateDialogue()
 {
     

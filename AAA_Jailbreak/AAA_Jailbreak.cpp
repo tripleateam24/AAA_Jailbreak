@@ -147,21 +147,6 @@ int main() {
 	
 	MoveRooms(prison); 
 
-	/*
-		if (prison->currentRoom->getName() == "Your Cell") // if statement to ensure fork can only be "prompted" in cell
-		{
-			npc->talkToPlayer();
-			cout << npc->generateGreetingDialogue() << endl;
-			this_thread::sleep_for(5s); //a way to delay outputs useful for outputting multiple lines of dialogue over time 
-			cout << npc->generateDialogue() << endl;
-		}
-	*/ 
-
-	
-
-	
-
-
 	delete prison;
 
 	return 0;
