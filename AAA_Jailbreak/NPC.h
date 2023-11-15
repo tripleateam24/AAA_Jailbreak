@@ -2,7 +2,7 @@
 #define NPC_H
 #include <iostream>
 #include "Quest.h"
-
+ 
 class NPC {
 public:
     enum EmotionLevel { Friendly, Neutral, Angry };
