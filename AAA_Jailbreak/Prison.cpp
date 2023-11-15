@@ -124,9 +124,9 @@ Prison::Prison() {
 	//defining fork's quest
 	Quest forkQuest = Quest("Hey cellie, you think you could get me a cookie from the cafeteria?", "Hey cellie, any word on my cookie?", "Oh man, thanks for the cookie cellie.");
 	fork->quests.push_back(forkQuest);
-	Quest forkQuest2 = Quest("Hey one more thing, could you get me an apple too, I've got some pills here I could give to ya in return", "could you get me apple from the cafe too, I'll give ya these pills in return", "Wow thanks so much, here you go");
+	Quest forkQuest2 = Quest("Hey one more thing, could you get me an apple too, I've got my old lighter here I could give to ya in return", "could you get me apple from the cafe too, I'll give ya my old lighter in return", "Wow thanks so much, here you go");
 	//giving fork's second quest and item to give to player
-	forkQuest2.itemsToGive.push_back(Item("Pills", "Anxiety Pills, prisoners take them to feel better about themselves", Item_Types[6]));
+	forkQuest2.itemsToGive.push_back(Item("Lighter", "old zippo lighter, good for lighting up small spaces", Item_Types[5]));
 	fork->quests.push_back(forkQuest2);
 
 
