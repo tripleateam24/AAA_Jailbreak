@@ -11,7 +11,7 @@ Player::Player(string n) {
 	intellect = 1;
 	reputation = 1;
 }
-
+ 
 //method for printing instructions
 void Player::PrintInstructions() {
 	string answer;
