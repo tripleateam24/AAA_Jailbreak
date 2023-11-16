@@ -380,8 +380,15 @@ void Player::InputMenu(Prison* prison) {
 	else if (answer == "STUDY" && prison->currentRoom->getName() == "The Common Room") {
 		Study(prison);
 
-	}
-	else if (answer == "EXIT") {
+	}else if (answer == "SLEEP" && prison->currentRoom->getName() == "Your Cell") {
+		cout << "You Lie down and go to sleep....\n\n";
+		prison->SetDayLight(24);
+		prison->newDay();
+		resetExerciseCount();
+		resetStudyCount();
+
+
+	}else if (answer == "EXIT") {
 		cout << "Exiting Game...\n";
 		exit(0);
 	}
