@@ -245,6 +245,7 @@ void Player::CheckQuestConditions(Prison* prison, string questGiverName) {
 		getline(cin, answer);
 		if (answer == "Y" || answer == "y") {
 			GiveItemAway("Cookie", "Fork");
+			TakeItemFromNPC(prison, "Fork", "Pills", questPOS);
 
 		}
 
@@ -261,12 +262,11 @@ void Player::CheckQuestConditions(Prison* prison, string questGiverName) {
 	//end of fork's quest conditions
 
 	//start of james's quest condition
-	if (HasItem("Soap") && prison->currentRoom->getNPC(questGiverName)->getName() == "James" && questPOS == 0) {
+	if (HasItem("Pills") && prison->currentRoom->getNPC(questGiverName)->getName() == "James" && questPOS == 0) {
 		cout << "Give Soap to James? Y/N: ";
 		getline(cin, answer);
 		if (answer == "Y" || answer == "y") {
 			GiveItemAway("Soap", "Fork");
-			TakeItemFromNPC(prison, "James", "Makeshift Knife", questPOS);
 
 		}
 	}
@@ -323,6 +323,16 @@ void Player::InputMenu(Prison* prison) {
 					//if they are confronted, they have a chance of being put into solitary
 					solitaryDays = prison->currentRoom->getNPCByIndex(i)->Confront(intellect, reputation);
 					if (solitaryDays > 0) {
+						//bandaid solution to have pills be take away - need to refactor this and put into storage closet
+						if (HasItem("Pills")) {
+							cout << "The guards also found your Pills - They take them to the contraband closet!.\n";
+							for (int i = 0; i < PocketsInventory.size(); i++) {
+								if (PocketsInventory[i].getName() == "Pills") {
+									PocketsInventory.erase(PocketsInventory.begin() + i);
+								}
+							}
+						}
+						
 						for (int x = 0; x < solitaryDays; x++) prison->newDay();
 						//resetting day
 						prison->currentRoom = prison->cell;

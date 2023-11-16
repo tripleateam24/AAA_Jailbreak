@@ -122,7 +122,8 @@ Prison::Prison() {
 	QuestGiver* fork = new QuestGiver("Fork", "You're cellmate", "QUESTGIVER");
 	fork->greetings = { "Hey cellie", "sup, cellie?", "How's it hanging, cellie?", "What's up Cellie?", "Hey man" }; //special cell mate greetings
 	//defining fork's quest
-	Quest forkQuest = Quest("Hey cellie, you think you could get me a cookie from the cafeteria?", "Hey cellie, any word on my cookie?", "Oh man, thanks for the cookie cellie.");
+	Quest forkQuest = Quest("Hey cellie, you think you could get me a cookie from the cafeteria?", "Hey cellie, any word on my cookie?", "Oh man, thanks for the cookie cellie. Here, take this in return.");
+	forkQuest.itemsToGive.push_back(Item("Pills", "Anxiety Pills, prisoners take them to feel better about themselves", Item_Types[0]));
 	fork->quests.push_back(forkQuest);
 	Quest forkQuest2 = Quest("Hey one more thing, could you get me an apple too, I've got my old lighter here I could give to ya in return", "could you get me apple from the cafe too, I'll give ya my old lighter in return", "Wow thanks so much, here you go");
 	//giving fork's second quest and item to give to player
@@ -133,9 +134,8 @@ Prison::Prison() {
 	QuestGiver* bob = new QuestGiver("Bob", "Line Cook", "QUESTGIVER");
 
 
-	QuestGiver* james = new QuestGiver("James", "Second Line Cook", "QUESTGIVER");
-	Quest jamesQuest = Quest("Hey man, I got this idea, can you get me some soap from the showers, I'll get you something in return", "Hey can you get me a bar of soap from the showers, I'll get you something in return", "Alright thanks man...here you go");
-	jamesQuest.itemsToGive.push_back(Item("Makeshift Knife", "Sharp knife crafted from a toothbrush and razorblades", Item_Types[1]));
+	QuestGiver* james = new QuestGiver("James", "Guard watching over the cafe, he looks pretty anxious", "QUESTGIVER");
+	Quest jamesQuest = Quest("Hey prisoner, if you can get me some pills I'll give you something in return", "Hey can you get me some pills, I'll give you something in return", "Alright thanks man...here you go");
 	james->quests.push_back(jamesQuest);
 
 	NPC* seth = new NPC("Seth", "Fellow Prisoner", "FRIEND"); // NPC who gives player info about crime in showers
