@@ -11,7 +11,7 @@ Guard::Guard(string n, string desc, string id) {
     
     //defualt emotional status to be used later(maybe)
     emotionStatus = Neutral;
-
+     
     //greetings and responses for guards
     greetings = { "Hey you...what are you doing right now?", "Hey, you! Are you doing something you're not supposed to?", "What are you up to?" };
     neutralresponses = { "Alright, carry on.", "Ok...you may proceed", "hmm....alright then, carry on", "Alright, move along then", "Ok, but I've got my eye on you." };
