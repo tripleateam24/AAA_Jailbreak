@@ -326,6 +326,9 @@ void Player::InputMenu(Prison* prison) {
 						for (int x = 0; x < solitaryDays; x++) prison->newDay();
 						//resetting day
 						prison->currentRoom = prison->cell;
+						prison->newDay();
+						resetExerciseCount();
+						resetStudyCount();
 						prison->SetDayLight(24);
 						break;
 					}
