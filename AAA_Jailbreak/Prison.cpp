@@ -10,14 +10,14 @@ Prison::Prison() {
 	bathroom = new Room("Your Bathroom", "A very small room with just enough space to give you privacy while using the bathroom....A small hole is visible in the wall behind the toilet, discarded items in this room will not be found during inspection", nullptr, nullptr, nullptr, nullptr);
 
 	hallway = new Room("The A Block Hallway", "An adequate lit hallway with security doors, exit signs, and emergency routes. Under strict supervision by prison guards.", nullptr, nullptr, nullptr, nullptr);
-	commonRoom = new Room("The Common Room", "COMMON ROOM DESCRIPTION HERE", nullptr, nullptr, nullptr, nullptr);
-	cafe = new Room("The Cafeteria", "A Large cafeteria with long tables, many other prisoners sit with their food. You see a Cookie on a table next to.", nullptr, nullptr, nullptr, nullptr);
+	commonRoom = new Room("The Common Room", "A common room fit with a television and stacks of educational books. You can STUDY in this room for increased intellect.", nullptr, nullptr, nullptr, nullptr);
+	cafe = new Room("The Cafeteria", "A Large cafeteria with long tables, many other prisoners sit with their food. You see a Cookie on a table next to you.", nullptr, nullptr, nullptr, nullptr);
 
 	airlock = new Room("Airlock Room", "A room seperating the courtyard from the rest of the prison", nullptr, nullptr, nullptr, nullptr);
 	courtYard = new Room("The Court Yard", "The courtyard is the outdoor space with a basketball court being the main attraction. The high fences and prison guards keep this area under control.", nullptr, nullptr, nullptr, nullptr);
 
 	workshopRoom = new Room("The Workshop Room", "WORKSHOP ROOM DESCRIPTION HERE", nullptr, nullptr, nullptr, nullptr);
-	gym = new Room("The Gym", "A prison gym that features exercise equipment and other jail-mates. There are also 2 guards always on supervision.", nullptr, nullptr, nullptr, nullptr);
+	gym = new Room("The Gym", "A prison gym that features exercise equipment and other jail-mates. You can EXERCISE for increased strength and health. You hear that this is the place you can trade with people for items. There are also 2 guards always on supervision.", nullptr, nullptr, nullptr, nullptr);
 	showers = new Room("The Showers", "The communal showers where there are open shower heads for you to wash up.", nullptr, nullptr, nullptr, nullptr);
 	laundryRoom = new Room("The Laundry Room", "Filled with your standard washers and dryers ran by other prisoners. Both gurads and prisoners get their clothes washed here.", gym, nullptr, nullptr, nullptr);
 
