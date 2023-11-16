@@ -7,7 +7,7 @@ Guard::Guard(string n, string desc, string id) {
     name = n;
     description = desc;
     ID = id;
-    suspicionLevel = 6;
+    suspicionLevel = 10;
     
     //defualt emotional status to be used later(maybe)
     emotionStatus = Neutral;

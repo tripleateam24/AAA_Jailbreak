@@ -319,7 +319,7 @@ void Player::InputMenu(Prison* prison) {
 				int modifier = prison->currentRoom->getNPCByIndex(i)->getSuspicionLevel() + reputation;
 				if (modifier <= 0) modifier = 5;
 				int confrontationChance = rand() % modifier + 1;
-				if (confrontationChance >= 8) {
+				if (confrontationChance >= 9) {
 					//if they are confronted, they have a chance of being put into solitary
 					solitaryDays = prison->currentRoom->getNPCByIndex(i)->Confront(intellect, reputation);
 					if (solitaryDays > 0) {
