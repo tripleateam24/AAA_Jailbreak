@@ -35,6 +35,7 @@ public:
 	int getHealth() const;
 	int getStrengthModifier() const;
 
+	string clearWhiteSpaceAndCapitalize(string input);
 	void manipulateItem();
 
 };

@@ -2,8 +2,8 @@
 #include "Item.h"
 #include <chrono>
 #include <thread>
-
-
+#include <cctype>
+using namespace std;
 Player::Player(string n) {
 	name = n;
 	health = 15;
@@ -238,6 +238,35 @@ int Player::getStrengthModifier() const{
 	return strengthModifier;
 }
 
+string Player::clearWhiteSpaceAndCapitalize(string input)
+{
+	bool newWord = true;
+	for (size_t i = 0; i < input.length(); i++) {
+		if (isspace(input[i])) {
+			newWord = true;
+		}
+		else {
+			if (newWord) {
+				input[i] = toupper(input[i]);
+				newWord = false;
+			}
+			else {
+				input[i] = tolower(input[i]);
+			}
+		}
+	}
+
+	// Erase leading and trailing whitespace
+	size_t firstNonSpace = input.find_first_not_of(' ');
+	size_t lastNonSpace = input.find_last_not_of(' ');
+
+	if (firstNonSpace == string::npos) {
+		return "";
+	}
+
+	return input.substr(firstNonSpace, lastNonSpace - firstNonSpace + 1);
+}
+
 // Revist
 //Function allows player to maniplulate object based on type
 void Player::manipulateItem()
@@ -247,18 +276,18 @@ void Player::manipulateItem()
 	string answer;
 	cout << "Which item? \n";
 	getline(cin, answer);
-
+	string temp = clearWhiteSpaceAndCapitalize(answer);
 		//check to see if the item exsit in inventory
 		for (int i = 0; i < PocketsInventory.size(); i++) {
-			if (PocketsInventory[i].getName() == answer) {
+			if (PocketsInventory[i].getName() == temp) {
 				if (PocketsInventory[i].getType() == Item_Types[0])
 				{
-					cout << "You consumed " << answer << endl;
+					cout << "You consumed " << temp << endl;
 					PocketsInventory.erase(PocketsInventory.begin() + i);
 				}
 				else if (PocketsInventory[i].getType() == Item_Types[1])
 				{
-					cout << "You swung a " << answer << endl;
+					cout << "You swung a " << temp << endl;
 
 				}
 				else if (PocketsInventory[i].getType() == Item_Types[2])
@@ -302,6 +331,8 @@ void Player::manipulateItem()
 				}
 				else if (PocketsInventory[i].getType() == Item_Types[3])
 				{
+					Prison* prison;
+					prison->currentRoom;
 					bool ticker = false;
 					while (!ticker)
 					{
@@ -312,7 +343,7 @@ void Player::manipulateItem()
 							if (choice == "y" || choice == "Y")
 							{
 								cout << "You chucked a " << PocketsInventory[i].getName() << endl;
-								//DiscardItem(prison, PocketsInventory[i].getName());
+								DiscardItem(prison, PocketsInventory[i].getName());
 								ticker = true;
 							}
 							else if (choice == "n" || choice == "N")
@@ -337,7 +368,7 @@ void Player::manipulateItem()
 				//must figure out how objective items will be used
 				else if (PocketsInventory[i].getType() == Item_Types[5])
 				{
-					cout << "This will definitely come in handy\n";
+					cout << "This will definitely come in handy....\n";
 				}
 				//will create a trading / barter system
 				else if (PocketsInventory[i].getType() == Item_Types[6])
