@@ -1,5 +1,7 @@
 #include "Player.h"
 #include "Item.h"
+#include "Room.h"
+#include "Fight.h"
 #include <chrono>
 #include <thread>
 #include <cctype>
@@ -64,6 +66,33 @@ bool Player::HasItem(string itemName) {
 
 }
 
+void Player::startFightFairly(Room* room)
+{
+	bool cheapShot = false;
+	fight Currentmatch;
+	string ans;
+
+	while (false) {
+		cout << "Who do you want to pick a fight with?" << endl;
+		getline(cin, ans);
+		room->printPeopleInRoom();
+
+		if (room->SearchForPerson(ans)) {
+			cout << "Hey punk! Bring it on " << ans << endl;
+			Currentmatch.fightScene(room, cheapShot, room->getNPC(ans)); 
+			break;
+		}
+		else if (ans == "nevermind")
+		{
+			break;
+		}
+		else {
+			cout << "Who? They are not in the room...." << endl;
+		}
+
+	}
+}
+
 //absolutely need to refactor this with proper variable names 
 //also add a condition that tells if they have anything to trade today
 void Player::Trade(Prison* prison, string traderName){
@@ -102,6 +131,34 @@ void Player::Trade(Prison* prison, string traderName){
 
 }
 
+void Player::startFightBySneakAttack(Room* room)
+{
+	bool cheapShot = true;
+	fight Currentmatch;
+	string ans;
+
+	while (true) {
+		cout << "Who do you want to pick a fight with?" << endl;
+		getline(cin, ans);
+		room->printPeopleInRoom();
+
+		if (room->SearchForPerson(ans)) {
+			cout << "You smacked fire out " << ans << endl;
+			Currentmatch.fightScene(room, cheapShot,room->getNPC(ans)); //check
+			break; 
+		}
+		else if (ans == "nevermind")
+		{
+			break;
+		}
+		else {
+			cout << "Who? They are not in the room...." << endl;
+		}
+
+	}
+	
+}
+
 
 void Player::TalkToNPC(Prison* prison) {
 	string answer;
@@ -138,6 +195,7 @@ void Player::Exercise(Prison* prison){
 
 
 void Player::InputMenu(Prison* prison) {
+	string person;
 	string answer;
 	string itemAnswer;
 	string dropAnswer;
@@ -196,6 +254,15 @@ void Player::InputMenu(Prison* prison) {
 	}else if (answer == "USEITEM"){
 		manipulateItem();
 	}
+	else if (answer == "VIOLATE")
+	{
+		startFightBySneakAttack(prison->currentRoom);
+
+	}
+	else if (answer == "Start fight")
+	{
+		startFightFairly(prison->currentRoom);
+	}
 	else {
 		cout << "Sorry, didn't quite understand that.\n";
 	}
@@ -223,8 +290,37 @@ void Player::setHealth(int x){
 }
 void Player::setStrengthModifier(int x){
 
+
 	strengthModifier = x;
 }
+
+//Player can attack enemy
+void Player::attack(Room* r,NPC* Opp,int temp)
+{
+	//choices
+	string wepon;
+	switch (temp)
+	{
+	case 5: 
+		cout << "You threw a left hook." << endl; 
+		break;
+	case 6:
+		cout << "You threw a right hook. " << endl;
+	case 7:
+		cout << "Which wepon?\n";
+		PrintInventory();
+		cin >> wepon;
+		for (int i = 0; i < PocketsInventory.size(); i++) {
+			if (PocketsInventory[i].getName() == wepon && PocketsInventory[i].getType() == "Wepon") 
+			{
+					cout << "You swung a " << temp <<" at your opponet." << endl;
+					Opp->takeDamage(r, 5);
+			}
+
+		}
+	}
+}
+
 
 
 
@@ -236,6 +332,20 @@ int Player::getHealth() const{
 }
 int Player::getStrengthModifier() const{
 	return strengthModifier;
+}
+
+void Player::takeDamage(int damage)
+{
+	health-=damage;
+	if (health <= 0)
+	{
+		cout << "GAME OVER.\n" << endl;
+		cout << endl;
+		cout << endl;
+		cout << endl;
+		cout << "..........You Died.........\n";
+		exit(0);
+	}
 }
 
 string Player::clearWhiteSpaceAndCapitalize(string input)

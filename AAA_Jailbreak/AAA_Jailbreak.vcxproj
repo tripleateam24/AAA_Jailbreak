@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AAA_Jailbreak.cpp" />
+    <ClCompile Include="Fight.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -136,6 +137,7 @@
     <ClCompile Include="Trader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Fight.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="Player.h" />

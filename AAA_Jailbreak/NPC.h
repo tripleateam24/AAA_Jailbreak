@@ -4,6 +4,8 @@
 #include <iostream>
 #include "Item.h"
 #include <map>
+#include "Room.h"
+#include "Enemy.h"
 
 using namespace std;
 
@@ -31,6 +33,23 @@ public:
    // string getName() const; 
    //string getDescription() const; 
     string ID; 
+
+
+
+    //Virtual Functions for Enemy
+
+  virtual int getHealth();
+    //Give ability to take damage
+  virtual void takeDamage(Room* r, int damage);
+    //function that allows computer to attack
+  virtual void attack(NPC* e, int num);
+    //return the type of wepon the opp has
+  virtual string getWepon();
+    //upon dying the opp would drop its items
+  virtual void dropLoot(NPC* e);
+    //return strenght
+  virtual int getStrength();
+
 
 
     virtual void PrintTradeTable();
