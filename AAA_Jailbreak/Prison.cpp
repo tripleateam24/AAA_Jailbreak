@@ -131,13 +131,14 @@ Prison::Prison() {
 	Trader* bill = new Trader("Bill", "Gym Trader", "TRADER");
 	Trader* john = new Trader("John", "Gym Trader", "TRADER");
 
+
 	greg->TradeTable["Plate"] = Item("Lighter", "A silver zippo lighter, good for lighting up dark places", Item_Types[4]);
 	greg->TradeTable["Razor"] = Item("Matches", "A small box of striking matches", Item_Types[4]);
 	bill->TradeTable["Apple"] = Item("Wrench", "A silver hand wrench", Item_Types[4]);
 	bill->TradeTable["Cookie"] = Item("Flashlight", "A handheld, battery powered flashling", Item_Types[4]);
 
 	//enemies
-	Enemy* josh = new Enemy("Josh", "Bad Guy", "ENEMY", 20, 5, Item("Knife", "A knife", Item_Types[1]));
+	Enemy* josh = new Enemy("Josh", "Bad Guy", "ENEMY", 20, 5, Item("Knife", "A knife", Item_Types[1]), Item("Pills", "I dont do drugs...maybe I can trade it to someone who does..", Item_Types[6]));
 
 	//assigning NPC to rooms
 	cell->AddNPCToRoom(fork);

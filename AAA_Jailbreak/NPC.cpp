@@ -24,8 +24,38 @@ string NPC::generateGreetingDialogue()
     
 }
 
-void NPC::PrintTradeTable() {
+int NPC::getHealth()
+{
+    return 0;
+}
 
+void NPC::takeDamage(Room* r, int damage)
+{
+    //defined in enemy
+}
+
+void NPC::attack(NPC* e, int num)
+{
+    //defined in enemy
+}
+
+string NPC::getWepon()
+{
+    return string();
+}
+
+void NPC::dropLoot(NPC* e)
+{
+    //defined in enemy
+}
+
+int NPC::getStrength()
+{
+    return 0;
+}
+
+void NPC::PrintTradeTable() {
+    //defined in enemy
 }
 
 bool NPC::SearchForTradeItem(string itemName) {
@@ -71,7 +101,7 @@ Item NPC::getItemFromTrader(string itemName)
 
 void NPC::DeleteTradeItem(string itemName)
 {
-
+    //defined in enemy
 }
 
 

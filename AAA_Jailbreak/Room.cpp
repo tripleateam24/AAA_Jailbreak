@@ -1,5 +1,7 @@
-
+#include "Player.h"
 #include "Room.h"
+#include "Item.h"
+#include "NPC.h"
 
 Room::Room(string n, string desc, Room* bR, Room* lR, Room* rR, Room* fR, int moveCounter) {
 	name = n;
@@ -29,11 +31,22 @@ Item Room::GetItem(string itemName) {
 	}
 }
 
+bool Room::isAnyoneThere()
+{
+	if (PeopleInRoom.empty())
+		return false;
+	else
+		return true;
+
+}
+
 Room::~Room() {
 	for (auto person : PeopleInRoom) {
-		delete person;
+		delete person;  // Assuming person is of type NPC*
 	}
+	PeopleInRoom.clear();
 }
+
 
 // duplicate bool Room::SearchForItem(string itemName) removed
 
@@ -52,6 +65,13 @@ void Room::RemoveItemFromRoom(string itemName) {
 		}
 	}
 }
+void Room::printPeopleInRoom()
+{
+	for (const auto& person : PeopleInRoom) {
+		cout << person->getName();
+	}
+}
+
 
 void Room::AddNPCToRoom(NPC* npc) {
 	PeopleInRoom.push_back(npc);
@@ -70,6 +90,16 @@ bool Room::SearchForPerson(string personName) {
 	}
 
 	return false;
+}
+
+
+void Room::RemoveNPCFromRoom(string name)
+{
+	for (int i = 0; i < ItemsInRoom.size(); i++) {
+		if (PeopleInRoom[i]->getName() == name) {
+			PeopleInRoom.erase(PeopleInRoom.begin() + i);
+		}
+	}
 }
 
 

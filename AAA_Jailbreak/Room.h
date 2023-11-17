@@ -14,7 +14,7 @@ class Room {
 	string description;
 
 	vector<Item> ItemsInRoom;
-	vector<NPC*> PeopleInRoom;
+	vector<NPC> PeopleInRoom;
 
 public:
 	Room* backRoom;
@@ -27,13 +27,13 @@ public:
 
 	bool SearchForItem(string itemName);
 	Item GetItem(string itemName);
-
+	bool isAnyoneThere();
 	void AddItemToRoom(Item item);
 	void RemoveItemFromRoom(string itemName);
-
+	void printPeopleInRoom();
 	void AddNPCToRoom(NPC* npc);
 	bool SearchForPerson(string personName);
-
+	void RemoveNPCFromRoom(string name);
 	NPC* getNPC(string personName);
 
 	int amountTimesInRoom;
