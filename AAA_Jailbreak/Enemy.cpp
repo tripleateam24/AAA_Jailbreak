@@ -22,7 +22,7 @@ void Enemy::takeDamage(Room* r, int damage)
     {
         //drop item 
         //remove NPC from the room
-        r.RemoveNPCFromRoom(getName());
+        r->RemoveNPCFromRoom(getName());
       
     }
 }
@@ -35,7 +35,7 @@ void Enemy::attack(NPC* e,int number)
     {
         //attack with fist
     case 1: 
-        cout<< e->getName() << " threw a left hook, think fast!"
+        cout << e->getName() << " threw a left hook, think fast!";
         break;
         //attack with wepon
     case 2:
