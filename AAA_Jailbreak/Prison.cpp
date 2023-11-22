@@ -13,6 +13,8 @@ Prison::Prison() {
 	commonRoom = new Room("The Common Room", "A common room fit with a television and stacks of educational books. You can STUDY in this room for increased intellect.", nullptr, nullptr, nullptr, nullptr);
 	cafe = new Room("The Cafeteria", "A Large cafeteria with long tables, many other prisoners sit with their food. You see a Cookie on a table next to you.", nullptr, nullptr, nullptr, nullptr);
 
+	westWingHallway = new Room("West Wing Hallway", "WEST WING HALLWAY DESCRIPTION HERE", nullptr, nullptr, nullptr, nullptr);
+
 	airlock = new Room("Airlock Room", "A room seperating the courtyard from the rest of the prison", nullptr, nullptr, nullptr, nullptr);
 	courtYard = new Room("The Court Yard", "The courtyard is the outdoor space with a basketball court being the main attraction. The high fences and prison guards keep this area under control.", nullptr, nullptr, nullptr, nullptr);
 
@@ -21,6 +23,9 @@ Prison::Prison() {
 	showers = new Room("The Showers", "The communal showers where there are open shower heads for you to wash up.", nullptr, nullptr, nullptr, nullptr);
 	laundryRoom = new Room("The Laundry Room", "Filled with your standard washers and dryers ran by other prisoners. Both gurads and prisoners get their clothes washed here.", gym, nullptr, nullptr, nullptr);
 
+	eastWingHallway = new Room("East Wing Hallway", "EAST WING HALLWAY DESCRIPTION HERE", nullptr, nullptr, nullptr, nullptr);
+
+	contrabandCloset = new Room("Contraband Closet", "Small storage closet, guards put the contraband they find in here. Locked with a 3 number lock.", nullptr, nullptr, nullptr, nullptr);
 	WardensOffice = new Room("The Warden's Office", "The Warden's office, where a large desk and cabinets that contain sensitive files and records reside.\n It is also a communication center equipped with phones, radios, and computer systems for the Warden to stay in contact with other prison staff.", nullptr, nullptr, nullptr, nullptr);
 
 	// Prison layout
@@ -43,9 +48,12 @@ Prison::Prison() {
 	cafe->forwardRoom = workshopRoom;
 
 	commonRoom->leftRoom = hallway;
-	commonRoom->forwardRoom = showers;
+	commonRoom->forwardRoom = westWingHallway;
 
-	showers->backRoom = commonRoom;
+	westWingHallway->backRoom = commonRoom;
+	westWingHallway->forwardRoom = showers;
+
+	showers->backRoom = westWingHallway;
 	showers->leftRoom = gym;
 
 	gym->rightRoom = showers;
@@ -55,8 +63,18 @@ Prison::Prison() {
 	workshopRoom->rightRoom = gym;
 	workshopRoom->backRoom = cafe;
 	workshopRoom->leftRoom = WardensOffice;
+	workshopRoom->forwardRoom = eastWingHallway;
 
-	WardensOffice->rightRoom = workshopRoom;
+	eastWingHallway->backRoom = workshopRoom;
+	eastWingHallway->forwardRoom = WardensOffice;
+	eastWingHallway->rightRoom = contrabandCloset;
+
+	contrabandCloset->leftRoom = eastWingHallway;
+
+
+	WardensOffice->backRoom = eastWingHallway;
+	
+
 
 	currentRoom = cell;
 
@@ -123,7 +141,7 @@ Prison::Prison() {
 	fork->greetings = { "Hey cellie", "sup, cellie?", "How's it hanging, cellie?", "What's up Cellie?", "Hey man" }; //special cell mate greetings
 	//defining fork's quest
 	Quest forkQuest = Quest("Hey cellie, you think you could get me a cookie from the cafeteria?", "Hey cellie, any word on my cookie?", "Oh man, thanks for the cookie cellie. Here, take this in return.");
-	forkQuest.itemsToGive.push_back(Item("Pills", "Anxiety Pills, prisoners take them to feel better about themselves", Item_Types[0]));
+	forkQuest.itemsToGive.push_back(Item("Pills", "Anxiety Pills, prisoners take them to feel better about themselves", Item_Types[5]));
 	fork->quests.push_back(forkQuest);
 	Quest forkQuest2 = Quest("Hey one more thing, could you get me an apple too, I've got my old lighter here I could give to ya in return", "could you get me apple from the cafe too, I'll give ya my old lighter in return", "Wow thanks so much, here you go");
 	//giving fork's second quest and item to give to player
@@ -158,7 +176,7 @@ Prison::Prison() {
 
 	//creating guard
 	Guard* phil = new Guard("Phil", "Prison Guard", "GUARD");
-
+	Guard* andrew = new Guard("Andrew", "Prison Guard", "GUARD");
 
 	//adding everyone to their rooms
 	cell->AddNPCToRoom(fork);
@@ -176,6 +194,8 @@ Prison::Prison() {
 	showers->AddNPCToRoom(seth);
 
 	hallway->AddNPCToRoom(phil);
+
+	westWingHallway->AddNPCToRoom(andrew);
 
 }
 

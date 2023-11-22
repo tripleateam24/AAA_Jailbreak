@@ -323,11 +323,13 @@ void Player::InputMenu(Prison* prison) {
 					//if they are confronted, they have a chance of being put into solitary
 					solitaryDays = prison->currentRoom->getNPCByIndex(i)->Confront(intellect, reputation);
 					if (solitaryDays > 0) {
-						//bandaid solution to have pills be take away - need to refactor this and put into storage closet
-						if (HasItem("Pills")) {
-							cout << "The guards also found your Pills - They take them to the contraband closet!.\n";
+						if (PocketsInventory.size() > 0) {
+							//right now this just takes the first item from your iventory
+							//could make it take everything from your inventory but that might not be as fun
 							for (int i = 0; i < PocketsInventory.size(); i++) {
-								if (PocketsInventory[i].getName() == "Pills") {
+								if (PocketsInventory[i].getType() == "Wepons" || PocketsInventory[i].getType() == "objective_item" || PocketsInventory[i].getType() == "key_Item" || PocketsInventory[i].getType() == "Valuable") {
+									cout << "The guards found your " << PocketsInventory[i].getName() << " - They took it to the contraband closet!.\n";
+									prison->contrabandCloset->AddItemToRoom(PocketsInventory[i]);
 									PocketsInventory.erase(PocketsInventory.begin() + i);
 								}
 							}

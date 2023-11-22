@@ -20,9 +20,12 @@ public:
 	Room* hallway;
 	Room* cafe;
 	Room* commonRoom;
+	Room* westWingHallway;
 	Room* gym;
 	Room* showers;
 	Room* workshopRoom;
+	Room* eastWingHallway;
+	Room* contrabandCloset;
 	Room* courtYard;
 	Room* WardensOffice;
 	Room* airlock;

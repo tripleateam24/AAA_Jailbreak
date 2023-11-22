@@ -24,6 +24,7 @@ void PrintBackStory() { // backstory function. Can call it when the user inputs 
 
 
 int main() {
+	int daysUntilInspection = 0;
 	//Displaying Game title
 	cout << "-------Jailbreak-------\n";
 	//displaying backstory
@@ -58,6 +59,7 @@ int main() {
 
 	//main game loop
 	while (true) {
+		
 		player1.InputMenu(prison);
 		if (prison->getDaylight() <= 0) {
 			//resetting day
@@ -68,6 +70,12 @@ int main() {
 			player1.resetExerciseCount();
 			player1.resetStudyCount();
 		}
+		if(prison->getDay() % 5 == 0 && prison->getDay() != 0) daysUntilInspection = rand() % 5 + 1;
+		if (prison->getDay() % (5 + daysUntilInspection) == 0 && prison->getDay() != 0) cout << "INSPECTION DAY!\n";
+		cout << prison->getDay() << endl;
+
+		cout << daysUntilInspection << endl;
+
 	}
 
 	cout << "You spent " << prison->getDay() << " days in jail.\n";
