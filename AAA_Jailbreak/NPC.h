@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Prison.h"
 #include <string>
 #include <iostream>
 #include "Item.h"
@@ -34,24 +34,20 @@ public:
    //string getDescription() const; 
     string ID; 
 
+    //For Enemy class
+    virtual string getWeponName();
 
+    virtual void attack(NPC* e, int number);
 
-    //Virtual Functions for Enemy
+    virtual void dropLoot(Prison* prison, NPC* e);
 
-  virtual int getHealth();
-    //Give ability to take damage
-  virtual void takeDamage(Room* r, int damage);
-    //function that allows computer to attack
-  virtual void attack(NPC* e, int num);
-    //return the type of wepon the opp has
-  virtual string getWepon();
-    //upon dying the opp would drop its items
-  virtual void dropLoot(NPC* e);
-    //return strenght
-  virtual int getStrength();
+    virtual int getStrength();
+     
+    virtual void droploot(Prison* prison,NPC* e);
 
+    virtual int getHealth();
 
-
+    virtual int takeDamage(int damage);
     virtual void PrintTradeTable();
     virtual bool SearchForTradeItem(string itemName);
     virtual string ItemToGiveToTrader(string itemName);

@@ -2,7 +2,7 @@
 #include <iostream>
 #include "Item.h"
 #include "NPC.h"
-#include "Room.h"
+#include "Prison.h"
 #include <map>
 #pragma once
 using namespace std;
@@ -13,41 +13,40 @@ class Enemy : public NPC {
     vector<Item> loot;
 
 public:
-    Enemy(string n, string desc, string id, int h, int s, Item w, Item droppable);
-    
-    
+    Enemy(string n, string desc, string id, int h, int s, Item w);
     //Return enemy health
-    
-    
+
+
     int getHealth();
-    
-    
+
+
+
     //Give ability to take damage
-    
-    
-    void takeDamage(Room* r,int damage);
+
+
+    int takeDamage(int damage);
+
+
+    //function that allows computer to attack
+
+
+    void attack(NPC* e, int num);
+
+
+    //return the type of wepon the opp has
 
     
-    //function that allows computer to attack
-    
-    
-    void attack(NPC* e,int num);
-    
-    
-    //return the type of wepon the opp has
-    
-    
-    string getWepon();
-    
-    
+     string getWeponName();
+
+
     //upon dying the opp would drop its items
-    
-    
-    void dropLoot(Room* room,NPC* e);
-    
-    
+
+    void dropLoot(Prison* prison, NPC* e);
+
+
     //return strength
-  
-    
+
+
     int getStrength();
+
 };

@@ -24,34 +24,39 @@ string NPC::generateGreetingDialogue()
     
 }
 
-int NPC::getHealth()
+string NPC::getWeponName()
 {
-    return 0;
+    //defined in enemy.cpp
 }
 
-void NPC::takeDamage(Room* r, int damage)
+void NPC::attack(NPC* e, int number)
 {
-    //defined in enemy
+    //defined in enemy.cpp
 }
 
-void NPC::attack(NPC* e, int num)
+void NPC::dropLoot(Prison* prison, NPC* e)
 {
-    //defined in enemy
-}
-
-string NPC::getWepon()
-{
-    return string();
-}
-
-void NPC::dropLoot(NPC* e)
-{
-    //defined in enemy
+    //defined in enemy.cpp
 }
 
 int NPC::getStrength()
 {
-    return 0;
+    //defined in enemy.cpp
+}
+
+void NPC::droploot(Prison* prison,NPC* e)
+{
+    //defined in enemy.cpp
+}
+
+int NPC::getHealth()
+{
+    //defined in enemy.cpp
+}
+
+int NPC::takeDamage(int damage)
+{
+   //defined in enemy.cpp
 }
 
 void NPC::PrintTradeTable() {

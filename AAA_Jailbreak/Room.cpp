@@ -21,6 +21,7 @@ bool Room::SearchForItem(string itemName) {
 		}
 	}
 	return false;
+	
 }
 
 Item Room::GetItem(string itemName) {
@@ -133,6 +134,20 @@ void Room::PrintItems() {
 		cout << "\nYou see:\n";
 		for (auto item : ItemsInRoom) {
 			cout << item.getName() << "\n\t" << item.getDescription() << "\n\n";
+		}
+
+	}
+}
+
+void Room::PrintPeople()
+{
+	if (PeopleInRoom.empty()) {
+		cout << "This room is empty.......\n";
+	}
+	else {
+		cout << "\nYou see:\n";
+		for (auto people : PeopleInRoom) {
+			cout << people->getName() << "\n\t";
 		}
 
 	}

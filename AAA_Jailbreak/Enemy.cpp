@@ -1,8 +1,8 @@
 #include "Enemy.h"
-#include "Room.h"
+#include <iostream>
 #include "NPC.h" 
-
-Enemy::Enemy(string n, string desc, string id, int h, int s, Item w, Item droppable) {
+using namespace std;
+Enemy::Enemy(string n, string desc, string id, int h, int s, Item w) {
         name = n;
         description = desc;
         ID = id;
@@ -10,74 +10,61 @@ Enemy::Enemy(string n, string desc, string id, int h, int s, Item w, Item droppa
         strength = s;
         wp = w;
 }
+
 int Enemy::getHealth()
 {
     return health;
 }
 
-void Enemy::takeDamage(Room* r, int damage)
+int Enemy::takeDamage(int damage)
 {
-    health -= damage;
-    if (health == 0)
-    {
-        //drop item 
-        //remove NPC from the room
-        r.RemoveNPCFromRoom(getName());
-      
-    }
+    return health = -damage;
 }
 
-void Enemy::attack(NPC* e,int number)
+void Enemy::attack(NPC* e, int number)
 {
-  
-  
-    switch (number)
+   /* switch (number)
     {
         //attack with fist
-    case 1: 
-        cout<< e->getName() << " threw a left hook, think fast!"
-        break;
+    case 1:
+        cout << e->getName() << " threw a left hook, think fast!\n";
+            break;
         //attack with wepon
     case 2:
-        cout << e->getName() << " tried to use a " << e->getWepon() << endl;
+        cout << e->getName() << " tried to use a " << e->getWeponName() << endl;
         break;
         //attack with graple
     case 3:
         cout << e->getName() << "grabbed you, what will you do? \n";
         break;
         //headbutt
-    case 4: 
+    case 4:
         cout << e->getName() << " is trying to headbutt you. \n";
         break;
-        //attack
-    case 5: 
+        //attack with right hook
+    case 5:
         cout << e->getName() << "threw a right hook\n";
         break;
 
-    } 
+    }*/
 }
-
-string Enemy::getWepon()
+string Enemy::getWeponName()
 {
-    return wp;
+    string weponName = wp.getName();
+    return weponName; 
 }
 
-void Enemy::dropLoot(Room* r, NPC* e)
+void Enemy::dropLoot(Prison* prison, NPC* e)
 {
     for (int i = 0; i < loot.size(); i++)
     {
-        r->AddItemToRoom(i);
-        cout << "Items dropped: \n";
-        cout << "-" << i << endl;
+        prison->currentRoom->AddItemToRoom(loot[i]);
+        cout << "Dropped: " << loot[i].getDescription() << endl;
     }
+    
 }
 
 int Enemy::getStrength()
 {
     return strength;
-}
-
-
-void Enemy::dropLoot(Enemy opp)
-{
 }

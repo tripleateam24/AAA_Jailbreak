@@ -1,7 +1,6 @@
 #include "Player.h"
 #include "Item.h"
-#include "Room.h"
-#include "Fight.h"
+#include "Fighting.h"
 #include <chrono>
 #include <thread>
 #include <cctype>
@@ -12,13 +11,70 @@ Player::Player(string n) {
 	strengthModifier = 10;
 }
 
+void Player::startFightBySneakAttack(Prison* prison, Player player)
+{
+	bool cheapShot = true;
+	Fighting Currentmatch;
+	string ans;
+
+	while (true) {
+		cout << "Who do you want to pick a fight with?" << endl;
+		getline(cin, ans);
+		prison->currentRoom->PrintPeople();
+		if (prison->currentRoom->SearchForPerson(ans)) {
+			cout << "You smacked fire out " << ans << endl;
+			Currentmatch.fightScene(prison, cheapShot, prison->currentRoom->getNPC(ans), player);
+			break;
+		}
+		else if (ans == "nevermind")
+		{
+			break;
+		}
+		else {
+			cout << "Who? They are not in the room...." << endl;
+		}
+
+	}
+
+}
+
+void Player::startFightFairly(Prison* prison, Player player)
+{
+	bool cheapShot = false;
+	Fighting Currentmatch;
+	string ans;
+
+	while (false) {
+		cout << "Who do you want to pick a fight with?" << endl;
+		getline(cin, ans);
+		prison->currentRoom->PrintPeople();
+
+		if (prison->currentRoom->SearchForPerson(ans)) {
+			cout << "Hey punk! Bring it on " << ans << endl;
+			Currentmatch.fightScene(prison, cheapShot, prison->currentRoom->getNPC(ans), player);
+			break;
+		}
+		else if (ans == "nevermind")
+		{
+			break;
+		}
+		else {
+			cout << "Who? They are not in the room...." << endl;
+		}
+
+	}
+}
+
 void Player::PrintInstructions() {
 	string answer;
 	string instructions = "Here's How to Play:\nMOVE - Move rooms\n\tleft - left\n\tright - right\n\tforward - forward\n\tback - back\n"
 		"\nWHERE - Check where you are in the prison\nINSPECT - Inspect the room in which you are in"
+		"\nVIOLATE - Start fight by sneak attack. (Will do some damage but fight will start with oppent going first)\n"
+		"\FIGHT - Start a fair fight. Randomzies who goes first.\n"
 		"\nTAKEITEM - Take an item in the room\nDISCARD - Discard an item from your inventory\n"
-		"INVENTORY - See what you have in your inventory\n"
-		"EXIT - Exit the game\nHELP - Print this menu again\n\n\n\n";
+		"INVENTORY - See what you have in your inventory\nSEARCH - look for items in a room\nTALK- Talk to person in a room\nUSEITEM - Use an item"
+		"\nEXIT - Exit the game\nHELP - Print this menu again\n\n\n\n";
+		
 	cout << instructions << "\n\nPress Enter to Continue ";
 	getline(cin, answer);
 	cout << "\n\n";
@@ -194,8 +250,7 @@ void Player::Exercise(Prison* prison){
 }
 
 
-void Player::InputMenu(Prison* prison) {
-	string person;
+void Player::InputMenu(Prison* prison, Player player) {
 	string answer;
 	string itemAnswer;
 	string dropAnswer;
@@ -213,6 +268,10 @@ void Player::InputMenu(Prison* prison) {
 	}
 	else if (answer == "INVENTORY") {
 		PrintInventory();
+	}
+	else if (answer == "VIOLATE")
+	{
+		startFightBySneakAttack(prison,player);
 	}
 	else if (answer == "whereami" || answer == "w" || answer == "W" || answer == "WhereAmI" || answer == "WHERE" || answer == "Where") {
 		cout << "\nYou are currently standing in " << prison->currentRoom->getName() << "\n\n";
@@ -513,4 +572,46 @@ void Player::manipulateItem()
 		return itemType();
 	}
 	*/
+}
+
+void Player::attack(Prison* prison, NPC* Opp, int temp)
+{
+
+	//choices
+	string wepon;
+	switch (temp)
+	{
+	case 5:
+		cout << "You threw a left hook." << endl;
+		break;
+	case 6:
+		cout << "You threw a right hook. " << endl;
+	case 7:
+		cout << "Which wepon?\n";
+		PrintInventory();
+		cin >> wepon;
+		for (int i = 0; i < PocketsInventory.size(); i++) {
+			if (PocketsInventory[i].getName() == wepon && PocketsInventory[i].getType() == "Wepon")
+			{
+				cout << "You swung a " << temp << " at your opponet." << endl;
+				Opp->takeDamage(temp);
+			}
+
+		}
+	}
+}
+
+void Player::takeDamage(int damage)
+{
+
+	health -= damage;
+	if (health <= 0)
+	{
+		cout << "GAME OVER.\n" << endl;
+		cout << endl;
+		cout << endl;
+		cout << endl;
+		cout << "..........You Died.........\n";
+		exit(0);
+	}
 }

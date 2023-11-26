@@ -133,7 +133,7 @@ int main() {
 	string testinput;
 	//moving within rooms demo
 	while (true) {
-		player1.InputMenu(prison);
+		player1.InputMenu(prison, player1);
 		if (prison->getDaylight() <= 0) {
 			cout << "\nDay's Over....Lights Out!\n\n\n";
 			prison->currentRoom = prison->cell;
