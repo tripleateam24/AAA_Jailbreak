@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.7.34031.279
+VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AAA_Jailbreak", "AAA_Jailbreak\AAA_Jailbreak.vcxproj", "{856480CF-BE1F-4665-B6E0-E714A30677F8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AAA_Jailbreak", "AAA_Jailbreak.vcxproj", "{856480CF-BE1F-4665-B6E0-E714A30677F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +26,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {17488A72-B4FD-4992-BA63-B9D35B58EEF9}
+		SolutionGuid = {2B1508F6-A366-42B1-81EA-6987A3B6AA6B}
 	EndGlobalSection
 EndGlobal
