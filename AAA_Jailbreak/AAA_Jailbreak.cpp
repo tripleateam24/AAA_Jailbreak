@@ -51,7 +51,7 @@ int main() {
 		// user can now redisplay story. 
 	}
 
-
+	
 	Player player1 = Player("Mr. Prisoner");
 
 	Prison* prison = new Prison();

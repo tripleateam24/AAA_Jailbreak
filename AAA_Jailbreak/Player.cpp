@@ -274,7 +274,7 @@ void Player::CheckQuestConditions(Prison* prison, string questGiverName) {
 	//end of james's quest condition
 
 	//start of dan's quest conditions
-	//should be rafactored but I think this will be the only quest where you can give 2 different items
+	//should be refactored but I think this will be the only quest where you can give 2 different items
 	if ((HasItem("AAA Batteries") || HasItem("TV Remote")) && prison->currentRoom->getNPC(questGiverName)->getName() == "Dan" && questPOS == 0) {
 		if (!HasItem("TV Remote")) {
 			cout << "Give Batteries to Dan? Y/N: ";
