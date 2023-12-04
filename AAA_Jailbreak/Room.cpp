@@ -47,6 +47,22 @@ void Room::RemoveItemFromRoom(string itemName) {
 	}
 }
 
+vector<Item> Room::GetContraband() {
+	
+	vector<Item> itemsToConfiscate;
+	for (auto item : ItemsInRoom) {
+		if (item.getType() == "valuable" || item.getType() == "key_item" || item.getType() == "objective_item" || item.getType() == "wepons") {
+			itemsToConfiscate.push_back(item);
+			
+		}
+	}
+
+	//will return an empty vector if there are no items in the room - make sure to use if statement in INSPECTION method
+	return itemsToConfiscate;
+	
+}
+
+
 void Room::AddNPCToRoom(NPC* npc) {
 	PeopleInRoom.push_back(npc);
 }
@@ -82,8 +98,7 @@ NPC* Room::getNPC(string personName) {
 NPC* Room::getNPCByIndex(int index) {
 	if (PeopleInRoom.size() == 0) {
 		return nullptr;
-	}
-	else {
+	}else{
 		return PeopleInRoom[index];
 	}
 }
@@ -113,6 +128,16 @@ void Room::PrintItems() {
 		cout << "\nYou see:\n";
 		for (auto item : ItemsInRoom) {
 			cout << item.getName() << "\n\t" << item.getDescription() << "\n\n";
+		}
+
+	}
+}
+
+void Room::PrintPeople() {
+	if (!PeopleInRoom.empty()) {
+		cout << "\nYou look around you....\n\nYou see: \n";
+		for (auto person : PeopleInRoom) {
+			cout << person->getName() << ":\n\t" << person->getDescription() << "\n\n";
 		}
 
 	}

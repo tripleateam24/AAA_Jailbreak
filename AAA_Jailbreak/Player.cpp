@@ -10,15 +10,16 @@ Player::Player(string n) {
 	studyCount = 0;
 	intellect = 1;
 	reputation = 1;
+	dressedAsGuard = false;
 }
   
 //method for printing instructions
 void Player::PrintInstructions() {
 	string answer;
-	string instructions = "Here's How to Play:\nMOVE - Move rooms\n\tleft - left\n\tright - right\n\tforward - forward\n\tback - back\n"
+	string instructions = "\nHere's How to Play:\nMOVE - Move rooms\n\tleft - move left\n\tright - move right\n\tforward - move forward\n\tback - move back\n"
 		"\nWHERE - Check where you are in the prison\nINSPECT - Inspect the room in which you are in"
-		"\nTAKEITEM - Take an item in the room\nDISCARD - Discard an item from your inventory\n"
-		"INVENTORY - See what you have in your inventory\nCHECKTIME - Check the Time\n"
+		"\nTAKEITEM - Take an item in the room\nDISCARD - Discard an item from your inventory\nSEARCH - Search for items in a room"
+		"\nTALK - Talk to someone\nINVENTORY - See what you have in your inventory\nCHECKTIME - Check the Time\n"
 		"EXIT - Exit the game\nHELP - Print this menu again\n\n\n\n";
 	cout << instructions << "\n\nress Enter to Continue ";
 	getline(cin, answer);
@@ -263,14 +264,131 @@ void Player::CheckQuestConditions(Prison* prison, string questGiverName) {
 
 	//start of james's quest condition
 	if (HasItem("Pills") && prison->currentRoom->getNPC(questGiverName)->getName() == "James" && questPOS == 0) {
-		cout << "Give Soap to James? Y/N: ";
+		cout << "Give Pills to James? Y/N: ";
 		getline(cin, answer);
 		if (answer == "Y" || answer == "y") {
-			GiveItemAway("Soap", "Fork");
+			GiveItemAway("Pills", "James");
 
 		}
 	}
 	//end of james's quest condition
+
+	//start of dan's quest conditions
+	//should be rafactored but I think this will be the only quest where you can give 2 different items
+	if ((HasItem("AAA Batteries") || HasItem("TV Remote")) && prison->currentRoom->getNPC(questGiverName)->getName() == "Dan" && questPOS == 0) {
+		if (!HasItem("TV Remote")) {
+			cout << "Give Batteries to Dan? Y/N: ";
+			getline(cin, answer);
+			if (answer == "Y" || answer == "y") {
+				GiveItemAway("AAA Batteries", "Dan");
+				TakeItemFromNPC(prison, "Dan", "Salt", questPOS);
+			}
+		}else if (!HasItem("AAA Batteries")) {
+			cout << "Give TV Remote to Dan? Y/N: ";
+			getline(cin, answer);
+			if (answer == "Y" || answer == "y") {
+				GiveItemAway("TV Remote", "Dan");
+				TakeItemFromNPC(prison, "Fork", "Lighter", questPOS);
+			}
+		}else {
+			cout << "(1)Give Batteries to Dan?\n";
+			cout << "(2)Give TV Remote to Dan?\n";
+			cout << "(3)Give nothing to Dan?\n";
+			cout << "Enter Choice: ";
+			getline(cin, answer);
+			if (answer == "1") {
+				GiveItemAway("AAA Batteries", "Dan");
+				TakeItemFromNPC(prison, "Dan", "Salt", questPOS);
+				answer = "Y";
+			}
+			else if (answer == "2") {
+				GiveItemAway("TV Remote", "Dan");
+				TakeItemFromNPC(prison, "Dan", "Salt", questPOS);
+				answer = "Y";
+			}
+
+		}
+		
+
+	}
+	if (HasItem("Phone Charger") && prison->currentRoom->getNPC(questGiverName)->getName() == "Dan" && questPOS == 1) {
+		cout << "Give Phone Charger to Dan? Y/N: ";
+		getline(cin, answer);
+		if (answer == "Y" || answer == "y") {
+			GiveItemAway("Phone Charger", "Dan");
+			TakeItemFromNPC(prison, "Dan", "Radio", questPOS);
+
+		}
+	}
+	
+	//end of dan's quest conditions
+
+
+	//start of will's quest conditions
+	if (HasItem("Salt") && prison->currentRoom->getNPC(questGiverName)->getName() == "Will" && questPOS == 0) {
+		cout << "Give Salt to Will? Y/N: ";
+		getline(cin, answer);
+		if (answer == "Y" || answer == "y") {
+			GiveItemAway("Salt", "Will");
+			TakeItemFromNPC(prison, "Will", "Trinket", questPOS);
+
+		}
+
+	}
+	if (HasItem("Soda") && prison->currentRoom->getNPC(questGiverName)->getName() == "Will" && questPOS == 1) {
+		cout << "Give Soda to Will? Y/N: ";
+		getline(cin, answer);
+		if (answer == "Y" || answer == "y") {
+			GiveItemAway("Soda", "Will");
+
+		}
+	}
+	//end of will's quest conditions
+
+	//start of Bob's quest conditions
+	if (HasItem("Trinket") && prison->currentRoom->getNPC(questGiverName)->getName() == "Bob" && questPOS == 0) {
+		cout << "Give Trinket to Bob? Y/N: ";
+		getline(cin, answer);
+		if (answer == "Y" || answer == "y") {
+			GiveItemAway("Trinket", "Bob");
+			TakeItemFromNPC(prison, "Bob", "Permission Slip", questPOS);
+
+		}
+	}//end of Bob's quest conditions
+
+
+	//start of Alex's quest conditions
+	if (HasItem("Permission Slip") && prison->currentRoom->getNPC(questGiverName)->getName() == "Alex" && questPOS == 0) {
+		cout << "Give Permission Slip to Alex? Y/N: ";
+		getline(cin, answer);
+		if (answer == "Y" || answer == "y") {
+			GiveItemAway("Permission Slip", "Alex");
+			prison->laundryAccess = true;
+		}
+	}
+
+	if (HasItem("Radio") && prison->currentRoom->getNPC(questGiverName)->getName() == "Alex" && questPOS == 1) {
+		cout << "Give Radio to Alex? Y/N: ";
+		getline(cin, answer);
+		if (answer == "Y" || answer == "y") {
+			GiveItemAway("Radio", "Alex");
+			TakeItemFromNPC(prison, "Alex", "Guards Hat", questPOS);
+		}
+	}
+	if (HasItem("Roledex") && prison->currentRoom->getNPC(questGiverName)->getName() == "Alex" && questPOS == 2) {
+		cout << "Give Roledex to Alex? Y/N: ";
+		getline(cin, answer);
+		if (answer == "Y" || answer == "y") {
+			GiveItemAway("Roledex", "Alex");
+			TakeItemFromNPC(prison, "Alex", "Guards Pants", questPOS);
+		}
+	}
+
+
+
+	//end of Alex's quest conditions
+
+
 
 	//update quests
 	if (answer == "Y" || answer == "y") {
@@ -283,6 +401,44 @@ void Player::CheckQuestConditions(Prison* prison, string questGiverName) {
 }
 
 
+
+
+void Player::CheckDressAsGuardCondition(Prison* prison) {
+	string answer;
+	//laundry / guard impersonation win
+	if (prison->currentRoom->SearchForItem("Guards Shirt") && prison->currentRoom->SearchForItem("Guards Shoes") && prison->currentRoom->SearchForItem("Guards Hat") && prison->currentRoom->SearchForItem("Guards Pants")) {
+		cout << "Put on Guard's Uniform? Y/N: ";
+		getline(cin, answer);
+		if (answer == "Y" || answer == "y") {
+			prison->currentRoom->RemoveItemFromRoom("Guards Shirt");
+			prison->currentRoom->RemoveItemFromRoom("Guards Shoes");
+			prison->currentRoom->RemoveItemFromRoom("Guards Hat");
+			prison->currentRoom->RemoveItemFromRoom("Guards Pants");
+			cout << "\nYou put on the guard's clothing...\nYou are now dressed as a Guard!\n";
+			dressedAsGuard = true;
+			prison->hallway->getNPC("Phil")->greetings = {"Hey there fellow guard, how are you?", "Nice weather today", "How's it going?", "Hello fellow guard"};
+			prison->westWingHallway->getNPC("Andrew")->greetings = {"Hey there fellow guard, how are you?", "Nice weather today", "How's it going?", "Hello fellow guard"};
+			prison->cafe->getNPC("James")->greetings = {"Hey man", "Hey there fellow guard, how are you?", "Nice weather today", "How's it going?", "Hello fellow guard"};
+		}
+		
+	}
+}
+
+void Player::CheckWinCondition(Prison* prison) {
+	if (prison->escaped) {
+		if (prison->currentRoom->getName() == "Entrance To Prison" && dressedAsGuard) {
+			cout << "YOU ESCAPED BY DRESSIING AS A GUARD!\nYOU WIN!";
+		}
+		
+
+		//DisplayStats();
+		exit(0);
+
+	}
+}
+
+
+
 //giving item away to npc for quests
 void Player::GiveItemAway(string itemName, string npcName) {
 	for (int i = 0; i < PocketsInventory.size(); i++) {
@@ -293,6 +449,44 @@ void Player::GiveItemAway(string itemName, string npcName) {
 	}
 
 }
+//right now this just takes the first contraband item from your iventory
+//could make it take everything from your inventory but that might not be as fun
+void Player::LoseItemsToGuard(Prison* prison) {
+	for (int i = 0; i < PocketsInventory.size(); i++) {
+		if (PocketsInventory[i].getType() == "Wepons" || PocketsInventory[i].getType() == "objective_item" || PocketsInventory[i].getType() == "key_Item" || PocketsInventory[i].getType() == "Valuable") {
+			cout << "The guards also found your " << PocketsInventory[i].getName() << " on your person - They took it to the contraband closet!.\n";
+			prison->contrabandCloset->AddItemToRoom(PocketsInventory[i]);
+			PocketsInventory.erase(PocketsInventory.begin() + i);
+		}
+	}
+}
+
+bool GuessWardensCombo() {
+	string answer;
+	string guess;
+	cout << "\nThe room is locked!\n\nThere is a 4 digit combination lock on the door from 0-9 \n";
+	cout << "Try to guess? Y/N: ";
+	getline(cin, answer);
+	if (answer == "Y" || answer == "y") {
+		cout << "0000\n";
+		cout << "----\n";
+		cout << "9999\n";
+		cout << "Enter Combination: ";
+		getline(cin, guess);
+		if (guess == "5182") {
+			cout << guess << endl;
+			cout << "You Entered the correct combination.\n";
+			return true;
+		}else{
+			cout << "You did not enter the correct combination.\n";
+			return false;
+		}
+		
+	}else {
+		return false;
+	}
+}
+
 
 
 //the player's input menu
@@ -319,20 +513,14 @@ void Player::InputMenu(Prison* prison) {
 				int modifier = prison->currentRoom->getNPCByIndex(i)->getSuspicionLevel() + reputation;
 				if (modifier <= 0) modifier = 5;
 				int confrontationChance = rand() % modifier + 1;
-				if (confrontationChance >= 9) {
+				if (confrontationChance >= 9 && prison->hallway->numTimesInRoom > 1 && !dressedAsGuard) {
 					//if they are confronted, they have a chance of being put into solitary
 					solitaryDays = prison->currentRoom->getNPCByIndex(i)->Confront(intellect, reputation);
 					if (solitaryDays > 0) {
 						if (PocketsInventory.size() > 0) {
 							//right now this just takes the first item from your iventory
 							//could make it take everything from your inventory but that might not be as fun
-							for (int i = 0; i < PocketsInventory.size(); i++) {
-								if (PocketsInventory[i].getType() == "Wepons" || PocketsInventory[i].getType() == "objective_item" || PocketsInventory[i].getType() == "key_Item" || PocketsInventory[i].getType() == "Valuable") {
-									cout << "The guards found your " << PocketsInventory[i].getName() << " - They took it to the contraband closet!.\n";
-									prison->contrabandCloset->AddItemToRoom(PocketsInventory[i]);
-									PocketsInventory.erase(PocketsInventory.begin() + i);
-								}
-							}
+							LoseItemsToGuard(prison);
 						}
 						
 						for (int x = 0; x < solitaryDays; x++) prison->newDay();
@@ -345,8 +533,34 @@ void Player::InputMenu(Prison* prison) {
 						break;
 					}
 				}
+				if (dressedAsGuard) {
+					cout << "\nA Guard approaches you!\n";
+					cout << prison->currentRoom->getNPCByIndex(i)->getGreeting() << endl;
+				}
+
+				
 			}
 		}
+		if (prison->currentRoom->getName() == "The Warden's Office" && prison->wardensOfficeLocked) {
+			if (GuessWardensCombo()) {
+				cout << "You have unlocked the Warden's Office.\n";
+				prison->wardensOfficeLocked = false;
+			}else{
+				prison->currentRoom = prison->eastWingHallway;
+			}
+
+		}
+		if (prison->currentRoom->getName() == "Entrance To Prison") {
+			if (dressedAsGuard) {
+				cout << "\nYou walk out towards the exit of the Prison\n";
+				prison->escaped = true;
+			}else{
+				cout << "\nYou aren't allowed to be this close to the exit.\n";
+				prison->currentRoom = prison->westWingHallway;
+			}
+		}
+		
+
 	}
 	else if (answer == "INVENTORY") {
 		PrintInventory();
@@ -355,7 +569,9 @@ void Player::InputMenu(Prison* prison) {
 		cout << "\nYou are currently standing in " << prison->currentRoom->getName() << "\n\n";
 	}
 	else if (answer == "inspect" || answer == "i" || answer == "I" || answer == "INSPECT") {
-		cout << "\n" << prison->currentRoom->getDescription() << "\n\n";
+		cout << "\n" << prison->currentRoom->getName() << ":\n" << prison->currentRoom->getDescription() << "\n\n";
+		prison->currentRoom->PrintPeople();
+
 		if (prison->currentRoom->getName() == "The Showers" && prison->currentRoom->numTimesInRoom == 1) {
 			cout << prison->currentRoom->getNPC("Seth")->getGreeting() << endl;
 		}
@@ -396,14 +612,18 @@ void Player::InputMenu(Prison* prison) {
 		Study(prison);
 
 	}else if (answer == "SLEEP" && prison->currentRoom->getName() == "Your Cell") {
-		cout << "You Lie down and go to sleep....\n\n";
-		prison->SetDayLight(24);
-		prison->newDay();
-		resetExerciseCount();
-		resetStudyCount();
+		
+		if (prison->getDaylight() > 12) {
+			cout << "\nIt's too early to sleep now.\n";
+		}else {
+			cout << "You Lie down and go to sleep....\n\n";
+			prison->SetDayLight(0);
+		}
+		
 
 
 	}else if (answer == "EXIT") {
+
 		cout << "Exiting Game...\n";
 		exit(0);
 	}
@@ -416,7 +636,6 @@ void Player::InputMenu(Prison* prison) {
 	else {
 		cout << "Sorry, didn't quite understand that.\n";
 	}
-	//CheckOtherConditions(prison);
 
 }
 

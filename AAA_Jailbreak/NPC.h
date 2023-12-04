@@ -35,6 +35,7 @@ public:
     virtual string ItemToGiveToTrader(string);
     virtual Item getItemFromTrader(string);
     virtual void DeleteTradeItem(string);
+    virtual void RefreshTable();
     virtual string getGreeting();
     virtual string FightDialogue();
     virtual int getSuspicionLevel();

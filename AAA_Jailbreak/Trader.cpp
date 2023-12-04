@@ -12,7 +12,7 @@ Trader::Trader(string n, string desc, string id) {
 }
 
 void Trader::AddTradeableItem(Item item, string price) {
-
+    TradeTable[price] = item;
 }
 
 //method to search for trade item
@@ -43,24 +43,36 @@ Item Trader::getItemFromTrader(string itemName) {
     }
 }
 
+void Trader::RefreshTable() {
+    TradeTable.clear();
+    if ((possibleItemsToGive.size() == possibleItemsToBeGiven.size()) && (possibleItemsToGive.size() > 0)) {
+        for (int i = 0; i < 5; i++) {
+            int choice = rand() % possibleItemsToGive.size();
+            AddTradeableItem(possibleItemsToBeGiven[choice], possibleItemsToGive[choice]);
+        }
+        
+    }
+}
+
 //printing the trader's table
 void Trader::PrintTradeTable() {
     map<string, Item>::iterator it = TradeTable.begin();
 
     cout << name << "'s Trading:\n";
-    cout << "===============================\n";
+    cout << "=====================================\n";
     cout << "I receive:\t  You receive:\n";
-    cout << "------------------------------\n";
+    cout << "------------------------------------\n";
     while (it != TradeTable.end()) {
-        cout << it->first << "\t\t   " << it->second.getName() << ": " << it->second.getDescription() << "\n\n";
+        cout << it->first << "  \t\t" << it->second.getName() << ": " << it->second.getDescription() << "\n\n";
         ++it;
     }
-    cout << "===============================\n\n";
+    cout << "=====================================\n\n";
 
 }
 
 void Trader::DeleteTradeItem(string itemName) {
     TradeTable.erase(ItemToGiveToTrader(itemName));
+
 }
 
 string Trader::getGreeting() {

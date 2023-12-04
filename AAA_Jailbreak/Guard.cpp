@@ -63,6 +63,15 @@ string Guard::getBadResponse() {
 
 }
 
+string Guard::getInspectionGreeting() {
+    string inspectionGreetings[] = {"Get up prisoner, time for Inspection!", "Inspection Day!", "Time For Inspection!"};
+    int size = sizeof(inspectionGreetings) / sizeof(inspectionGreetings[0]);
+    int choice = rand() % size;
+    string dialogueSep = "\n============================================\n";
+    cout << dialogueSep;
+    return inspectionGreetings[choice] + dialogueSep;
+}
+
 //refactor if-tree
 //guard confrontation method
 int Guard::Confront(int playerIntellect, int playerReputation) {
@@ -71,7 +80,7 @@ int Guard::Confront(int playerIntellect, int playerReputation) {
     int charm;
     int numSolitaryDays = 0;
     cout << "\nA Guard approaches you....\n";
-    getGreeting();
+    cout << getGreeting() << endl;
     //response menu for player
     cout << "(A) NEUTRAL: \"I'm just trying to go on my way.\"\n(B) COMPLIMENT: \"I really like your uniform, I bet all the other guards are jealous\"\n(C) INSULT: \"Screw You!\"";
     cout << "\n\nEnter Response: ";
@@ -80,7 +89,6 @@ int Guard::Confront(int playerIntellect, int playerReputation) {
     if (answer == "A" || answer == "a") {
         roll = rand() % (20 + playerIntellect) + 1;
         charm = roll + playerReputation;
-        cout << charm << endl;
         if (charm >= suspicionLevel) {
             cout << getNeutralResponse() << endl;
             setEmotionStatus(Neutral);

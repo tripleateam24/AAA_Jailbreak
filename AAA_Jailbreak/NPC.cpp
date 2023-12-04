@@ -56,6 +56,10 @@ void NPC::DeleteTradeItem(string itemName) {
 
 }
 
+void NPC::RefreshTable() {
+
+}
+
 string NPC::FightDialogue() {
     return "";
 }

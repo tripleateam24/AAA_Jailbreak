@@ -28,6 +28,7 @@ public:
 
 	void AddItemToRoom(Item);
 	void RemoveItemFromRoom(string);
+	vector<Item> GetContraband();
 
 	void AddNPCToRoom(NPC*);
 	bool SearchForPerson(string);
@@ -40,7 +41,7 @@ public:
 	int getNumPeopleInRoom();
 
 	void PrintItems();
-
+	void PrintPeople();
 
 
 };

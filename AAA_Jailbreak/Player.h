@@ -19,6 +19,9 @@ class Player {
 	vector<Item> PocketsInventory;
 
 public:
+
+	bool dressedAsGuard;
+
 	Player(string n);
 	void PrintInstructions();
 	void TakeItem(Prison*, string);
@@ -35,9 +38,12 @@ public:
 	void CheckTime(Prison*);
 
 	void GiveItemAway(string, string);
+	void LoseItemsToGuard(Prison*);
 
 	void InputMenu(Prison*);
 	void CheckQuestConditions(Prison*, string);
+	void CheckDressAsGuardCondition(Prison*);
+	void CheckWinCondition(Prison*);
 
 	void setName(string);
 	void setHealth(int);

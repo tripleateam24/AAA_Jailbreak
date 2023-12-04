@@ -31,4 +31,6 @@ public:
     string getNeutralResponse();
     string getGoodResponse();
     string getBadResponse();
+
+    static string getInspectionGreeting();
 };

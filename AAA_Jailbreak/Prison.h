@@ -14,6 +14,11 @@ class Prison {
 
 
 public:
+
+	bool laundryAccess;
+	bool wardensOfficeLocked;
+	bool escaped;
+
 	//all rooms within prison
 	Room* cell;
 	Room* bathroom;
@@ -31,7 +36,11 @@ public:
 	Room* airlock;
 	Room* laundryRoom;
 
+	Room* entranceToPrison;
+	
 	Room* currentRoom;
+
+	
 
 	Prison();
 	~Prison();
@@ -39,6 +48,10 @@ public:
 	void MoveRooms();
 
 	void PrintRoom();
+
+	void RefreshTraderTables();
+
+	void Inspection();
 
 	void LoseDayLight(int);
 	void SetDayLight(int);

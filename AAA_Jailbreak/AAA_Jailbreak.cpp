@@ -24,7 +24,7 @@ void PrintBackStory() { // backstory function. Can call it when the user inputs 
 
 
 int main() {
-	int daysUntilInspection = 0;
+	int daysUntilInspection = 5;
 	//Displaying Game title
 	cout << "-------Jailbreak-------\n";
 	//displaying backstory
@@ -56,12 +56,14 @@ int main() {
 
 	Prison* prison = new Prison();
 
+	player1.PrintInstructions();
 
 	//main game loop
 	while (true) {
-		
 		player1.InputMenu(prison);
-		if (prison->getDaylight() <= 0) {
+		player1.CheckDressAsGuardCondition(prison);
+		player1.CheckWinCondition(prison);
+		if (prison->getDaylight() <= 0 && !player1.dressedAsGuard) {
 			//resetting day
 			cout << "\n\nDay's Over....You walk back to your cell and go to sleep....Lights Out!\n\nYou Wake Up bright and early the next day.\n\n";
 			prison->currentRoom = prison->cell;
@@ -69,13 +71,21 @@ int main() {
 			prison->newDay();
 			player1.resetExerciseCount();
 			player1.resetStudyCount();
+			prison->RefreshTraderTables();
+
+			daysUntilInspection--;
 		}
-		if(prison->getDay() % 5 == 0 && prison->getDay() != 0) daysUntilInspection = rand() % 5 + 1;
-		if (prison->getDay() % (5 + daysUntilInspection) == 0 && prison->getDay() != 0) cout << "INSPECTION DAY!\n";
-		cout << prison->getDay() << endl;
+		
+		//once every 5 - 10 days a random inspection will occur
+		if (daysUntilInspection == 0 && prison->getDay() != 0 && prison->getDaylight() == 24) {
+			prison->Inspection();
+			player1.LoseItemsToGuard(prison);
+			prison->LoseDayLight(1);
+			daysUntilInspection = rand() % 6 + 5;
+		}
 
-		cout << daysUntilInspection << endl;
 
+		
 	}
 
 	cout << "You spent " << prison->getDay() << " days in jail.\n";
