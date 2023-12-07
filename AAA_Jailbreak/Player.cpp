@@ -822,7 +822,7 @@ void Player::manipulateItem()
 			}
 		}
 		break;
-	case "Wepon":
+	case "Weapon":
 		cout << "Attacked with " << item << endl;
 		break;
 
