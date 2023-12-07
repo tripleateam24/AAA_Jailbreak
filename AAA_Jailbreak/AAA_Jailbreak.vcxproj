@@ -104,6 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,19 +130,25 @@
   <ItemGroup>
     <ClCompile Include="AAA_Jailbreak.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Guard.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Prison.cpp" />
+    <ClCompile Include="Quest.cpp" />
+    <ClCompile Include="QuestGiver.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="Trader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Guard.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Prison.h" />
+    <ClInclude Include="Quest.h" />
+    <ClInclude Include="QuestGiver.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="Trader.h" />
   </ItemGroup>

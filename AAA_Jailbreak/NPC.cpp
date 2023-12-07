@@ -1,5 +1,7 @@
 #include "NPC.h"
 
+
+
 //getter functions for name and description
 string NPC::getName() const {
     return name;
@@ -11,23 +13,33 @@ string NPC::getID() const {
     return ID;
 }
 
-string NPC::generateGreetingDialogue()
+string NPC::generateDialogue()
 {
     //generic dialogue for just fork - will add/diversify future dialogues and responses
-    string dialogue[] = { "Hey what you up to?","What's up, Cellie?", "You need something, Cellie?", "Sup, Cellie?", "How's it hanging, Cellie?"};
+    string dialogue[] = { "Hey Cellie, what you up to?","What's up, Cellie?", "You need something, Cellie?", "Sup, Cellie?", "How's it hanging, Cellie?" };
     srand(time(NULL));
     int arraySize = sizeof(dialogue) / sizeof(dialogue[0]);
     int choice = rand() % arraySize;
     string dialogueSep = "\n============================================\n";
     cout << dialogueSep;
     return dialogue[choice] + dialogueSep;
-    
+
+}
+
+//greeting for npcs
+string NPC::getGreeting() {
+    int size = greetings.size();
+    int choice = rand() % size;
+    string dialogueSep = "\n============================================\n";
+    cout << dialogueSep;
+    return greetings[choice] + dialogueSep;
 }
 
 void NPC::PrintTradeTable() {
 
 }
 
+//virtual methods for traders, enemies, guards, and questgivers
 bool NPC::SearchForTradeItem(string itemName) {
     return false;
 }
@@ -36,44 +48,38 @@ string NPC::ItemToGiveToTrader(string itemName) {
     return "";
 }
 
-
-// Randomize dialogue when player inputs "TALK" to NPC
-string NPC::generateDialogue()
-{
-    
-    string dialogue[] = { "You plan on getting out of here somehow?","How I got my name? You dont wanna know why.",
-        "Have you done your shift today?", "Have you had went to the commissary?" };
-    srand(time(NULL));
-    int arraySize = sizeof(dialogue) / sizeof(dialogue[0]);
-    int choice = rand() % arraySize;
-    string dialogueSep = "\n============================================\n";
-    cout << dialogueSep;
-    return dialogue[choice] + dialogueSep;
-
-}
-
-string NPC::sethDialogue()
-{
-    string dialogue = "Yo Mouse. You remember that one case in the papers with the tax fraud and the wife? Yeah well, turns out the wife wasn't in the hospital at all!\n"
-        "If I was that tax guy, I'd get out of here and get my revenge...\n";
-    string dialogueSep = "\n============================================\n";
-    cout << dialogueSep;
-    return dialogue + dialogueSep;
-}
-
-
-Item NPC::getItemFromTrader(string itemName)
-{
+Item NPC::getItemFromTrader(string itemName) {
     return Item();
 }
 
-
-
-void NPC::DeleteTradeItem(string itemName)
-{
+void NPC::DeleteTradeItem(string itemName) {
 
 }
 
+void NPC::RefreshTable() {
 
+}
 
+string NPC::FightDialogue() {
+    return "";
+}
 
+int NPC::getSuspicionLevel() {
+    return 1;
+}
+
+int NPC::Confront(int playerIntellect, int playerReputation) {
+    return 0;
+}
+
+void NPC::IncrementQuestPosition() {
+
+}
+
+void NPC::setQuestPosition(int) {
+
+}
+
+int NPC::getQuestPosition() {
+    return 0;
+}

@@ -1,12 +1,8 @@
 #include <iostream>
 #include <string>
-#include <chrono>
-#include <thread>
-#include "Prison.h"
-#include "NPC.h"
 #include "Player.h"
-#include "Item.h"
 
+using namespace std;
 
 
 void PrintBackStory() { // backstory function. Can call it when the user inputs "story"
@@ -23,84 +19,16 @@ void PrintBackStory() { // backstory function. Can call it when the user inputs 
 		"Against all odds, you find yourself on a rollercoaster ride through the justice system, ultimately facing a daunting 15-year sentence in a federal prison. "
 		"The tale of your unwavering moral compass and the fight for justice paints a riveting portrait of an unexpected journey through the twists and turns of the law. \n\n\n";
 	cout << backStory;
-	//cout << "Type 'story' to see the backstory again.\n";
 }
 
-
-
-//This function asks the player for input on where to go and then moves the tracker to that room and displays the description
-//If there is no pointer to another room it assumes that there is no room there and tells the player he can't go there
-//this can be left on own or put in either prison class or player class down the line
-void MoveRooms(Prison* prison) {
-	string answer;
-	std::cout << "Your Move: ";
-	getline(cin, answer);
-	cout << "\n";
-	if ((answer == "L") || (answer == "l") || (answer == "left") || (answer == "LEFT")) {
-		if (prison->currentRoom->leftRoom != nullptr) {
-			prison->currentRoom = prison->currentRoom->leftRoom;
-			cout << "Moving into " << prison->currentRoom->getName() << ".....\n";
-			prison->PrintRoom();
-		}else {
-			cout << "No Room to the Left.\n";
-		}
-	}else if ((answer == "R") || (answer == "r") || (answer == "right") || (answer == "RIGHT")) {
-		if (prison->currentRoom->rightRoom != nullptr) {
-			prison->currentRoom = prison->currentRoom->rightRoom;
-			cout << "Moving into " << prison->currentRoom->getName() << ".,...\n";
-			prison->PrintRoom();
-		}else {
-			cout << "No Room to the Right.\n";
-		}
-	}else if ((answer == "B") || (answer == "b") || (answer == "back") || (answer == "BACK")) {
-		if (prison->currentRoom->backRoom != nullptr) {
-			prison->currentRoom = prison->currentRoom->backRoom;
-			cout << "Moving back into " << prison->currentRoom->getName() << "....\n";
-			prison->PrintRoom();
-		}else {
-			cout << "You are in you're cell, there is no back room here.\n";
-		}
-	}else if ((answer == "F") || (answer == "f") || (answer == "forward") || (answer == "FORWARD")) {
-		if (prison->currentRoom->forwardRoom != nullptr) {
-			prison->currentRoom = prison->currentRoom->forwardRoom;
-			cout << "Moving into " << prison->currentRoom->getName() << ".....\n";
-		}else {
-			cout << "No Room in Front of You.\n";
-		}
-	}else if (answer == "EXIT") {
-		cout << "Exiting...\n";
-		exit(0);
-
-	}else if(answer == "whereami" || answer == "w" || answer == "W" || answer == "where") {
-		cout << "You are currently standing in " << prison->currentRoom->getName() << "\n\n";
-
-	}
-	else if (answer == "inspect" || answer == "i" || answer == "I") {
-		cout << prison->currentRoom->getDescription() << "\n\n";
-
-	}
-	else if (answer == "story") {
-		cout << "\n";
-		PrintBackStory();
-	}
-
-	else{
-		cout << "Sorry, I don't understand what you want to do here.\n";
-
-
-	}
-
-}
 
 
 int main() {
-
+	int daysUntilInspection = 5;
 	//Displaying Game title
-	cout << "\t\t\t\t\t\t-------Jailbreak-------\n";
-	Player player("Prisoner Name");
-	player.PrintInstructions();
-
+	cout << "-------Jailbreak-------\n";
 	//displaying backstory
+
 	PrintBackStory();
 	//Displaying game objective
 	cout << endl << "Game Objective: Go through different tasks to escape the prison in the shortest amount of days possible."
@@ -123,31 +51,48 @@ int main() {
 		// user can now redisplay story. 
 	}
 
+	
 	Player player1 = Player("Mr. Prisoner");
 
 	Prison* prison = new Prison();
 
+	player1.PrintInstructions();
 
-	NPC* npc = new NPC("Fork","Cell Mate");
-
-
-	string testinput;
-	//moving within rooms demo
+	//main game loop
 	while (true) {
 		player1.InputMenu(prison);
-		if (prison->getDaylight() <= 0) {
-			cout << "\nDay's Over....Lights Out!\n\n\n";
+		player1.CheckDressAsGuardCondition(prison);
+		player1.CheckWinCondition(prison);
+		if (prison->getDaylight() <= 0 && !player1.dressedAsGuard) {
+			//resetting day
+			cout << "\n\nDay's Over....You walk back to your cell and go to sleep....Lights Out!\n\nYou Wake Up bright and early the next day.\n\n";
 			prison->currentRoom = prison->cell;
-			prison->SetDayLight(20);
+			prison->SetDayLight(24);
 			prison->newDay();
+			player1.resetExerciseCount();
+			player1.resetStudyCount();
+			prison->RefreshTraderTables();
 
+			daysUntilInspection--;
 		}
 		
+		//once every 5 - 10 days a random inspection will occur
+		if (daysUntilInspection == 0 && prison->getDay() != 0 && prison->getDaylight() == 24) {
+			prison->Inspection();
+			player1.LoseItemsToGuard(prison);
+			prison->LoseDayLight(1);
+			daysUntilInspection = rand() % 6 + 5;
+		}
+
+
+		
 	}
-	
-	MoveRooms(prison); 
+
+	cout << "You spent " << prison->getDay() << " days in jail.\n";
+
 
 	delete prison;
+
 
 	return 0;
 

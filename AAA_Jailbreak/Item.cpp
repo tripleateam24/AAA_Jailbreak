@@ -1,5 +1,4 @@
 #include "Item.h"
-#include "Player.h"
 
 
 //items are not showing up when the user types "INSPECT" 
@@ -10,7 +9,7 @@ Item::Item() {
 	Type = "UNKNOWN";
 }
 
-
+//item constructor
 Item::Item(string n, string desc, string t) {
 	name = n;
 	Type = t;
@@ -18,6 +17,7 @@ Item::Item(string n, string desc, string t) {
 
 }
 
+//setters and getters
 string Item::getName() const {
 	return name;
 }
@@ -46,6 +46,3 @@ void Item::updatedesc(string upddesc)
 {
 	description = upddesc;
 }
-
-
-

@@ -1,10 +1,6 @@
 #pragma once
-#include <string>
-#include <vector>
+#define ROOM_H
 #include "NPC.h"
-#include "Trader.h"
-#include "Enemy.h"
-#include "Item.h"
 
 using namespace std;
 
@@ -22,27 +18,30 @@ public:
 	Room* rightRoom;
 	Room* forwardRoom;
 
-	Room(string n, string desc, Room* bR, Room* lR, Room* rR, Room* fR, int moveCounter);
+	int numTimesInRoom;
+
+	Room(string, string, Room*, Room*, Room*, Room*);
 	~Room();
 
-	bool SearchForItem(string itemName);
-	Item GetItem(string itemName);
+	bool SearchForItem(string);
+	Item GetItem(string);
 
-	void AddItemToRoom(Item item);
-	void RemoveItemFromRoom(string itemName);
+	void AddItemToRoom(Item);
+	void RemoveItemFromRoom(string);
+	vector<Item> GetContraband();
 
-	void AddNPCToRoom(NPC* npc);
-	bool SearchForPerson(string personName);
+	void AddNPCToRoom(NPC*);
+	bool SearchForPerson(string);
 
-	NPC* getNPC(string personName);
-
-	int amountTimesInRoom;
+	NPC* getNPC(string);
+	NPC* getNPCByIndex(int index);
 
 	string getName() const;
 	string getDescription() const;
+	int getNumPeopleInRoom();
 
 	void PrintItems();
-
+	void PrintPeople();
 
 
 };

@@ -1,9 +1,6 @@
 #pragma once
-#include <string>
-#include <iostream>
-#include "Item.h"
+#define ENEMY_H
 #include "NPC.h"
-#include <map>
 
 class Enemy : public NPC {
     int health;
@@ -13,7 +10,12 @@ class Enemy : public NPC {
     vector<Item> loot;
 
 public:
-    Enemy(string n, string desc, string id, int h, int s, Item w);
+    Enemy(string, string, string, int, int, Item);
+
+    string FightDialogue();
+
+
 
 
 };
+
