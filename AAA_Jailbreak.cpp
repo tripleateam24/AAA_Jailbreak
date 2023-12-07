@@ -93,7 +93,10 @@ void MoveRooms(Prison* prison) {
 
 
 int main() {
+	
+	
 	//JP3
+	/*
 	string JP3_MSGhold;
 	cout << "---MASTER BUILDERS REVIEW---" << endl;
 	cout << "This is John from MB, I was requested to assist with this PR as part of cross team testing." << endl;
@@ -101,14 +104,17 @@ int main() {
 	cout << "Most changes made contain //JP3 in a comment, and //3PJ at the end." << endl;
 	cout << "You might also see [JP3] for some functions, this means that the function needs to be checked." << endl;
 	cout << "The changes made were only tested for compiling, and not for correct logic." << endl << endl;
-
-	/*!!!!!!!!*/ cout << "IMPORTANT: the function: Enemy::dropLoot was removed, due to a recursion in import files." << endl << endl; /*!!!!!!!!*/
-
+	*/
+	/*!!!!!!!!*/ /*cout << "IMPORTANT: the function: Enemy::dropLoot was removed, due to a recursion in import files." << endl << endl; */ /*!!!!!!!!*/
+	/*
 	cout << "If you have any questions, ping me or Nick P in a bug Jira." << endl;
 	cout << "(You can remove this message from the main function)" << endl << endl;
 	system("pause");
 	system("cls");
-	//3PJ
+	*/
+	//3PJ 
+	
+
 	//Displaying Game title
 	cout << "\t\t\t\t\t\t-------Jailbreak-------\n";
 	Player player("Prisoner Name");
